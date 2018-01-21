@@ -28,7 +28,7 @@ public class ConnectionMySQL {
 
 		  conn = DriverManager.getConnection(url,username,password);
 
-		   return conn;
+		  
 		  } catch(Exception e){System.out.println(e);}
 
 

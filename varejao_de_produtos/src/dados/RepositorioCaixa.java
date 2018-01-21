@@ -12,7 +12,7 @@ import negocio.preferencial_caixa;
 import negocio.situacao_caixa;
 
 
-public class RepositorioCaixa {
+public class RepositorioCaixa implements IRepositorioCaixa {
 	//setando tipo enum caixa.setSexo(Enum.valueOf(Sexo.class, query.getString("Sexo")))
 
 	private final Connection connection;
@@ -22,7 +22,12 @@ public class RepositorioCaixa {
     }
 
 
-    public void add(Caixa caixa) throws SQLException
+
+    /* (non-Javadoc)
+	 * @see dados.IRepositorioCaixa#add(negocio.Caixa)
+	 */
+    @Override
+	public void add(Caixa caixa) throws SQLException
     {
         String sql = "INSERT INTO caixa(descricao,situacao,e_preferencial,observacao,id_matriz,sequencial_filial) VALUES(?,?,?,?,?,?);";
         PreparedStatement st = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -33,12 +38,19 @@ public class RepositorioCaixa {
        st.setInt(5, caixa.getId_matriz());
        st.setInt(6, caixa.getSeq_filial());
         st.executeUpdate();
+
         ResultSet key = st.getGeneratedKeys();
+
         if (key.next())
             caixa.setId(key.getInt(1));
 
+
     }
-    public boolean edit(Caixa caixa) throws SQLException
+    /* (non-Javadoc)
+	 * @see dados.IRepositorioCaixa#edit(negocio.Caixa)
+	 */
+    @Override
+	public boolean edit(Caixa caixa) throws SQLException
     {
         String sql = "UPDATE caixa SET descricao=?, situacao=?, e_preferencial=?, observacao=?, id_matriz=?, sequencial_filial=?  where id=?";
         PreparedStatement st = this.connection.prepareStatement(sql);
@@ -51,7 +63,11 @@ public class RepositorioCaixa {
         st.setInt(7, caixa.getId());
         return st.execute();
     }
-    public Caixa find(int id) throws SQLException
+    /* (non-Javadoc)
+	 * @see dados.IRepositorioCaixa#find(int)
+	 */
+    @Override
+	public Caixa find(int id) throws SQLException
     {
         Caixa caixa = null;
         String sql = "SELECT * FROM caixa where id=?";
@@ -71,7 +87,11 @@ public class RepositorioCaixa {
         }
         return caixa;
     }
-    public ArrayList<Caixa> all() throws SQLException
+    /* (non-Javadoc)
+	 * @see dados.IRepositorioCaixa#all()
+	 */
+    @Override
+	public ArrayList<Caixa> all() throws SQLException
     {
         ArrayList<Caixa> listacaixa = new ArrayList<Caixa>();
         String sql = "SELECT * FROM caixa ORDER BY id";
