@@ -24,7 +24,7 @@ public class RepositorioCaixa {
 
     public void add(Caixa caixa) throws SQLException
     {
-        String sql = "INSERT INTO teste(id,descricao,situacao,e_preferencial,observacao,id_matriz,sequencial_filial) VALUES(?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO caixa(descricao,situacao,e_preferencial,observacao,id_matriz,sequencial_filial) VALUES(?,?,?,?,?,?);";
         PreparedStatement st = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
        st.setString(1, caixa.getDescricao());
         st.setString(2, caixa.getSituacao().name());
