@@ -4,8 +4,6 @@ public class Dia {
 	private int sequencial;
 	private String descricao;
 	
-	
-	
 	public Dia(int sequencial, String descricao) {
 		super();
 		this.sequencial = sequencial;
