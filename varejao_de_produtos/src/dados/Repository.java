@@ -1,8 +1,11 @@
 package dados;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
+import java.lang.reflect.ParameterizedType;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import varejao_de_produtos.ConnectionMySQL;
@@ -11,14 +14,31 @@ public class Repository<T, TId> implements IRepository<T, TId>{
 	
 	@Override
 	public T getOne(TId id_entity) throws Exception {
-		
+
 		return null;
 	}
 
 	@Override
 	public Collection<T> getAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Class<T> classe = (Class<T>) ((ParameterizedType) (this.getClass().getGenericSuperclass())).getActualTypeArguments()[0];
+		String minhaClasse = classe.getSimpleName();
+		String query = "SELECT * FROM "+ minhaClasse;
+		
+		PreparedStatement st = ConnectionMySQL.getConnection().prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        ResultSetMetaData rsmt = rs.getMetaData();
+        int count = rsmt.getColumnCount();
+        Collection<T> retorno = new ArrayList<>(); 
+        while(rs.next()){
+        	T myInstance = classe.newInstance();
+        	Field[] campos = classe.getDeclaredFields();
+        	for(int i = 1; i <= count; i++){
+        		String coluna = rsmt.getColumnName(i);
+        		
+        	}
+        	retorno.add(myInstance);
+        }
+		return retorno;
 	}
 
 	@Override
@@ -55,7 +75,6 @@ public class Repository<T, TId> implements IRepository<T, TId>{
 			st.setObject(k+1, value);
 		}
 		st.execute();
-		//System.out.println(entity.toString());
 		return entity;
 	}
 
@@ -66,9 +85,32 @@ public class Repository<T, TId> implements IRepository<T, TId>{
 	}
 
 	@Override
-	public void delete(TId id_entity) throws Exception {
-		
-		
+	public void delete(T entity) throws Exception {
+		String className = entity.getClass().getSimpleName().toLowerCase();
+		String query = "DELETE FROM "+ className +" WHERE ";
+		String meu_id = "";
+		int achouUm = 0;
+		for(Field f : entity.getClass().getDeclaredFields()){
+			//System.out.println(f.getName());
+			if(f.isAnnotationPresent(MeuId.class)){
+				//System.out.println("entrou" + f.toString());
+				if(achouUm == 0){
+					meu_id = f.getName();
+					achouUm++;
+				}else if(achouUm != 0){
+					throw new Exception("Entidade com multiplos Ids");
+				}
+			}
+		}
+		query += meu_id+"=?;";
+		PreparedStatement st = ConnectionMySQL.getConnection().prepareStatement(query);
+		//System.out.println(query);
+		Field field = entity.getClass().getDeclaredField(meu_id);
+		field.setAccessible(true);
+
+		Object value = field.get(entity);
+		st.setObject(1, value);
+		st.execute();
 	}
 
 }

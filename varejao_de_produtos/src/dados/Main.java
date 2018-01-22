@@ -10,7 +10,10 @@ public class Main {
 		DiaSemanaRepository repository = DiaSemanaRepository.getInstance();
 		Repository<Caixa, Integer> caixa = new Repository();
 		try {
-			repository.save(new Dia(21, "Descricao"));
+			Dia d = new Dia(27, "Olha o Dia novo");
+			//repository.save(d);
+			repository.getAll(); 
+			repository.delete(d);
 			//caixa.save(new Caixa());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

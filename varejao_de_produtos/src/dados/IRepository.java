@@ -8,6 +8,6 @@ public interface IRepository<T extends Object, TId extends Object> {
 	Collection<T> getAll() throws Exception;
 	T save(T entity) throws Exception;
 	T update(T entity) throws Exception;
-	void delete(TId id_entity) throws Exception;
+	void delete(T entity) throws Exception;
 
 }

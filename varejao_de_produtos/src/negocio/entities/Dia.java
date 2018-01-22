@@ -1,6 +1,9 @@
 package negocio.entities;
 
+import dados.MeuId;
+
 public class Dia {
+	@MeuId
 	private int sequencial;
 	private String descricao;
 	
