@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>mysql-connector-java-5.1.37-bin.jar</name>
+			<type>1</type>
+			<location>/Users/mac/Downloads/Kit_JDBC_MySQL (1)/Kit_JDBC_MySQL/02_Driver_JDBD_MySQL/mysql-connector-java-5.1.37-bin.jar</location>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -7,18 +7,18 @@ import com.mysql.jdbc.MySQLConnection;
 
 import dados.IRepositorioCaixa;
 import dados.RepositorioCaixa;
-import negocio.Caixa;
 import negocio.preferencial_caixa;
 import negocio.situacao_caixa;
+import negocio.entities.Caixa;
 
 public class Teste {
 
-	public static void main(String[] args) throws SQLException {
+/*	public static void main(String[] args) throws SQLException {
 		Connection con = null;
 		try {
 			con = ConnectionMySQL.getConnection();
 
-			//setando o autocommit para falso, pois só commitar se tiver tudo correto
+			//setando o autocommit para falso, pois sï¿½ commitar se tiver tudo correto
 			con.setAutoCommit(false);
 
 			IRepositorioCaixa rep = new RepositorioCaixa(con);
@@ -52,5 +52,5 @@ public class Teste {
 
 	}
 
-
+*/
 }

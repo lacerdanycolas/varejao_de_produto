@@ -1,4 +1,7 @@
-package negocio;
+package negocio.entities;
+
+import negocio.preferencial_caixa;
+import negocio.situacao_caixa;
 
 public class Caixa {
 

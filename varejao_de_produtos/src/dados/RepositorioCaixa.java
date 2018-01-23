@@ -7,25 +7,32 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import negocio.Caixa;
 import negocio.preferencial_caixa;
 import negocio.situacao_caixa;
+import negocio.entities.Caixa;
 
 
-public class RepositorioCaixa implements IRepositorioCaixa {
+public class RepositorioCaixa {// implements IRepositorioCaixa {
 	//setando tipo enum caixa.setSexo(Enum.valueOf(Sexo.class, query.getString("Sexo")))
 
+	/*private static RepositorioC/*aixa instance;
+	
 	private final Connection connection;
     public RepositorioCaixa(Connection connection)
     {
        this.connection = connection;
     }
+    
+    public static RepositorioCaixa getInstance(){
+    	if(instance==null){
+    		instance = new RepositorioCaixa(); 
+    	}
+    }
 
 
-
-    /* (non-Javadoc)
+     (non-Javadoc)
 	 * @see dados.IRepositorioCaixa#add(negocio.Caixa)
-	 */
+	 
     @Override
 	public void add(Caixa caixa) throws SQLException
     {
@@ -46,9 +53,9 @@ public class RepositorioCaixa implements IRepositorioCaixa {
 
 
     }
-    /* (non-Javadoc)
+     (non-Javadoc)
 	 * @see dados.IRepositorioCaixa#edit(negocio.Caixa)
-	 */
+	 
     @Override
 	public boolean edit(Caixa caixa) throws SQLException
     {
@@ -63,9 +70,9 @@ public class RepositorioCaixa implements IRepositorioCaixa {
         st.setInt(7, caixa.getId());
         return st.execute();
     }
-    /* (non-Javadoc)
+     (non-Javadoc)
 	 * @see dados.IRepositorioCaixa#find(int)
-	 */
+	 
     @Override
 	public Caixa find(int id) throws SQLException
     {
@@ -87,11 +94,11 @@ public class RepositorioCaixa implements IRepositorioCaixa {
         }
         return caixa;
     }
-    /* (non-Javadoc)
+     (non-Javadoc)
 	 * @see dados.IRepositorioCaixa#all()
-	 */
+	 
     @Override
-	public ArrayList<Caixa> all() throws SQLException
+	/*public ArrayList<Caixa> all() throws SQLException
     {
         ArrayList<Caixa> listacaixa = new ArrayList<Caixa>();
         String sql = "SELECT * FROM caixa ORDER BY id";
@@ -99,17 +106,18 @@ public class RepositorioCaixa implements IRepositorioCaixa {
         ResultSet query = st.executeQuery();
        Caixa caixa = null;
         while (query.next())
-        {
-            caixa = new Caixa();
+      *//*  {
+          caixa = new Caixa();
             caixa.setId(query.getInt("id"));
             caixa.setDescricao(query.getString("descricao"));
             caixa.setSituacao(Enum.valueOf(situacao_caixa.class, query.getString("situacao")));
             caixa.setE_preferencial(Enum.valueOf(preferencial_caixa.class, query.getString("e_preferencial")));
             caixa.setObservacao(query.getString("observacao"));
             caixa.setId_matriz(query.getInt("id_matriz"));
-            caixa.setSeq_filial(query.getInt("sequencial_filial"));
-            listacaixa.add(caixa);
-        }
-        return listacaixa;
-    }
+        //    caixa.setSeq_filial(query.getInt("sequencial_filial"));
+        //    listacaixa.add(caixa);
+        }*/
+//        return listacaixa;
+//    }
+
 }
