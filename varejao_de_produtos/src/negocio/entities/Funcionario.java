@@ -1,7 +1,9 @@
 package negocio.entities;
 
-public class Funcionario {
+import dados.MeuId;
 
+public class Funcionario {
+	@MeuId
 	private int id;
 	private String cpf;
 	private char sexo;

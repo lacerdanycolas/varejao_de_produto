@@ -1,8 +1,9 @@
 package negocio.entities;
-
+import dados.MeuId;
 import java.sql.Date;
 
 public class Pedido_Fornecedor {
+	@MeuId
 	private int id;
 	private double total_desconto;
 	private double valor_total;

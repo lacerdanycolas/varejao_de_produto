@@ -1,7 +1,9 @@
 package negocio.entities;
 
+import dados.MeuId;
+
 public class Jornada_Trabalho {
-	
+	@MeuId
 	private int id;
 	private int id_func;
 	private Trabalha_Sabado trabaS;

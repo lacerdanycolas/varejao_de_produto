@@ -1,7 +1,9 @@
 package negocio.entities;
 
+import dados.MeuId;
+
 public class Item_Pedido {
-	
+	@MeuId
 	private int id;
 	private int id_pedido_fornecedor;
 	private int id_produto_ref;

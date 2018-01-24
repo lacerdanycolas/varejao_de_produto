@@ -1,11 +1,11 @@
 package negocio.entities;
 
 import java.sql.Time;
-
+import dados.MeuId;
 import com.mysql.jdbc.TimeUtil;
 
 public class Turno {
-
+	@MeuId
 	private int codigo;
 	private String descricao;
 	private Time hora_inicio;

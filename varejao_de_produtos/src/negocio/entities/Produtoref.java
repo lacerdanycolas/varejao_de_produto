@@ -1,6 +1,7 @@
 package negocio.entities;
-
-public class Produto {
+import dados.MeuId;
+public class Produtoref {
+	@MeuId
 	private String codigo_de_barra;
 	private String id;
 	private String descricao;
@@ -22,7 +23,7 @@ public class Produto {
 	private int id_marcaref;
 	private int id_ncm;
 	
-	public Produto(String codigo_de_barra, String id, String descricao, double frequencia_pedido,
+	public Produtoref(String codigo_de_barra, String id, String descricao, double frequencia_pedido,
 			double preco_por_tabela, int cst, String icms, String nome, double preco_ultima_compra,
 			int quantidade_estoque, int quantidade_minima, String marca, String unidade_de_medida, String ncm,
 			int id_fornecedor, int id_categoriaref, int id_sub_categoriaref, int id_unidaderef, int id_marcaref,

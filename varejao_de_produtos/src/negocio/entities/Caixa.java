@@ -2,9 +2,10 @@ package negocio.entities;
 
 import negocio.preferencial_caixa;
 import negocio.situacao_caixa;
+import dados.MeuId;
 
 public class Caixa {
-
+	@MeuId
 	private int id;
 	private String descricao;
 	private situacao_caixa situacao;

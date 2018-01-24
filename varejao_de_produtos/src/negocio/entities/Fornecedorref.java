@@ -1,6 +1,9 @@
 package negocio.entities;
 
-public class Fornecedor {
+import dados.MeuId;
+
+public class Fornecedorref {
+	@MeuId
 	private int id;
 	private String nome;
 	private String cnpj;
@@ -10,7 +13,7 @@ public class Fornecedor {
 	private String bairro;
 	private Situacao situacao;
 	
-	public Fornecedor(int id, String nome, String cnpj, String rua, String cep, String estado, String bairro,
+	public Fornecedorref(int id, String nome, String cnpj, String rua, String cep, String estado, String bairro,
 			Situacao situacao) {
 		this.id = id;
 		this.nome = nome;
@@ -95,7 +98,7 @@ public class Fornecedor {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Fornecedor other = (Fornecedor) obj;
+		Fornecedorref other = (Fornecedorref) obj;
 		if (bairro == null) {
 			if (other.bairro != null)
 				return false;
