@@ -1,9 +1,10 @@
 package negocio.entities;
 
-public enum Situacao {
-	ATIVO(1), INATIVO(2);
+public enum Estado_Civil {
+	SOLTEIRO(1), CASADO(2), DIVORCIADO(3);
 	private int id;
-	Situacao (int i){
+	
+	Estado_Civil (int i){
 		this.id=i;
 	}
 	

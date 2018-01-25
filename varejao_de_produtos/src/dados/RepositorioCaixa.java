@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import negocio.preferencial_caixa;
-import negocio.situacao_caixa;
 import negocio.entities.Caixa;
+import negocio.entities.Preferencial_Caixa;
+import negocio.entities.Situacao_Caixa;
 
 
 public class RepositorioCaixa {// implements IRepositorioCaixa {

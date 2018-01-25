@@ -1,6 +1,8 @@
 package dados;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,10 +16,56 @@ public class Repository<T, TId> implements IRepository<T, TId>{
 	
 	@Override
 	public T getOne(TId id_entity) throws Exception {
-
-		return null;
+		Class<T> classe = (Class<T>) ((ParameterizedType) (this.getClass().getGenericSuperclass())).getActualTypeArguments()[0];
+		String minhaClasse = classe.getSimpleName();
+		String query = "SELECT * FROM "+ minhaClasse + " WHERE ";
+		String meu_id = "";
+		int achouUm = 0;
+		for(Field f : classe.getDeclaredFields()){
+			//System.out.println(f.getName());
+			if(f.isAnnotationPresent(MeuId.class)){
+				//System.out.println("entrou" + f.toString());
+				if(achouUm == 0){
+					meu_id = f.getName();
+					achouUm++;
+				}else if(achouUm != 0){
+					throw new Exception("Entidade com multiplos Ids");
+				}
+			}
+		}
+		query += meu_id+"=?;";
+		PreparedStatement st = ConnectionMySQL.getConnection().prepareStatement(query);
+		st.setObject(1, id_entity);
+		
+        ResultSet rs = st.executeQuery();
+        ResultSetMetaData rsmt = rs.getMetaData();
+        int count = rsmt.getColumnCount();
+        Constructor<?> constructor = classe.getConstructor(); // recupera o construtor default da classe passada para o repositorio
+    	Object instance = constructor.newInstance(); // cria uma nova instancia da classe que está sendo passada como parametro
+        while(rs.next()){
+        	Field[] campos = classe.getDeclaredFields(); //lista os campos da classe passada como paramentro no repositorio
+        	for(int i = 0; i <= campos.length-1; i++){ // intero sobre a lista de campos da entidade 
+        		for(int k = 1; k <= count; k++){ // intero sobre as colunas do result set
+        			String coluna = rsmt.getColumnName(k); // recupero o nome da coluna atual 
+        			if(campos[i].getName().equals(coluna)){ // verifica se o nome da coluna é igual ao nome do atributo da classe
+        				Object valor = rs.getObject(k); // recupera o valor da coluna caso o nome dela seja igual ao nome do parametro
+            			Field fd = instance.getClass().getDeclaredField(campos[i].getName()); 
+            			if(fd.getType().isEnum()){
+            				fd.setAccessible(true);
+                			fd.set(instance, Enum.valueOf((Class<Enum>) fd.getType(), valor.toString()));
+            			}else{
+            				fd.setAccessible(true);
+                			fd.set(instance, valor);	
+            			}
+            			break;
+            		}  
+        		}
+        	}
+        }
+		return (T) instance;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Collection<T> getAll() throws Exception {
 		Class<T> classe = (Class<T>) ((ParameterizedType) (this.getClass().getGenericSuperclass())).getActualTypeArguments()[0];
@@ -30,13 +78,29 @@ public class Repository<T, TId> implements IRepository<T, TId>{
         int count = rsmt.getColumnCount();
         Collection<T> retorno = new ArrayList<>(); 
         while(rs.next()){
-        	T myInstance = classe.newInstance();
-        	Field[] campos = classe.getDeclaredFields();
-        	for(int i = 1; i <= count; i++){
-        		String coluna = rsmt.getColumnName(i);
-        		
+        	Constructor<?> constructor = classe.getConstructor(); // recupera o construtor default da classe passada para o repositorio
+        	Object instance = constructor.newInstance(); // cria uma nova instancia da classe que está sendo passada como parametro
+        	Field[] campos = classe.getDeclaredFields(); //lista os campos da classe passada como paramentro no repositorio
+        	for(int i = 0; i <= campos.length-1; i++){ // intero sobre a lista de campos da entidade 
+        		for(int k = 1; k <= count; k++){ // intero sobre as colunas do result set
+        			String coluna = rsmt.getColumnName(k); // recupero o nome da coluna atual 
+        			if(campos[i].getName().equals(coluna)){ // verifica se o nome da coluna é igual ao nome do atributo da classe
+        				Object valor = rs.getObject(k); // recupera o valor da coluna caso o nome dela seja igual ao nome do parametro
+            			Field fd = instance.getClass().getDeclaredField(campos[i].getName()); 
+            			if(fd.getType().isEnum()){
+            				/*Constructor<?> enumeravel = fd.getType().getConstructor(Integer.class);*/
+            				/*Object meu_enum = enumeravel.newInstance(Enum.valueOf(fd.getType().getClass(), valor));*/
+            				fd.setAccessible(true);
+                			fd.set(instance, Enum.valueOf((Class<Enum>) fd.getType(), valor.toString()));
+            			}else{
+            				fd.setAccessible(true);
+                			fd.set(instance, valor);	
+            			}
+            			break;
+            		}  
+        		}
         	}
-        	retorno.add(myInstance);
+        	retorno.add((T)instance);
         }
 		return retorno;
 	}
@@ -70,9 +134,18 @@ public class Repository<T, TId> implements IRepository<T, TId>{
 		for(int k = 0; k <= entity.getClass().getDeclaredFields().length-1; k++){
 			Field field = entity.getClass().getDeclaredField(campos[k]);
 			field.setAccessible(true);
-
-			Object value = field.get(entity);
-			st.setObject(k+1, value);
+			if(field.getType().isEnum()){
+				/*System.out.println(field.getName() + " -> Entrou no If");
+				System.out.print(field.getClass().getSimpleName());	
+				*/
+				Method method = field.getType().getDeclaredMethod("getId");
+			    Integer val = (Integer) method.invoke(field.get(entity));
+			    st.setObject(k+1, val);
+			}else{
+				System.out.println(field.getName() + " -> Entrou no Else");
+				Object value = field.get(entity);
+				st.setObject(k+1, value);
+			}
 		}
 		st.execute();
 		return entity;

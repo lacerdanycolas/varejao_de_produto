@@ -7,9 +7,9 @@ import com.mysql.jdbc.MySQLConnection;
 
 import dados.IRepositorioCaixa;
 import dados.RepositorioCaixa;
-import negocio.preferencial_caixa;
-import negocio.situacao_caixa;
 import negocio.entities.Caixa;
+import negocio.entities.Preferencial_Caixa;
+import negocio.entities.Situacao_Caixa;
 
 public class Teste {
 

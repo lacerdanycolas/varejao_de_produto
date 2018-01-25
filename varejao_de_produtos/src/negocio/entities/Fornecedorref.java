@@ -4,7 +4,7 @@ import dados.MeuId;
 
 public class Fornecedorref {
 	@MeuId
-	private int id;
+	private Integer id;
 	private String nome;
 	private String cnpj;
 	private String rua;
@@ -12,6 +12,10 @@ public class Fornecedorref {
 	private String estado;
 	private String bairro;
 	private Situacao situacao;
+
+	public Fornecedorref(){
+		
+	}
 	
 	public Fornecedorref(int id, String nome, String cnpj, String rua, String cep, String estado, String bairro,
 			Situacao situacao) {

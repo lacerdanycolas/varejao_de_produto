@@ -1,15 +1,13 @@
 package negocio.entities;
 
-import negocio.preferencial_caixa;
-import negocio.situacao_caixa;
 import dados.MeuId;
 
 public class Caixa {
 	@MeuId
 	private int id;
 	private String descricao;
-	private situacao_caixa situacao;
-	private preferencial_caixa e_preferencial;
+	private Situacao_Caixa situacao;
+	private Preferencial_Caixa e_preferencial;
 	private String observacao;
 	private int id_matriz;
 	private int seq_filial;
@@ -25,16 +23,16 @@ public class Caixa {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public situacao_caixa getSituacao() {
+	public Situacao_Caixa getSituacao() {
 		return situacao;
 	}
-	public void setSituacao(situacao_caixa situacao) {
+	public void setSituacao(Situacao_Caixa situacao) {
 		this.situacao = situacao;
 	}
-	public preferencial_caixa getE_preferencial() {
+	public Preferencial_Caixa getE_preferencial() {
 		return e_preferencial;
 	}
-	public void setE_preferencial(preferencial_caixa e_preferencial) {
+	public void setE_preferencial(Preferencial_Caixa e_preferencial) {
 		this.e_preferencial = e_preferencial;
 	}
 	public String getObservacao() {
