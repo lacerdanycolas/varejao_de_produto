@@ -10,7 +10,9 @@ public class Item_Pedido {
 	private int quantidade;
 	private double preco_unitario;
 	
-	
+	public Item_Pedido(){
+		
+	}
 	
 	public Item_Pedido(int id, int id_pedido_fornecedor, int id_produto_ref, int quantidade, double preco_unitario) {
 		

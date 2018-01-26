@@ -9,6 +9,9 @@ public class Jornada_Trabalho {
 	private Trabalha_Sabado trabaS;
 	private String descricao;
 	
+	public Jornada_Trabalho(){
+		
+	}
 	public Jornada_Trabalho(int id, int id_func, Trabalha_Sabado trabaS, String descricao) {
 		
 		this.id = id;

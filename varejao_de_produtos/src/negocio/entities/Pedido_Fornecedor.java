@@ -14,6 +14,9 @@ public class Pedido_Fornecedor {
 	private double valor_frete;
 	private String cpf_coordenador;
 	
+	public Pedido_Fornecedor(){
+		
+	}
 	
 	public Pedido_Fornecedor(int id, double total_desconto, double valor_total, double ipi, String cfop,
 			Date data_pedido, Situacao situacao, double valor_frete, String cpf_coordenador) {

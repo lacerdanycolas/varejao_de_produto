@@ -18,7 +18,7 @@ public class Repository<T, TId> implements IRepository<T, TId>{
 	public T getOne(TId id_entity) throws Exception {
 		Class<T> classe = (Class<T>) ((ParameterizedType) (this.getClass().getGenericSuperclass())).getActualTypeArguments()[0];
 		String minhaClasse = classe.getSimpleName();
-		String query = "SELECT * FROM "+ minhaClasse + " WHERE ";
+		String query = "SELECT * FROM "+ minhaClasse.toLowerCase() + " WHERE ";
 		String meu_id = "";
 		int achouUm = 0;
 		for(Field f : classe.getDeclaredFields()){
@@ -34,9 +34,10 @@ public class Repository<T, TId> implements IRepository<T, TId>{
 			}
 		}
 		query += meu_id+"=?;";
+		System.out.println(query);
 		PreparedStatement st = ConnectionMySQL.getConnection().prepareStatement(query);
 		st.setObject(1, id_entity);
-		
+		System.out.println(id_entity);
         ResultSet rs = st.executeQuery();
         ResultSetMetaData rsmt = rs.getMetaData();
         int count = rsmt.getColumnCount();
@@ -49,7 +50,7 @@ public class Repository<T, TId> implements IRepository<T, TId>{
         			String coluna = rsmt.getColumnName(k); // recupero o nome da coluna atual 
         			if(campos[i].getName().equals(coluna)){ // verifica se o nome da coluna é igual ao nome do atributo da classe
         				Object valor = rs.getObject(k); // recupera o valor da coluna caso o nome dela seja igual ao nome do parametro
-            			Field fd = instance.getClass().getDeclaredField(campos[i].getName()); 
+        				Field fd = instance.getClass().getDeclaredField(campos[i].getName()); 
             			if(fd.getType().isEnum()){
             				fd.setAccessible(true);
                 			fd.set(instance, Enum.valueOf((Class<Enum>) fd.getType(), valor.toString()));
