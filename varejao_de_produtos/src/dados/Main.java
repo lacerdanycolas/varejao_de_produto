@@ -37,7 +37,7 @@ public class Main {
 			Dia d = new Dia(27, "Olha o Dia novo");
 			Produtoref produto = new Produtoref("28162152", 460, null, null, new BigDecimal("27.32"), "10", new BigDecimal("0.00"), "Faca de madeira", null, null, null, 3, 4, 4, 2, 9, 17);
 			
-			//produtoRepository.save(produto);
+			produtoRepository.save(produto);
 			System.out.println(produtoRepository.getOne(460));
 			Collection<Produtoref> listaProdutos = produtoRepository.getAll();
 			for(Produtoref prod : listaProdutos){

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="565.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.VarejaoDeProdutosPaneController">
+   <center>
+      <AnchorPane prefHeight="561.0" prefWidth="678.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="223.0" layoutY="-18.0" text="Bem Vindo">
+               <font>
+                  <Font name="Bangla MN Bold" size="36.0" />
+               </font>
+            </Label>
+            <Button fx:id="butX" layoutX="632.0" layoutY="1.0" mnemonicParsing="false" onAction="#sair" text="X" textFill="#ee0606" />
+            <Label layoutX="66.0" layoutY="512.0" prefHeight="17.0" prefWidth="539.0" text="Copyright © 2018 Developed by Rafael, Samantha, Viviane, Nycolas  and supported by Thiago Henrique.">
+               <font>
+                  <Font name="Tamil MN" size="11.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="198.0" fitWidth="410.0" layoutX="144.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Downloads/Varejao_de_fralas_001.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="209.0" layoutY="304.0" text="Login" textFill="#fffafa">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="206.0" layoutY="368.0" text="Senha" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <TextField layoutX="206.0" layoutY="326.0" />
+            <TextField layoutX="206.0" layoutY="390.0" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </AnchorPane>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" />
+            <Menu mnemonicParsing="false" />
+            <Menu mnemonicParsing="false" />
+            <Menu mnemonicParsing="false" />
+            <Menu mnemonicParsing="false" />
+            <Menu mnemonicParsing="false" />
+         </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
