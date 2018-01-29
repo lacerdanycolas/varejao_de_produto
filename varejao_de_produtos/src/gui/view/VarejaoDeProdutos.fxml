@@ -29,7 +29,7 @@
             </Label>
             <ImageView fitHeight="198.0" fitWidth="410.0" layoutX="144.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Pictures/tumblr_ku37elzBrE1qa2nyko1_500.png" />
+                  <Image url="@../../../../../../Downloads/varejao%20fraldas.jpg" />
                </image>
             </ImageView>
             <Label layoutX="209.0" layoutY="304.0" text="Login" textFill="#fffafa">
