@@ -11,15 +11,14 @@ public class Caixa {
 	private String observacao;
 	private Integer id_matriz;
 	private Integer sequencial_filial;
-	
+
 	public Caixa(){
-		
+
 	}
-	
-	public Caixa(Integer id, String descricao, Situacao situacao, Preferencial_Caixa e_preferencial,
+
+	public Caixa(String descricao, Situacao situacao, Preferencial_Caixa e_preferencial,
 			String observacao, int id_matriz, int seq_filial) {
 		super();
-		this.id = id;
 		this.descricao = descricao;
 		this.situacao = situacao;
 		this.e_preferencial = e_preferencial;
@@ -27,8 +26,8 @@ public class Caixa {
 		this.id_matriz = id_matriz;
 		this.sequencial_filial = seq_filial;
 	}
-	
-	public int getId() {
+
+	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
