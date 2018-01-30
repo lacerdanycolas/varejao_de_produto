@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import controllers.ControladorCaixa;
+import negocio.controller.ControladorCaixa;
+import negocio.controller.FachadaVarejao;
 import dados.CaixaRepository;
 import dados.RepositorioCaixa;
 import gui.MainTeste;
@@ -45,7 +47,10 @@ public class CaixaControllerGui implements Initializable{
 	private TableColumn<Caixa, String> tbCollumIdCaixa;
 	@FXML
 	private TableColumn<Caixa,String> tbCollumSituacaoCaixa;
-
+	@FXML
+	private TableColumn<Caixa, String> tbCollumPreferencialCaixa;
+	@FXML
+	private TableColumn<Caixa, String> tbCollumSeqFilialCaixa;
 
 
 	@FXML
@@ -57,8 +62,6 @@ public class CaixaControllerGui implements Initializable{
 	@FXML
 	private javafx.scene.control.TextField textFieldIdMatrizCaixa;
 
-	@FXML
-	private javafx.scene.control.TextField textFieldSequencialFilialCaixa;
 
 	@FXML
 	private ComboBox<String> comboBoxSituacao;
@@ -67,29 +70,58 @@ public class CaixaControllerGui implements Initializable{
 	private ComboBox<String> comboBoxPreferencial;
 
 	@FXML
+	private ComboBox<Integer> comboBoxSeqFilial;
+
+	@FXML
 	javafx.scene.control.Button buttonSalvarCaixa;
 
 	@FXML
 	javafx.scene.control.Button buttonRemoverCaixa;
-	
+
+	@FXML
+	javafx.scene.control.Button buttonLimparCaixa;
 
 	private Collection<Caixa> listaCaixa = new ArrayList<Caixa>();
+	private Collection<Caixa> listcaixa2 = new ArrayList<Caixa>();
 	private ObservableList<Caixa> oblistaCaixa;
 
 	private MainTeste main;
+	private FachadaVarejao fachada = FachadaVarejao.getInstance();
+
 
 	private ObservableList<String> situacao = FXCollections.observableArrayList(Situacao_Caixa.ATIVO.toString(),Situacao.INATIVO.toString());
 	private ObservableList<String> preferencial = FXCollections.observableArrayList(Preferencial_Caixa.S.toString(),Preferencial_Caixa.N.toString());
-
+	private ObservableList<Integer> seqFilialList;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		this.main = MainTeste.getInstance();
-		comboBoxSituacao.setItems(situacao);
-		comboBoxPreferencial.setItems(preferencial);
 
+		//setando os valores do combobox
+//		comboBoxSituacao.setItems(situacao);
+//		comboBoxPreferencial.setItems(preferencial);
+//		try {
+//			listcaixa2 = fachada.listarCaixa();
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		ArrayList<Integer> listseqfilial = new ArrayList<Integer>();
+//		for (Caixa caixa : listcaixa2) {
+//			listseqfilial.add(caixa.getSeq_filial());
+//		}
+//		Collections.sort(listseqfilial);
+//		seqFilialList = FXCollections.observableArrayList(listseqfilial);
+//		comboBoxSeqFilial.setItems(seqFilialList);
+//		textFieldIdMatrizCaixa.setText("1");
+//		textFieldIdMatrizCaixa.editableProperty().set(false);
+
+		//carregandoTableView
+		carregandoValoresTela();
 		carregarTableViewCaixa();
 
+
+		//Metodo Salvar
 		buttonSalvarCaixa.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -119,13 +151,13 @@ public class CaixaControllerGui implements Initializable{
 						String idMatriz = new String(textFieldIdMatrizCaixa.getText());
 						int idm = Integer.parseInt(idMatriz);
 
-						String seq_filial = new String(textFieldSequencialFilialCaixa.getText());
+						String seq_filial = new String(comboBoxSeqFilial.getValue().toString());
 						int seqf = Integer.parseInt(seq_filial);
 
 						Caixa caixa = new Caixa(descricao, situ, pref, observacao, idm, seqf);
 
 						try {
-							CaixaRepository.getInstance().save(caixa);
+							fachada.getInstance().salvarCaixa(caixa);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -152,6 +184,7 @@ public class CaixaControllerGui implements Initializable{
 			}
 		});
 
+		//Metodo Remover
 		buttonRemoverCaixa.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
@@ -164,7 +197,7 @@ public class CaixaControllerGui implements Initializable{
 					if(caixaremove!= null && caixaremove instanceof Caixa){
 
 						try {
-							CaixaRepository.getInstance().delete(caixaremove);
+							fachada.deletarCaixa(caixaremove);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -178,6 +211,39 @@ public class CaixaControllerGui implements Initializable{
 				        root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroCaixa.fxml"));
 				    } else {
 						stage = (Stage) buttonRemoverCaixa.getScene().getWindow();
+						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroCaixa.fxml"));
+					}
+					//create a new scene with root and set the stage
+					Scene scene = new Scene(root);
+				    stage.setScene(scene);
+				    main.changeStage(stage);
+
+			}catch(IOException e){
+				e.printStackTrace();
+			}
+
+
+		}
+		});
+
+		buttonLimparCaixa.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+				Stage stage;
+				Parent root;
+				try{
+					if(event.getSource()==buttonLimparCaixa){
+
+							textFieldDescricaoCaixa.clear();
+							textFieldObservacaoCaixa.clear();
+
+						//get reference to the button's stage
+				        stage = (Stage) buttonLimparCaixa.getScene().getWindow();
+				        //load up OTHER FXML document
+				        root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroCaixa.fxml"));
+				    } else {
+						stage = (Stage) buttonLimparCaixa.getScene().getWindow();
 						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroCaixa.fxml"));
 					}
 					//create a new scene with root and set the stage
@@ -213,8 +279,11 @@ public class CaixaControllerGui implements Initializable{
 	public void carregarTableViewCaixa() {
 		tbCollumIdCaixa.setCellValueFactory(new PropertyValueFactory<>("Id"));
         tbCollumSituacaoCaixa.setCellValueFactory(new PropertyValueFactory<>("Situacao"));
+        tbCollumPreferencialCaixa.setCellValueFactory(new PropertyValueFactory<>("E_preferencial"));
+        //tbCollumSeqFilialCaixa.setCellValueFactory(new PropertyValueFactory<>("sequencial_filial"));
+        tbCollumSeqFilialCaixa.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSeq_filial().toString()));
         try {
-			listaCaixa = CaixaRepository.getInstance().getAll();
+			listaCaixa = fachada.listarCaixa();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -224,7 +293,25 @@ public class CaixaControllerGui implements Initializable{
         tbViewCaixa.setItems(oblistaCaixa);
     }
 
-
+public void carregandoValoresTela(){
+	comboBoxSituacao.setItems(situacao);
+	comboBoxPreferencial.setItems(preferencial);
+	try {
+		listcaixa2 = fachada.listarCaixa();
+	} catch (Exception e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	ArrayList<Integer> listseqfilial = new ArrayList<Integer>();
+	for (Caixa caixa : listcaixa2) {
+		listseqfilial.add(caixa.getSeq_filial());
+	}
+	Collections.sort(listseqfilial);
+	seqFilialList = FXCollections.observableArrayList(listseqfilial);
+	comboBoxSeqFilial.setItems(seqFilialList);
+	textFieldIdMatrizCaixa.setText("1");
+	textFieldIdMatrizCaixa.editableProperty().set(false);
+}
 
 
 	public void setApp(MainTeste main) {

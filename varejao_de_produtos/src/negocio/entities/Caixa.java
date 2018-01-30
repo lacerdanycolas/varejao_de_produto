@@ -1,5 +1,7 @@
 package negocio.entities;
 
+import java.util.Comparator;
+
 import dados.MeuId;
 
 public class Caixa {
@@ -75,6 +77,8 @@ public class Caixa {
 				+ e_preferencial + ", observacao=" + observacao + ", id_matriz=" + id_matriz + ", seq_filial="
 				+ sequencial_filial + "]";
 	}
+	
+	
 
 
 
