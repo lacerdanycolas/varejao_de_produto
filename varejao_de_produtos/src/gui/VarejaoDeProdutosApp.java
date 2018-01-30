@@ -16,6 +16,8 @@ public class VarejaoDeProdutosApp extends Application {
 
 	private Stage primaryStage;
 	private BorderPane rootScene;
+	
+	
 
 	private static VarejaoDeProdutosApp instance;
 
@@ -38,6 +40,7 @@ public class VarejaoDeProdutosApp extends Application {
 		primaryStage.show();
 
 		carregarTelaPrincipal();
+		
 
 	}
 	public static void main(String[] args) {

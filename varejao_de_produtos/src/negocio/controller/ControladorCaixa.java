@@ -28,11 +28,11 @@ public class ControladorCaixa {
 		return rep.getAll();
 	}
 
-	public Caixa salvarCaixa(Caixa caixa) throws Exception{
+	public void salvarCaixa(Caixa caixa) throws Exception{
 		if(caixa.equals(null))
 			throw new IllegalArgumentException();
 		else
-			return rep.save(caixa);
+			rep.save(caixa);
 	}
 
 	public void deletarCaixa(Caixa caixa) throws Exception{

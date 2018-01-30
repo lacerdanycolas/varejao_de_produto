@@ -97,26 +97,6 @@ public class CaixaControllerGui implements Initializable{
 		// TODO Auto-generated method stub
 		this.main = MainTeste.getInstance();
 
-		//setando os valores do combobox
-//		comboBoxSituacao.setItems(situacao);
-//		comboBoxPreferencial.setItems(preferencial);
-//		try {
-//			listcaixa2 = fachada.listarCaixa();
-//		} catch (Exception e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		ArrayList<Integer> listseqfilial = new ArrayList<Integer>();
-//		for (Caixa caixa : listcaixa2) {
-//			listseqfilial.add(caixa.getSeq_filial());
-//		}
-//		Collections.sort(listseqfilial);
-//		seqFilialList = FXCollections.observableArrayList(listseqfilial);
-//		comboBoxSeqFilial.setItems(seqFilialList);
-//		textFieldIdMatrizCaixa.setText("1");
-//		textFieldIdMatrizCaixa.editableProperty().set(false);
-
-		//carregandoTableView
 		carregandoValoresTela();
 		carregarTableViewCaixa();
 
@@ -261,26 +241,12 @@ public class CaixaControllerGui implements Initializable{
 
 	}
 
-//	public void carregarTableViewCaixa() {
-//		try {
-//			listaCaixa = CaixaRepository.getInstance().getAll();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        oblistaCaixa = FXCollections.observableArrayList(listaCaixa);
-//        //obslistaUsuarios.addAll(this.listaUsuarios);
-//        tbViewCaixa.setItems(oblistaCaixa);
-//        tbCollumIdCaixa.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId().toString()));
-//        tbCollumSituacaoCaixa.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSituacao().toString()));
-//	}
 
-//
 	public void carregarTableViewCaixa() {
 		tbCollumIdCaixa.setCellValueFactory(new PropertyValueFactory<>("Id"));
         tbCollumSituacaoCaixa.setCellValueFactory(new PropertyValueFactory<>("Situacao"));
         tbCollumPreferencialCaixa.setCellValueFactory(new PropertyValueFactory<>("E_preferencial"));
-        //tbCollumSeqFilialCaixa.setCellValueFactory(new PropertyValueFactory<>("sequencial_filial"));
+
         tbCollumSeqFilialCaixa.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSeq_filial().toString()));
         try {
 			listaCaixa = fachada.listarCaixa();

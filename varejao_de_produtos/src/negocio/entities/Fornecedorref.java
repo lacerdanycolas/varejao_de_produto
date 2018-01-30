@@ -14,12 +14,12 @@ public class Fornecedorref {
 	private Situacao situacao;
 
 	public Fornecedorref(){
-		
+
 	}
-	
-	public Fornecedorref(int id, String nome, String cnpj, String rua, String cep, String estado, String bairro,
+
+	public Fornecedorref(String nome, String cnpj, String rua, String cep, String estado, String bairro,
 			Situacao situacao) {
-		this.id = id;
+
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.rua = rua;
@@ -92,8 +92,8 @@ public class Fornecedorref {
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
 	}
-	
-	
+
+
 
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -145,8 +145,8 @@ public class Fornecedorref {
 		return "Fornecedor [id=" + id + ", nome=" + nome + ", cnpj=" + cnpj + ", rua=" + rua + ", cep=" + cep
 				+ ", estado=" + estado + ", bairro=" + bairro + ", situacao=" + situacao + "]";
 	}
-	
-	
-	
+
+
+
 
 }

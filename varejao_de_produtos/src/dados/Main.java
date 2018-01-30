@@ -31,7 +31,7 @@ public class Main {
 		CaixaRepository caixaRepository = dados.CaixaRepository.getInstance();
 		ProdutorefRepository produtoRepository = dados.ProdutorefRepository.getInstance();
 		try {
-			Fornecedorref f = new Fornecedorref(21, "Jimmys ltda", "1291829182", "Rua Albacora", "54400-400", "PE", "Piedade", situacao);
+			//Fornecedorref f = new Fornecedorref(21, "Jimmys ltda", "1291829182", "Rua Albacora", "54400-400", "PE", "Piedade", situacao);
 			Funcionario func = new Funcionario(21, "03236541123",sexo, estado_civil, "8842161", "Rafael", "Camara", "Figueredo", situacao, "Rua Espardate", "Brasilia teimosa", "PE", "45555555", "admin", "admin", "10303577495",  tipo_func, "2352733254", 14);
 			//Caixa caixa = new Caixa(null, situacao, e_preferencial, null, 1, 26);
 			Dia d = new Dia(27, "Olha o Dia novo");

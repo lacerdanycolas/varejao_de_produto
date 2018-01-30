@@ -31,12 +31,16 @@ public class VarejaoDeProdutosPaneController {
 	@FXML
 	Button	buttonLogin;
 
+//	@FXML
+//	Button buttonTelaFornecedor;
+
 
 	private VarejaoDeProdutosApp main;
 
 	@FXML
 	public void initialize() throws Exception {
-	 this.setVarejaoDeProdutosApp(main.getInstance());
+
+		this.setVarejaoDeProdutosApp(main.getInstance());
 	 /*buttonLogin.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -57,6 +61,34 @@ public class VarejaoDeProdutosPaneController {
 
 				} catch (IOException e) {
 					e.printStackTrace();
+				}
+
+
+			}
+		});*/
+
+	 /*buttonTelaFornecedor.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				Stage stage = null;
+				Parent root = null;
+				try {
+					if (event.getSource() == buttonTelaFornecedor) {
+						// get reference to the button's stage
+						stage = (Stage) buttonTelaFornecedor.getScene().getWindow();
+						// load up OTHER FXML document
+						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroFornecedor.fxml"));
+					}
+					// create a new scene with root and set the stage
+					Scene scene = new Scene(root);
+					stage.setScene(scene);
+					main.changeStage(stage);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}catch(NullPointerException e){
+
 				}
 
 
