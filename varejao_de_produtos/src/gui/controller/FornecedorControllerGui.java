@@ -16,13 +16,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import negocio.controller.FachadaVarejao;
@@ -152,7 +155,11 @@ public class FornecedorControllerGui implements Initializable {
 					main.changeStage(stage);
 
 				} catch (IOException e) {
-					e.printStackTrace();
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Erro ao cadastrar um fornecedor.");
+					alert.setHeaderText("Impossivel efetuar cadastro.");
+					alert.setContentText(e.getMessage());
+					alert.showAndWait();
 				}
 
 
@@ -193,7 +200,11 @@ public class FornecedorControllerGui implements Initializable {
 				    main.changeStage(stage);
 
 			}catch(IOException e){
-				e.printStackTrace();
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao remover um fornecedor.");
+				alert.setHeaderText("Impossivel efetuar remocao.");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
 			}
 
 
@@ -289,5 +300,24 @@ public class FornecedorControllerGui implements Initializable {
 		}
 		estados = FXCollections.observableArrayList(stringestados);
 		comboBoxEstados.setItems(estados);
+	}
+	
+	public void sair(ActionEvent event) {
+		((Node) event.getSource()).getScene().getWindow().hide();
+
+	}
+
+	public void voltarMenuPrincipal(ActionEvent event) {
+		((Node) event.getSource()).getScene().getWindow().hide();
+		Parent parent;
+		try {
+			parent = FXMLLoader.load(getClass().getResource("/GUI/view/TelaPrincipalVarejao.fxml"));
+			Stage stage3 = new Stage();
+			Scene cena = new Scene(parent);
+			stage3.setScene(cena);
+			stage3.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
