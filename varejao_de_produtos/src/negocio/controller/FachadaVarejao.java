@@ -49,7 +49,7 @@ public class FachadaVarejao {
 	}
 
 	public Fornecedorref buscarFornecedor(int id) throws Exception{
-		this.fornecedores.buscarFornecedor(id);
+		return this.fornecedores.buscarFornecedor(id);
 	}
 
 
