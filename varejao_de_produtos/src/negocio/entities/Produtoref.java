@@ -21,17 +21,16 @@ public class Produtoref {
 	private Integer id_unidaderef;
 	private Integer id_marcaref;
 	private Integer id_ncm;
-	
+
 	public Produtoref(){
-		
+
 	}
-	public Produtoref(String codigo_de_barra, Integer id, String descricao, BigDecimal frequencia_pedido,
+	public Produtoref(String codigo_de_barra, String descricao, BigDecimal frequencia_pedido,
 			BigDecimal preco_por_tabela, String cst, BigDecimal icms, String nome, BigDecimal preco_ultima_compra,
 			Integer quantidade_estoque, Integer quantidade_minima, Integer id_fornecedor, Integer id_categoriaref,
 			Integer id_sub_categoriaref, Integer id_unidaderef, Integer id_marcaref, Integer id_ncm) {
 		super();
 		this.codigo_de_barra = codigo_de_barra;
-		this.id = id;
 		this.descricao = descricao;
 		this.frequencia_pedido = frequencia_pedido;
 		this.preco_por_tabela = preco_por_tabela;
@@ -160,8 +159,8 @@ public class Produtoref {
 				+ id_sub_categoriaref + ", id_unidaderef=" + id_unidaderef + ", id_marcaref=" + id_marcaref
 				+ ", id_ncm=" + id_ncm + "]";
 	}
-	
-	
-	
-	
+
+
+
+
 }
