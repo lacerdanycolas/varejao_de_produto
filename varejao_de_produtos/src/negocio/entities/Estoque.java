@@ -1,14 +1,20 @@
 package negocio.entities;
 
+import dados.MeuId;
+
 public class Estoque {
-	private int id;
+	@MeuId
+	private Integer id;
 	private String descricao;
-	private int  id_matriz;
-	private int  seq_filial;
+	private Integer  id_matriz;
+	private Integer seq_filial;
 	
-	public Estoque(int id, String descricao, int id_matriz, int seq_filial) {
+	public Estoque(){
 		
-		this.id = id;
+	}
+	
+	public Estoque(String descricao, Integer id_matriz, Integer seq_filial) {
+		
 		this.descricao = descricao;
 		this.id_matriz = id_matriz;
 		this.seq_filial = seq_filial;
@@ -18,7 +24,7 @@ public class Estoque {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -34,7 +40,7 @@ public class Estoque {
 		return id_matriz;
 	}
 
-	public void setId_matriz(int id_matriz) {
+	public void setId_matriz(Integer id_matriz) {
 		this.id_matriz = id_matriz;
 	}
 
@@ -42,7 +48,7 @@ public class Estoque {
 		return seq_filial;
 	}
 
-	public void setSeq_filial(int seq_filial) {
+	public void setSeq_filial(Integer seq_filial) {
 		this.seq_filial = seq_filial;
 	}
 

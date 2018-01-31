@@ -1,49 +1,54 @@
 package negocio.entities;
 
-public class Prateleira {
+import dados.MeuId;
 
-	private int id;
-	private double altura;
-	private double comprimento;
-	private int  posicao_nivel;
+public class Prateleira {
+	@MeuId
+	private Integer id;
+	private Double altura;
+	private Double comprimento;
+	private Integer posicao_nivel;
 	
-	public Prateleira(int id, double altura, double comprimento, int posicao_nivel) {
+	public Prateleira(){
 		
-		this.id = id;
+	}
+	
+	public Prateleira(Double altura, Double comprimento, Integer posicao_nivel) {
+		
 		this.altura = altura;
 		this.comprimento = comprimento;
 		this.posicao_nivel = posicao_nivel;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public double getAltura() {
+	public Double getAltura() {
 		return altura;
 	}
 
-	public void setAltura(double altura) {
+	public void setAltura(Double altura) {
 		this.altura = altura;
 	}
 
-	public double getComprimento() {
+	public Double getComprimento() {
 		return comprimento;
 	}
 
-	public void setComprimento(double comprimento) {
+	public void setComprimento(Double comprimento) {
 		this.comprimento = comprimento;
 	}
 
-	public int getPosicao_nivel() {
+	public Integer getPosicao_nivel() {
 		return posicao_nivel;
 	}
 
-	public void setPosicao_nivel(int posicao_nivel) {
+	public void setPosicao_nivel(Integer posicao_nivel) {
 		this.posicao_nivel = posicao_nivel;
 	}
 
