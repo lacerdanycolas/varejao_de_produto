@@ -5,44 +5,55 @@ import java.util.Collection;
 import java.util.List;
 
 import dados.CaixaRepository;
+import exceptions.FormatacaoInvalidaException;
 import negocio.entities.Caixa;
 import varejao_de_produtos.ConnectionMySQL;
 
 public class ControladorCaixa {
 
-
-	private CaixaRepository rep;
+	private CaixaRepository repositoroioCaixa;
 
 	public ControladorCaixa(CaixaRepository rep) {
-		this.rep = rep;
+		if(rep !=null){
+			this.repositoroioCaixa = rep;
+		}else{
+			IllegalArgumentException x = new IllegalArgumentException("Repositorio invalido.");
+			throw x;
+		}
 	}
 
-	public Caixa buscarCaixa(int id) throws Exception{
+	public Caixa buscarCaixa(Integer id) throws Exception{
 		if(id>0 /*and conexao tipo caixa*/){
-			return rep.getOne(id);
+			return repositoroioCaixa.getOne(id);
+		}else{
+			IllegalArgumentException x = new IllegalArgumentException("Repositorio invalido.");
+			throw x;
 		}
-		return null;
 	}
 
 	public Collection<Caixa> listarCaixa() throws Exception{
-		return rep.getAll();
+		return repositoroioCaixa.getAll();
 	}
 
+
+
 	public Caixa salvarCaixa(Caixa caixa) throws Exception{
-		if(caixa.equals(null))
-			throw new IllegalArgumentException();
+		if(caixa == null)
+			throw new FormatacaoInvalidaException();
+
 		else
-			return rep.save(caixa);
+			return repositoroioCaixa.save(caixa);
+
 	}
 
 	public void deletarCaixa(Caixa caixa) throws Exception{
-		if(caixa.equals(null)){
-			throw new IllegalArgumentException();
+		if(caixa == null){
+			throw new FormatacaoInvalidaException();
 		}
-		else if(rep.getOne(caixa.getId()).equals(null))
-			throw new Exception("Caixa não existe");
+		else if(repositoroioCaixa.getOne(caixa.getId()).equals(null))
+			throw new Exception("Caixa no existe");
 		else
-			rep.delete(caixa);
+			repositoroioCaixa.delete(caixa);
 	}
 
 

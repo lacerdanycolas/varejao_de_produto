@@ -28,11 +28,11 @@ public class Funcionario {
 	public Funcionario() {
 		//Implementar construtor default em todos
 	}
-	public Funcionario(Integer id, String cpf, Sexo sexo, Estado_Civil estadoC, String rg, String primeiro_nome,
+	public Funcionario(String cpf, Sexo sexo, Estado_Civil estadoC, String rg, String primeiro_nome,
 			String segundo_nome, String terceiro_nome, Situacao situacao, String rua, String bairro, String estado,
 			String cep, String login, String senha, String cpf_gerente, Tipo_Funcionario tipo, String cnpj_matriz,
 			Integer seq_filial) {
-		this.id = id;
+		super();
 		this.cpf = cpf;
 		this.sexo = sexo;
 		this.estado_civil = estadoC;

@@ -1,6 +1,6 @@
 package dados;
 
-import negocio.beans.Item_Venda;
+import negocio.entities.Item_Venda;
 
 
 public class Item_Venda_Repository extends Repository <Item_Venda, Integer> {

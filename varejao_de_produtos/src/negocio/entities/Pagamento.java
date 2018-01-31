@@ -1,23 +1,28 @@
-package negocio.beans;
+package negocio.entities;
 
 import java.sql.Date;
 
-public class Pagamento {
+import dados.MeuId;
 
-	private int id;
+public class Pagamento {
+	@MeuId
+	private Integer id;
 	private Date data_pagamento;
-	private double valor_pago;
+	private Double valor_pago;
 	private Situacao_Fatura situacaoP;
 	private Tipo_Pagamento TPG;
-	private int id_tipo_pagamento;
-	private int  id_fatura;
-	private int id_venda;
-	private int id_nota_fiscal_fornecedor;
+	private Integer id_tipo_pagamento;
+	private Integer  id_fatura;
+	private Integer id_venda;
+	private Integer id_nota_fiscal_fornecedor;
 	
-	public Pagamento(int id, Date data_pagamento, double valor_pago, Situacao_Fatura situacaoP, Tipo_Pagamento tPG,
-			int id_tipo_pagamento, int id_fatura, int id_venda, int id_nota_fiscal_fornecedor) {
+	public Pagamento(){
 		
-		this.id = id;
+	}
+	
+	public Pagamento( Date data_pagamento, Double valor_pago, Situacao_Fatura situacaoP, Tipo_Pagamento tPG,
+			Integer id_tipo_pagamento, Integer id_fatura, Integer id_venda, Integer id_nota_fiscal_fornecedor) {
+		;
 		this.data_pagamento = data_pagamento;
 		this.valor_pago = valor_pago;
 		this.situacaoP = situacaoP;
@@ -28,11 +33,11 @@ public class Pagamento {
 		this.id_nota_fiscal_fornecedor = id_nota_fiscal_fornecedor;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -44,11 +49,11 @@ public class Pagamento {
 		this.data_pagamento = data_pagamento;
 	}
 
-	public double getValor_pago() {
+	public Double getValor_pago() {
 		return valor_pago;
 	}
 
-	public void setValor_pago(double valor_pago) {
+	public void setValor_pago(Double valor_pago) {
 		this.valor_pago = valor_pago;
 	}
 
@@ -68,35 +73,35 @@ public class Pagamento {
 		TPG = tPG;
 	}
 
-	public int getId_tipo_pagamento() {
+	public Integer getId_tipo_pagamento() {
 		return id_tipo_pagamento;
 	}
 
-	public void setId_tipo_pagamento(int id_tipo_pagamento) {
+	public void setId_tipo_pagamento(Integer id_tipo_pagamento) {
 		this.id_tipo_pagamento = id_tipo_pagamento;
 	}
 
-	public int getId_fatura() {
+	public Integer getId_fatura() {
 		return id_fatura;
 	}
 
-	public void setId_fatura(int id_fatura) {
+	public void setId_fatura(Integer id_fatura) {
 		this.id_fatura = id_fatura;
 	}
 
-	public int getId_venda() {
+	public Integer getId_venda() {
 		return id_venda;
 	}
 
-	public void setId_venda(int id_venda) {
+	public void setId_venda(Integer id_venda) {
 		this.id_venda = id_venda;
 	}
 
-	public int getId_nota_fiscal_fornecedor() {
+	public Integer getId_nota_fiscal_fornecedor() {
 		return id_nota_fiscal_fornecedor;
 	}
 
-	public void setId_nota_fiscal_fornecedor(int id_nota_fiscal_fornecedor) {
+	public void setId_nota_fiscal_fornecedor(Integer id_nota_fiscal_fornecedor) {
 		this.id_nota_fiscal_fornecedor = id_nota_fiscal_fornecedor;
 	}
 

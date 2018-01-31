@@ -1,23 +1,24 @@
-package negocio.beans;
+package negocio.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.ArrayList;
 
+import dados.MeuId;
+
 public class Venda {
-	
-	private int id;
+	@MeuId
+	private Integer id;
 	private String cpf_comprador;
-	private  BigDecimal valor_total;
+	private Double valor_total;
 	private Date data_venda;
-	private  BigDecimal valor_total_desconto;
+	private Double valor_total_desconto;
 	private int id_caixa;
-	
-	
-	public Venda( String cpf_comprador,  BigDecimal valor_total, Date data_venda,  BigDecimal valor_total_desconto,
-			int id_caixa) {
 		
 	
+	public Venda(String cpf_comprador, Double valor_total, Date data_venda, Double valor_total_desconto,
+			Integer id_caixa) {
+
 		this.cpf_comprador = cpf_comprador;
 		this.valor_total = valor_total;
 		this.data_venda = data_venda;
@@ -25,11 +26,11 @@ public class Venda {
 		this.id_caixa = id_caixa;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -41,11 +42,11 @@ public class Venda {
 		this.cpf_comprador = cpf_comprador;
 	}
 
-	public  BigDecimal getValor_total() {
+	public Double getValor_total() {
 		return valor_total;
 	}
 
-	public void setValor_total( BigDecimal valor_total) {
+	public void setValor_total(Double valor_total) {
 		this.valor_total = valor_total;
 	}
 
@@ -57,19 +58,19 @@ public class Venda {
 		this.data_venda = data_venda;
 	}
 
-	public  BigDecimal getValor_total_desconto() {
+	public Double getValor_total_desconto() {
 		return valor_total_desconto;
 	}
 
-	public void setValor_total_desconto( BigDecimal valor_total_desconto) {
+	public void setValor_total_desconto(Double valor_total_desconto) {
 		this.valor_total_desconto = valor_total_desconto;
 	}
 
-	public int getId_caixa() {
+	public Integer getId_caixa() {
 		return id_caixa;
 	}
 
-	public void setId_caixa(int id_caixa) {
+	public void setId_caixa(Integer id_caixa) {
 		this.id_caixa = id_caixa;
 	}
 

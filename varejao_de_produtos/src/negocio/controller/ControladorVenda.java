@@ -3,7 +3,7 @@ package negocio.controller;
 import java.util.Collection;
 
 import dados.VendaRepository;
-import negocio.beans.Venda;
+import negocio.entities.Venda;
 
 public class ControladorVenda {
 	

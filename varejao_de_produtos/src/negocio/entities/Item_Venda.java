@@ -1,22 +1,22 @@
-package negocio.beans;
+package negocio.entities;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class Item_Venda {
+import dados.MeuId;
 
-	private int id;
-	private int id_venda;
-	private int id_produtoref;
-	private int quantidade;
-	private BigDecimal valor_unitario;
-	private  BigDecimal valor_desconto_item;
+public class Item_Venda {
+	@MeuId
+	private Integer id;
+	private Integer id_venda;
+	private Integer id_produtoref;
+	private Integer quantidade;
+	private Double valor_unitario;
+	private Double valor_desconto_item;
 	
 	
-	public Item_Venda( int id_venda, int id_produtoref, int quantidade,  BigDecimal valor_unitario,
-			 BigDecimal valor_desconto_item) {
-		
+	public Item_Venda(Integer id_venda, Integer id_produtoref, Integer quantidade, Double valor_unitario,
+			Double valor_desconto_item) {
 		this.id_venda = id_venda;
 		this.id_produtoref = id_produtoref;
 		this.quantidade = quantidade;
@@ -25,62 +25,61 @@ public class Item_Venda {
 	}
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 
-	public int getId_venda() {
+	public Integer getId_venda() {
 		return id_venda;
 	}
 
 
-	public void setId_venda(int id_venda) {
+	public void setId_venda(Integer id_venda) {
 		this.id_venda = id_venda;
 	}
 
 
-	public int getId_produtoref() {
+	public Integer getId_produtoref() {
 		return id_produtoref;
 	}
 
 
-	public void setId_produtoref(int id_produtoref) {
+	public void setId_produtoref(Integer id_produtoref) {
 		this.id_produtoref = id_produtoref;
 	}
 
 
-	public int getQuantidade() {
+	public Integer getQuantidade() {
 		return quantidade;
 	}
 
 
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
 
-
-	public  BigDecimal getValor_unitario() {
+	public Double getValor_unitario() {
 		return valor_unitario;
 	}
 
-
-	public void setValor_unitario( BigDecimal valor_unitario) {
+	public void setValor_unitario(Double valor_unitario) {
 		this.valor_unitario = valor_unitario;
 	}
 
+	public Double getValor_desconto_item() {
 
-	public  BigDecimal getValor_desconto_item() {
 		return valor_desconto_item;
 	}
 
 
-	public void setValor_desconto_item( BigDecimal valor_desconto_item) {
+	public void setValor_desconto_item(Double valor_desconto_item) {
+
 		this.valor_desconto_item = valor_desconto_item;
 	}
 	

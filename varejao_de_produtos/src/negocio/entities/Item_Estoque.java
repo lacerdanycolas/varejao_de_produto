@@ -1,23 +1,29 @@
-package negocio.beans;
+package negocio.entities;
 
 import java.sql.Date;
 
-public class Item_Estoque {
+import dados.MeuId;
 
-	private int id;
-	private double valor_compra;
-	private int  quantidade;
+public class Item_Estoque {
+	@MeuId
+	private Integer id;
+	private Double valor_compra;
+	private Integer quantidade;
 	private Date data_validade;
 	private Date data_entrada;
-	private int  id_avaria;
-	private int id_pratileira;
-	private int id_produtoref;
-	private int id_lote;
-	private int id_estoque;
-	public Item_Estoque(int id, double valor_compra, int quantidade, Date data_validade, Date data_entrada,
-			int id_avaria, int id_pratileira, int id_produtoref, int id_lote, int id_estoque) {
+	private Integer id_avaria;
+	private Integer id_pratileira;
+	private Integer id_produtoref;
+	private Integer id_lote;
+	private Integer id_estoque;
+	
+	public Item_Estoque(){
 		
-		this.id = id;
+	}
+	
+	public Item_Estoque(Double valor_compra, Integer quantidade, Date data_validade, Date data_entrada,
+			Integer id_avaria, Integer id_pratileira, Integer id_produtoref, Integer id_lote, Integer id_estoque) {
+		
 		this.valor_compra = valor_compra;
 		this.quantidade = quantidade;
 		this.data_validade = data_validade;
@@ -28,22 +34,22 @@ public class Item_Estoque {
 		this.id_lote = id_lote;
 		this.id_estoque = id_estoque;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public double getValor_compra() {
+	public Double getValor_compra() {
 		return valor_compra;
 	}
-	public void setValor_compra(double valor_compra) {
+	public void setValor_compra(Double valor_compra) {
 		this.valor_compra = valor_compra;
 	}
-	public int getQuantidade() {
+	public Integer getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
 	public Date getData_validade() {
@@ -58,34 +64,34 @@ public class Item_Estoque {
 	public void setData_entrada(Date data_entrada) {
 		this.data_entrada = data_entrada;
 	}
-	public int getId_avaria() {
+	public Integer getId_avaria() {
 		return id_avaria;
 	}
-	public void setId_avaria(int id_avaria) {
+	public void setId_avaria(Integer id_avaria) {
 		this.id_avaria = id_avaria;
 	}
-	public int getId_pratileira() {
+	public Integer getId_pratileira() {
 		return id_pratileira;
 	}
-	public void setId_pratileira(int id_pratileira) {
+	public void setId_pratileira(Integer id_pratileira) {
 		this.id_pratileira = id_pratileira;
 	}
-	public int getId_produtoref() {
+	public Integer getId_produtoref() {
 		return id_produtoref;
 	}
-	public void setId_produtoref(int id_produtoref) {
+	public void setId_produtoref(Integer id_produtoref) {
 		this.id_produtoref = id_produtoref;
 	}
-	public int getId_lote() {
+	public Integer getId_lote() {
 		return id_lote;
 	}
-	public void setId_lote(int id_lote) {
+	public void setId_lote(Integer id_lote) {
 		this.id_lote = id_lote;
 	}
-	public int getId_estoque() {
+	public Integer getId_estoque() {
 		return id_estoque;
 	}
-	public void setId_estoque(int id_estoque) {
+	public void setId_estoque(Integer id_estoque) {
 		this.id_estoque = id_estoque;
 	}
 	
