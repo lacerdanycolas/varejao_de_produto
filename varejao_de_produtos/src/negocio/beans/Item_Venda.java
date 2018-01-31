@@ -1,18 +1,22 @@
 package negocio.beans;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 public class Item_Venda {
 
 	private int id;
 	private int id_venda;
 	private int id_produtoref;
 	private int quantidade;
-	private double valor_unitario;
-	private  double valor_desconto_item;
+	private BigDecimal valor_unitario;
+	private  BigDecimal valor_desconto_item;
 	
 	
-	public Item_Venda(int id, int id_venda, int id_produtoref, int quantidade, double valor_unitario,
-			double valor_desconto_item) {
-		this.id = id;
+	public Item_Venda( int id_venda, int id_produtoref, int quantidade,  BigDecimal valor_unitario,
+			 BigDecimal valor_desconto_item) {
+		
 		this.id_venda = id_venda;
 		this.id_produtoref = id_produtoref;
 		this.quantidade = quantidade;
@@ -61,24 +65,43 @@ public class Item_Venda {
 	}
 
 
-	public double getValor_unitario() {
+	public  BigDecimal getValor_unitario() {
 		return valor_unitario;
 	}
 
 
-	public void setValor_unitario(double valor_unitario) {
+	public void setValor_unitario( BigDecimal valor_unitario) {
 		this.valor_unitario = valor_unitario;
 	}
 
 
-	public double getValor_desconto_item() {
+	public  BigDecimal getValor_desconto_item() {
 		return valor_desconto_item;
 	}
 
 
-	public void setValor_desconto_item(double valor_desconto_item) {
+	public void setValor_desconto_item( BigDecimal valor_desconto_item) {
 		this.valor_desconto_item = valor_desconto_item;
 	}
+	
+	public BigDecimal Valor_total(ArrayList<Item_Venda> lista) {
+		BigDecimal decimal = null;
+		
+		for(int i=0; i<lista.size();i++) {
+			decimal=lista.get(i).getValor_unitario().add(decimal);
+		}
+		return decimal;
+	}
+	
+	public BigDecimal Valor_Total_Desconto(ArrayList<Item_Venda> lista) {
+		BigDecimal decimal = null;
+		
+		for(int i=0; i<lista.size();i++) {
+			decimal=lista.get(i).getValor_desconto_item().add(decimal);
+		}
+		return decimal;
+	}
+	
 
 
 	@Override

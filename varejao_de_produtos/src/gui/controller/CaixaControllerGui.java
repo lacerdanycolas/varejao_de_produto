@@ -157,6 +157,7 @@ public class CaixaControllerGui implements Initializable{
 						Caixa caixa = new Caixa(descricao, situ, pref, observacao, idm, seqf);
 
 						try {
+							
 							fachada.getInstance().salvarCaixa(caixa);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block

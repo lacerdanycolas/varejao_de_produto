@@ -1,20 +1,23 @@
 package negocio.beans;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.ArrayList;
 
 public class Venda {
 	
 	private int id;
 	private String cpf_comprador;
-	private double valor_total;
+	private  BigDecimal valor_total;
 	private Date data_venda;
-	private double valor_total_desconto;
+	private  BigDecimal valor_total_desconto;
 	private int id_caixa;
 	
-	public Venda(int id, String cpf_comprador, double valor_total, Date data_venda, double valor_total_desconto,
+	
+	public Venda( String cpf_comprador,  BigDecimal valor_total, Date data_venda,  BigDecimal valor_total_desconto,
 			int id_caixa) {
 		
-		this.id = id;
+	
 		this.cpf_comprador = cpf_comprador;
 		this.valor_total = valor_total;
 		this.data_venda = data_venda;
@@ -38,11 +41,11 @@ public class Venda {
 		this.cpf_comprador = cpf_comprador;
 	}
 
-	public double getValor_total() {
+	public  BigDecimal getValor_total() {
 		return valor_total;
 	}
 
-	public void setValor_total(double valor_total) {
+	public void setValor_total( BigDecimal valor_total) {
 		this.valor_total = valor_total;
 	}
 
@@ -54,11 +57,11 @@ public class Venda {
 		this.data_venda = data_venda;
 	}
 
-	public double getValor_total_desconto() {
+	public  BigDecimal getValor_total_desconto() {
 		return valor_total_desconto;
 	}
 
-	public void setValor_total_desconto(double valor_total_desconto) {
+	public void setValor_total_desconto( BigDecimal valor_total_desconto) {
 		this.valor_total_desconto = valor_total_desconto;
 	}
 
