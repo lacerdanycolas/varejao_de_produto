@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.SplitPane?>
@@ -12,13 +17,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="503.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CaixaControllerGui">
+<AnchorPane prefHeight="503.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CaixaControllerGui">
    <children>
       <SplitPane dividerPositions="0.6786427145708582" orientation="VERTICAL" prefHeight="503.0" prefWidth="543.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="358.0" prefWidth="430.0" style="-fx-background-color: #E80000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="561.0" prefWidth="678.0" style="-fx-background-color: #E80000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <TextField id="textFieldDescricaoCaixa" fx:id="textFieldDescricaoCaixa" layoutX="141.0" layoutY="91.0" prefHeight="25.0" prefWidth="119.0" />
                         <Text fill="WHITE" layoutX="58.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição" />
@@ -45,6 +50,8 @@
                               <Image url="@../../../images/WhatsApp%20Image%202018-01-28%20at%2017.26.04.jpeg" />
                            </image>
                         </ImageView>
+                        <Button layoutX="478.0" layoutY="10.0" mnemonicParsing="false" onAction="#voltarMenuPrincipal" text="&lt;" />
+                        <Button layoutX="506.0" layoutY="10.0" mnemonicParsing="false" onAction="#sair" text="X" textFill="#eb0b0b" />
                      </children>
                   </AnchorPane>
                </children>

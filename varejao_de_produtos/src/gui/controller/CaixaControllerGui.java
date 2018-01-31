@@ -24,6 +24,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
@@ -282,5 +283,24 @@ public void carregandoValoresTela(){
 
 	public void setApp(MainTeste main) {
 		this.main = main;
+	}
+	
+	public void sair(ActionEvent event) {
+		((Node) event.getSource()).getScene().getWindow().hide();
+
+	}
+	
+	public void voltarMenuPrincipal(ActionEvent event) {
+		((Node) event.getSource()).getScene().getWindow().hide();
+		Parent parent;
+		try {
+			parent = FXMLLoader.load(getClass().getResource("/GUI/view/TelaPrincipalVarejao.fxml"));
+			Stage stage3 = new Stage();
+			Scene cena = new Scene(parent);
+			stage3.setScene(cena);
+			stage3.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -2,12 +2,11 @@ package gui;
 
 import java.io.IOException;
 
-import gui.controller.CaixaControllerGui;
+import gui.controller.LoginPaneController;
 import gui.controller.VarejaoDeProdutosPaneController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 
@@ -16,8 +15,8 @@ public class VarejaoDeProdutosApp extends Application {
 
 	private Stage primaryStage;
 	private BorderPane rootScene;
-	
-	
+
+
 
 	private static VarejaoDeProdutosApp instance;
 
@@ -39,32 +38,28 @@ public class VarejaoDeProdutosApp extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
-		carregarTelaPrincipal();
-		
+
+
+		carregarTelaLogin();
 
 	}
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-	public void carregarTelaPrincipal(){
+	public void carregarTelaLogin(){
 		try{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(VarejaoDeProdutosApp.class.getResource("/gui/view/VarejaoDeProdutos.fxml"));
-		BorderPane pane = (BorderPane) loader.load();
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/GUI/view/TelaLoginVarejao.fxml"));
+			BorderPane pane = (BorderPane) loader.load();
 
-		this.rootScene.setCenter(pane);
-		VarejaoDeProdutosPaneController VarejaoDeProdutosPaneController = loader.getController();
-		VarejaoDeProdutosPaneController.setApp(this);
-		}catch(IOException e){
-			e.printStackTrace();
-		}
+			this.rootScene.setCenter(pane);
+			LoginPaneController loginPaneController= loader.getController();
+			loginPaneController.setApp(this);
+			}catch(IOException e){
+				e.printStackTrace();
+			}
 	}
-
-
-
-
-
 
 	public Stage getPrimaryStage() {
 		return primaryStage;
