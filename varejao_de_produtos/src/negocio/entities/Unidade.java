@@ -1,12 +1,16 @@
 package negocio.entities;
 
-public class Unidade {
+import dados.MeuId;
 
-	private int id;
+public class Unidade {
+	@MeuId
+	private Integer id;
 	private String descricao;
 	private String Sigla;
 	
-	
+	public Unidade(){
+		
+	}
 	
 	public Unidade(int id, String descricao, String sigla) {
 	
@@ -17,13 +21,13 @@ public class Unidade {
 
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

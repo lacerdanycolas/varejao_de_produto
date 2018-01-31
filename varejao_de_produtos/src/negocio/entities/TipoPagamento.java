@@ -2,19 +2,22 @@ package negocio.entities;
 
 public class TipoPagamento {
  
-	private int id;
+	private Integer id;
 	private String descricao;
 	
-	public TipoPagamento(int id, String descricao) {
-		this.id = id;
+	public TipoPagamento() {
+
+	}
+	
+	public TipoPagamento(String descricao) {
 		this.descricao = descricao;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

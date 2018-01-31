@@ -1,17 +1,22 @@
 package negocio.entities;
 
-public class Nota_Fiscal_Fornecedor {
+import dados.MeuId;
 
-	private int id;
-	private int id_nota_fiscal;
-	private double valor_frete;
+public class Nota_Fiscal_Fornecedor {
+	@MeuId
+	private Integer id;
+	private Integer id_nota_fiscal;
+	private Double valor_frete;
 	private String cfop;
-	private double ipi;
-	private int icms;
+	private Double ipi;
+	private Integer icms;
 	
-	public Nota_Fiscal_Fornecedor(int id, int id_nota_fiscal, double valor_frete, String cfop, double ipi, int icms) {
+	public Nota_Fiscal_Fornecedor(){
 		
-		this.id = id;
+	}
+	
+	public Nota_Fiscal_Fornecedor(Integer id_nota_fiscal, Double valor_frete, String cfop, Double ipi, Integer icms) {
+		
 		this.id_nota_fiscal = id_nota_fiscal;
 		this.valor_frete = valor_frete;
 		this.cfop = cfop;
@@ -19,27 +24,27 @@ public class Nota_Fiscal_Fornecedor {
 		this.icms = icms;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getId_nota_fiscal() {
+	public Integer getId_nota_fiscal() {
 		return id_nota_fiscal;
 	}
 
-	public void setId_nota_fiscal(int id_nota_fiscal) {
+	public void setId_nota_fiscal(Integer id_nota_fiscal) {
 		this.id_nota_fiscal = id_nota_fiscal;
 	}
 
-	public double getValor_frete() {
+	public Double getValor_frete() {
 		return valor_frete;
 	}
 
-	public void setValor_frete(double valor_frete) {
+	public void setValor_frete(Double valor_frete) {
 		this.valor_frete = valor_frete;
 	}
 
@@ -51,19 +56,19 @@ public class Nota_Fiscal_Fornecedor {
 		this.cfop = cfop;
 	}
 
-	public double getIpi() {
+	public Double getIpi() {
 		return ipi;
 	}
 
-	public void setIpi(double ipi) {
+	public void setIpi(Double ipi) {
 		this.ipi = ipi;
 	}
 
-	public int getIcms() {
+	public Integer getIcms() {
 		return icms;
 	}
 
-	public void setIcms(int icms) {
+	public void setIcms(Integer icms) {
 		this.icms = icms;
 	}
 
