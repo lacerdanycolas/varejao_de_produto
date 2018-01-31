@@ -11,12 +11,12 @@ public class Item_Venda {
 	private Integer id_venda;
 	private Integer id_produtoref;
 	private Integer quantidade;
-	private Double valor_unitario;
-	private Double valor_desconto_item;
+	private BigDecimal valor_unitario;
+	private BigDecimal valor_desconto_item;
 	
 	
-	public Item_Venda(Integer id_venda, Integer id_produtoref, Integer quantidade, Double valor_unitario,
-			Double valor_desconto_item) {
+	public Item_Venda(Integer id_venda, Integer id_produtoref, Integer quantidade, BigDecimal valor_unitario,
+			BigDecimal valor_desconto_item) {
 		this.id_venda = id_venda;
 		this.id_produtoref = id_produtoref;
 		this.quantidade = quantidade;
@@ -64,21 +64,21 @@ public class Item_Venda {
 		this.quantidade = quantidade;
 	}
 
-	public Double getValor_unitario() {
+	public BigDecimal getValor_unitario() {
 		return valor_unitario;
 	}
 
-	public void setValor_unitario(Double valor_unitario) {
+	public void setValor_unitario(BigDecimal valor_unitario) {
 		this.valor_unitario = valor_unitario;
 	}
 
-	public Double getValor_desconto_item() {
+	public BigDecimal getValor_desconto_item() {
 
 		return valor_desconto_item;
 	}
 
 
-	public void setValor_desconto_item(Double valor_desconto_item) {
+	public void setValor_desconto_item(BigDecimal valor_desconto_item) {
 
 		this.valor_desconto_item = valor_desconto_item;
 	}
