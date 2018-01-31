@@ -3,11 +3,9 @@ package negocio.controller;
 import java.util.Collection;
 
 import dados.CaixaRepository;
-<<<<<<< HEAD
 import dados.ProdutorefRepository;
 import negocio.entities.Caixa;
 import negocio.entities.Produtoref;
-=======
 
 import dados.FornecedorrefRepository;
 
@@ -19,18 +17,13 @@ import negocio.entities.Fornecedorref;
 
 import negocio.entities.Funcionario;
 
->>>>>>> master
 
 public class FachadaVarejao {
 
 	private ControladorCaixa caixas;
-<<<<<<< HEAD
 	private ControladorProduto produtos;
-=======
 
 	private ControladorFornecedorref fornecedores;
->>>>>>> master
-
 
 	private ControladorFuncionario funcionarios;
 
@@ -39,15 +32,12 @@ public class FachadaVarejao {
 
 	private FachadaVarejao(){
 		this.caixas = new ControladorCaixa(CaixaRepository.getInstance());
-<<<<<<< HEAD
 		this.produtos = new ControladorProduto(ProdutorefRepository.getInstance());
-=======
 
 		this.fornecedores = new ControladorFornecedorref(FornecedorrefRepository.getInstance());
 
 		this.funcionarios = new ControladorFuncionario(FuncionarioRepository.getInstance());
 
->>>>>>> master
 	}
 
 	public static FachadaVarejao getInstance(){
@@ -97,7 +87,6 @@ public class FachadaVarejao {
 		this.caixas.deletarCaixa(caixa);
 	}
 
-<<<<<<< HEAD
 //PRODUTOS
 	//BUSCAR
 	public Produtoref buscarProduto(int id) throws Exception{
@@ -117,8 +106,9 @@ public class FachadaVarejao {
 	//DELETAR
 	public void deletarProduto(Produtoref produto) throws Exception{
 		this.produtos.deletarProduto(produto);
-=======
-	//BUSCAR FUNCIONARIO
+	}
+
+		//BUSCAR FUNCIONARIO
 	public Funcionario buscarFuncionario (Integer id) throws Exception{
 		return this.funcionarios.buscarFuncionario(id);
 	}
@@ -150,7 +140,6 @@ public class FachadaVarejao {
 
 	public void deletarFornecedor(Fornecedorref fornecedor) throws Exception{
 		this.fornecedores.deletarFornecedor(fornecedor);
->>>>>>> master
 	}
 
 
