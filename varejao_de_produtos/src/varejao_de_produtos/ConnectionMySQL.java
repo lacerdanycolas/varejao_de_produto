@@ -17,7 +17,26 @@ public class ConnectionMySQL {
 
 
 	}
-	public static Connection getConnection()throws SQLException{
+	
+	/*private Connection conn;
+	
+	public ConnectionMySQL(){
+		this.conn = null;
+		try{
+		   String driver = "com.mysql.jdbc.Driver";
+		   String url = "jdbc:mysql://localhost:3306/varejao_de_fraldas";
+		   String username = "root";
+		   String password = "fish1997";
+		   Class.forName(driver);
+
+		  conn = DriverManager.getConnection(url,username,password);
+
+
+		  } catch(Exception e){
+			  System.out.println(e);
+			}
+	}
+*/	public static Connection getConnection()throws SQLException{
 		Connection conn = null;
 		try{
 		   String driver = "com.mysql.jdbc.Driver";

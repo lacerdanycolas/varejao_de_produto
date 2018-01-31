@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import gui.resources.*?>
 <?import GUI.resources.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -7,29 +8,29 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import gui.resources.MaskField?>
 
-<BorderPane prefHeight="503.0" prefWidth="524.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.FuncionarioPaneController">
+<BorderPane prefHeight="503.0" prefWidth="524.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.FuncionarioPaneController">
    <center>
       <AnchorPane prefHeight="503.0" prefWidth="543.0" style="-fx-background-color: #E80000;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="28.0" layoutY="49.0" mnemonicParsing="false" text="Cadastrar" />
-            <Button layoutX="118.0" layoutY="49.0" mnemonicParsing="false" text="Remover" />
-            <Button layoutX="279.0" layoutY="49.0" mnemonicParsing="false" text="Buscar" />
-            <Button layoutX="204.0" layoutY="49.0" mnemonicParsing="false" text="Limpar" />
-            <TableView fx:id="tabelaFuncionarios" layoutY="345.0" onMouseClicked="#selecionarFuncionario" prefHeight="159.0" prefWidth="543.0">
+            <Button fx:id="butCadastrar" layoutX="28.0" layoutY="49.0" mnemonicParsing="false" onAction="#cadastrarFuncionario" text="Cadastrar" />
+            <Button fx:id="butRemover" layoutX="118.0" layoutY="49.0" mnemonicParsing="false" onAction="#removerFuncionario" text="Remover" />
+            <Button fx:id="butLimpar" layoutX="204.0" layoutY="49.0" mnemonicParsing="false" onAction="#limparForm" text="Limpar" />
+            <TableView fx:id="tabelaFuncionarios" layoutY="345.0" prefHeight="159.0" prefWidth="543.0">
                <columns>
-                  <TableColumn fx:id="colunaNome" prefWidth="75.0" text="Id" />
-                  <TableColumn fx:id="colunaCpf" prefWidth="75.0" text="CPF" />
-                  <TableColumn fx:id="colunaIdade" prefWidth="75.0" text="Idade" />
-                  <TableColumn fx:id="colunaEndereco" prefWidth="75.0" text="Sexo" />
-                  <TableColumn fx:id="colunaTelefone" prefWidth="75.0" text="estado_civil" />
-                  <TableColumn fx:id="colunaCodigo" prefWidth="75.0" text="RG" />
-                  <TableColumn fx:id="colunaNivel" prefWidth="75.0" text="Primeiro_Nome" />
-                  <TableColumn fx:id="colunaNivel1" prefWidth="75.0" text="Segundo_nome" />
-                  <TableColumn fx:id="colunaNivel11" prefWidth="75.0" text="Terceiro_nome" />
-                  <TableColumn fx:id="colunaNivel111" prefWidth="75.0" text="Situacao" />
-                  <TableColumn fx:id="colunaNivel1111" prefWidth="75.0" text="Rua" />
-                  <TableColumn fx:id="colunaNivel11111" prefWidth="75.0" text="Tipo" />
+                  <TableColumn fx:id="colunaId" prefWidth="75.0" text="Id" />
+                  <TableColumn fx:id="colunaCPF" prefWidth="75.0" text="CPF" />
+                  <TableColumn fx:id="colunaLogin" prefWidth="75.0" text="Login" />
+                  <TableColumn fx:id="colunaSexo" prefWidth="75.0" text="Sexo" />
+                  <TableColumn fx:id="colunaEstadoCivil" prefWidth="75.0" text="Estado_civil" />
+                  <TableColumn fx:id="colunaRG" prefWidth="75.0" text="RG" />
+                  <TableColumn fx:id="colunaPrimeiroNome" prefWidth="75.0" text="Primeiro_Nome" />
+                  <TableColumn fx:id="colunaSegundoNome" prefWidth="75.0" text="Segundo_nome" />
+                  <TableColumn fx:id="colunaTerceiroNome" prefWidth="75.0" text="Terceiro_nome" />
+                  <TableColumn fx:id="colunaSituacao" prefWidth="75.0" text="Situacao" />
+                  <TableColumn fx:id="colunaRua" prefWidth="75.0" text="Rua" />
+                  <TableColumn fx:id="colunaTipo" prefWidth="75.0" text="Tipo" />
                </columns>
             </TableView>
             <Label layoutX="203.0" layoutY="11.0" text="Funcionários" textFill="WHITE">
@@ -46,9 +47,8 @@
             <Button layoutX="469.0" layoutY="10.0" mnemonicParsing="false" onAction="#voltarMenuPrincipal" text="&lt;" />
             <Label fx:id="lblMensagem" layoutX="3.0" layoutY="6.0" prefHeight="17.0" prefWidth="337.0" />
             <Label layoutX="14.0" layoutY="302.0" prefHeight="26.0" prefWidth="63.0" text="Situacao:" textFill="WHITE" />
-            <MaskField fx:id="txtCpfFuncionario" layoutX="76.0" layoutY="79.0" mask="DDD.DDD.DDD-DD" prefHeight="27.0" prefWidth="101.0" />
-            <MaskField fx:id="txtRGFuncionario" layoutX="77.0" layoutY="175.0" mask="D.DDD.DDD" prefHeight="27.0" prefWidth="64.0" text="_.___.___" />
-            <MaskField fx:id="txtIdadeFuncionario" layoutX="77.0" layoutY="239.0" mask="" prefHeight="27.0" prefWidth="64.0" />
+            <MaskField fx:id="txtCPF" layoutX="76.0" layoutY="79.0" mask="DDD.DDD.DDD-DD" prefHeight="27.0" prefWidth="101.0" />
+            <MaskField fx:id="txtRG" layoutX="77.0" layoutY="175.0" mask="D.DDD.DDD" prefHeight="27.0" prefWidth="64.0" text="_.___.___" />
             <ImageView fitHeight="62.0" fitWidth="64.0" layoutX="380.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/WhatsApp%20Image%202018-01-28%20at%2017.26.04.jpeg" />
@@ -56,31 +56,32 @@
             </ImageView>
             <Label layoutX="17.0" layoutY="212.0" text="P_Nome:" textFill="WHITE" />
             <Label layoutX="16.0" layoutY="244.0" text="S_Nome:" textFill="WHITE" />
-            <TextField layoutX="77.0" layoutY="207.0" prefHeight="27.0" prefWidth="65.0" />
-            <TextField layoutX="77.0" layoutY="275.0" prefHeight="17.0" prefWidth="65.0" />
+            <TextField fx:id="txtPrimeiroNome" layoutX="77.0" layoutY="207.0" prefHeight="27.0" prefWidth="65.0" />
+            <TextField fx:id="txtTerceiroNome" layoutX="77.0" layoutY="275.0" prefHeight="17.0" prefWidth="65.0" />
             <Label layoutX="234.0" layoutY="84.0" text="Rua:" textFill="WHITE" />
             <Label layoutX="229.0" layoutY="119.0" text="Bairro:" textFill="WHITE" />
             <Label layoutX="238.0" layoutY="159.0" text="UF:" textFill="WHITE" />
             <Label layoutX="235.0" layoutY="194.0" text="CEP:" textFill="WHITE" />
-            <TextField layoutX="272.0" layoutY="79.0" />
-            <TextField layoutX="272.0" layoutY="114.0" />
-            <MaskField layoutX="272.0" layoutY="154.0" mask="DD" prefHeight="27.0" prefWidth="42.0" />
-            <MaskField layoutX="272.0" layoutY="194.0" mask="DDDDD-DDD" prefHeight="27.0" prefWidth="70.0" />
+            <TextField fx:id="txtRua" layoutX="272.0" layoutY="79.0" />
+            <TextField fx:id="txtBairro" layoutX="272.0" layoutY="114.0" />
+            <MaskField fx:id="txtCep" layoutX="272.0" layoutY="194.0" mask="DDDDD-DDD" prefHeight="27.0" prefWidth="70.0" />
             <Label layoutX="231.0" layoutY="236.0" text="Login:" textFill="WHITE" />
             <Label layoutX="229.0" layoutY="271.0" text="Senha:" textFill="WHITE" />
-            <TextField layoutX="272.0" layoutY="231.0" prefHeight="27.0" prefWidth="75.0" />
-            <TextField layoutX="272.0" layoutY="266.0" prefHeight="27.0" prefWidth="76.0" />
+            <TextField fx:id="txtLogin" layoutX="272.0" layoutY="231.0" prefHeight="27.0" prefWidth="75.0" />
+            <TextField fx:id="txtSenha" layoutX="272.0" layoutY="266.0" prefHeight="27.0" prefWidth="76.0" />
             <Label layoutX="189.0" layoutY="307.0" text="CPF_Gerente:" textFill="WHITE" />
-            <MaskField fx:id="txtCpfFuncionario1" layoutX="274.0" layoutY="302.0" mask="DDD.DDD.DDD-DD" prefHeight="27.0" prefWidth="101.0" />
-            <ComboBox layoutX="75.0" layoutY="311.0" prefHeight="27.0" prefWidth="69.0" />
-            <ComboBox layoutX="75.0" layoutY="114.0" prefHeight="27.0" prefWidth="69.0" />
-            <ComboBox layoutX="77.0" layoutY="145.0" prefHeight="27.0" prefWidth="67.0" />
+            <MaskField fx:id="txtCpf_gerente" layoutX="274.0" layoutY="302.0" mask="DDD.DDD.DDD-DD" prefHeight="27.0" prefWidth="101.0" />
+            <ComboBox fx:id="comboBoxSituacao" layoutX="75.0" layoutY="311.0" prefHeight="27.0" prefWidth="69.0" />
+            <ComboBox fx:id="comboBoxSexo" layoutX="77.0" layoutY="114.0" prefHeight="27.0" prefWidth="67.0" />
+            <ComboBox fx:id="comboBoxEstadoCivil" layoutX="77.0" layoutY="145.0" prefHeight="27.0" prefWidth="67.0" />
             <Label layoutX="386.0" layoutY="159.0" text="Tipo:" textFill="WHITE" />
-            <ComboBox layoutX="421.0" layoutY="154.0" prefHeight="27.0" prefWidth="83.0" />
+            <ComboBox fx:id="comboBoxTipoFuncionario" layoutX="421.0" layoutY="154.0" prefHeight="27.0" prefWidth="83.0" />
             <Label layoutX="344.0" layoutY="194.0" text="Cnpj_Matriz:" textFill="WHITE" />
-            <MaskField layoutX="421.0" layoutY="189.0" mask="DDDD-DD-DDD-DDDDD" prefHeight="27.0" prefWidth="119.0" />
+            <MaskField fx:id="txtCnpj_matriz" layoutX="421.0" layoutY="189.0" mask="DDDD-DD-DDD-DDDDD" prefHeight="27.0" prefWidth="119.0" />
             <Label layoutX="356.0" layoutY="236.0" text="Seq_filial:" textFill="WHITE" />
-            <MaskField layoutX="421.0" layoutY="231.0" prefHeight="27.0" prefWidth="116.0" />
+            <ComboBox fx:id="comboBoxSeqFilial" layoutX="422.0" layoutY="231.0" prefHeight="27.0" prefWidth="118.0" />
+            <TextField fx:id="txtSegundoNome" layoutX="77.0" layoutY="240.0" prefHeight="27.0" prefWidth="65.0" />
+            <TextField fx:id="txtEstado" layoutX="273.0" layoutY="154.0" prefHeight="27.0" prefWidth="38.0" promptText="__" />
          </children>
       </AnchorPane>
    </center>
