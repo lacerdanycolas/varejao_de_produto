@@ -7,11 +7,11 @@ public class Coordenador extends Funcionario{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Coordenador(Integer id, String cpf, Sexo sexo, Estado_Civil estadoC, String rg, String primeiro_nome,
+	public Coordenador(String cpf, Sexo sexo, Estado_Civil estadoC, String rg, String primeiro_nome,
 			String segundo_nome, String terceiro_nome, Situacao situacao, String rua, String bairro, String estado,
 			String cep, String login, String senha, String cpf_gerente, Tipo_Funcionario tipo, String cnpj_matriz,
 			Integer seq_filial) {
-		super(id, cpf, sexo, estadoC, rg, primeiro_nome, segundo_nome, terceiro_nome, situacao, rua, bairro, estado, cep, login,
+		super(cpf, sexo, estadoC, rg, primeiro_nome, segundo_nome, terceiro_nome, situacao, rua, bairro, estado, cep, login,
 				senha, cpf_gerente, tipo, cnpj_matriz, seq_filial);
 		// TODO Auto-generated constructor stub
 	}
