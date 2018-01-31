@@ -17,9 +17,9 @@ public class ConnectionMySQL {
 
 
 	}
-	
+
 	/*private Connection conn;
-	
+
 	public ConnectionMySQL(){
 		this.conn = null;
 		try{
@@ -42,7 +42,7 @@ public class ConnectionMySQL {
 		   String driver = "com.mysql.jdbc.Driver";
 		   String url = "jdbc:mysql://localhost:3306/varejao_de_fraldas";
 		   String username = "root";
-		   String password = "fish1997";
+		   String password = "";
 		   Class.forName(driver);
 
 		  conn = DriverManager.getConnection(url,username,password);

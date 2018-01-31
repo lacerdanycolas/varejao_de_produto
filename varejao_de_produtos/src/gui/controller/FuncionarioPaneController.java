@@ -36,97 +36,97 @@ public class FuncionarioPaneController {
 	private FachadaVarejao varejao;
 	@FXML
 	Label lblMensagem;
-	
+
 	@FXML
 	private TableView<Funcionario> tabelaFuncionarios;
-	
+
 	@FXML
 	TableColumn<Funcionario, Integer> colunaId;
-	
+
 	@FXML
 	TableColumn<Funcionario, String> colunaCPF;
-	
+
 	@FXML
 	TableColumn<Funcionario, String> colunaLogin;
-	
+
 	@FXML
 	TableColumn<Funcionario, String> colunaSexo;
-	
+
 	@FXML
 	TableColumn<Funcionario, String> colunaEstadoCivil;
-	
+
 	@FXML
 	TableColumn<Funcionario, String> colunaRG;
-	
+
 	@FXML
 	TableColumn<Funcionario, String> colunaPrimeiroNome;
-	
+
 	@FXML
 	TableColumn<Funcionario, String> colunaSegundoNome;
-	
+
 	@FXML
 	TableColumn<Funcionario, String> colunaTerceiroNome;
-	
+
 	@FXML
 	TableColumn<Funcionario, String> colunaSituacao;
-	
+
 	@FXML
 	TableColumn<Funcionario, String> colunaRua;
-	
+
 	@FXML
 	TableColumn<Funcionario, String> colunaTipo;
-	
+
 	@FXML
 	Button butCadastrar;
-	
+
 	@FXML
 	Button butRemover;
-	
+
 	@FXML
 	Button butLimpar;
-	
+
 	@FXML
 	Button butBuscar;
-	
+
 	@FXML
-	TextField txtCPF;
-	
+	TextField txtCpfFuncionario;
+
 	@FXML
-	TextField txtRG;
-	
+	TextField txtRgFuncionario;
+
 	@FXML
 	TextField txtPrimeiroNome;
-	
+
 	@FXML
 	TextField txtSegundoNome;
-	
+
 	@FXML
 	TextField txtTerceiroNome;
-	
+
 	@FXML
 	TextField txtRua;
-	
+
 	@FXML
 	TextField txtBairro;
-	
+
 	@FXML
 	TextField txtEstado;
-	
+
 	@FXML
-	TextField txtCep;
-	
+	TextField txtCepFuncionario;
+
 	@FXML
 	TextField txtLogin;
-	
+
 	@FXML
 	TextField txtSenha;
-	
+
 	@FXML
 	TextField txtCpf_gerente;
-	
+
 	@FXML
-	TextField txtCnpj_matriz;
-	
+	TextField txtCnpjMatrizFuncionario;
+
 	@FXML
 	private ComboBox<String> comboBoxSituacao;
 
@@ -135,32 +135,33 @@ public class FuncionarioPaneController {
 
 	@FXML
 	private ComboBox<Integer> comboBoxSeqFilial;
-	
+
 	@FXML
 	private ComboBox<String> comboBoxEstadoCivil;
-	
+
 	@FXML
 	private ComboBox<String> comboBoxTipoFuncionario;
-	
+
 	private Collection<Funcionario> listaFuncionario = new ArrayList<Funcionario>();
 	private ObservableList<Funcionario> obListaFuncionario;
-	
+
 	private ObservableList<String> situacao = FXCollections.observableArrayList(Situacao_Caixa.ATIVO.toString(),Situacao.INATIVO.toString());
 	private ObservableList<String> sexo = FXCollections.observableArrayList(Sexo.M.toString(), Sexo.F.toString());
 	private ObservableList<String> estadoCivil = FXCollections.observableArrayList(Estado_Civil.SOLTEIRO.toString(),Estado_Civil.CASADO.toString(),Estado_Civil.DIVORCIADO.toString());
 	private ObservableList<String> tipoFuncionario = FXCollections.observableArrayList(Tipo_Funcionario.OPERADOR_DE_CAIXA.toString(), Tipo_Funcionario.SUPERVISOR_DE_CAIXA.toString(), Tipo_Funcionario.COORDENADOR.toString(), Tipo_Funcionario.CARREGADOR.toString(), Tipo_Funcionario.SUPERVISOR_DE_ESTOQUE.toString());
 	private ObservableList<Integer> seqFilialList;
-	
-	@FXML 
+
+	@FXML
 	private void initialize() throws Exception{
-		
+
 		varejao = varejao.getInstance();
-		
+
 		colunaId.setCellValueFactory(new PropertyValueFactory<>("Id"));
 		colunaCPF.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCpf()));
 		colunaLogin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLogin()));
 		colunaSexo.setCellValueFactory(new PropertyValueFactory<>("Sexo"));
-		colunaEstadoCivil.setCellValueFactory(new PropertyValueFactory<>("Estado_civil"));
+		//colunaEstadoCivil.setCellValueFactory(new PropertyValueFactory<>("estado_civil"));
+		colunaEstadoCivil.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstadoC().toString()) );
 		colunaRG.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRg()));
 		colunaPrimeiroNome.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPrimeiro_nome()));
 		colunaSegundoNome.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSegundo_nome()));
@@ -168,20 +169,20 @@ public class FuncionarioPaneController {
 		colunaSituacao.setCellValueFactory(new PropertyValueFactory<>("Situacao"));
 		colunaRua.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRua()));
 		colunaTipo.setCellValueFactory(new PropertyValueFactory<>("Tipo"));
-		
+
 		carregarComboBoxs();
 		obListaFuncionario = FXCollections.observableArrayList();
 		obListaFuncionario.addAll(varejao.listarFuncionario());
 		tabelaFuncionarios.setItems(obListaFuncionario);
 	}
-	
+
 	@FXML
 	public void refreshTable() throws Exception{
 		obListaFuncionario = FXCollections.observableArrayList();
 		obListaFuncionario.addAll(varejao.listarFuncionario());
 		tabelaFuncionarios.setItems(obListaFuncionario);
 	}
-	
+
 	public void sair(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide();
 
@@ -200,25 +201,25 @@ public class FuncionarioPaneController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	public void limparForm() {
-		txtCPF.clear();
-		txtRG.clear();
+		txtCpfFuncionario.clear();
+		txtRgFuncionario.clear();
 		txtPrimeiroNome.clear();
 		txtSegundoNome.clear();
 		txtTerceiroNome.clear();
 		txtRua.clear();
 		txtBairro.clear();
 		txtEstado.clear();
-		txtCep.clear();
+		txtCepFuncionario.clear();
 		txtLogin.clear();
 		txtSenha.clear();
 		txtCpf_gerente.clear();
-		txtCnpj_matriz.clear();
+		txtCnpjMatrizFuncionario.clear();
 
 	}
-	
+
 	public void cadastrarFuncionario(){
 		try{
 			String cpf, rg, primeiro_nome, segundo_nome, terceiro_nome, rua, bairro, estado, cep, login, senha, cpf_gerente, cnpj_Matriz;
@@ -257,9 +258,9 @@ public class FuncionarioPaneController {
 			}else{
 				tipoFuncionario = Tipo_Funcionario.SUPERVISOR_DE_ESTOQUE;
 			}
-			cpf = txtCPF.getText();
+			cpf = txtCpfFuncionario.getText();
 			cpf = cpf.replace(".", "").replace("-", "");
-			rg = txtRG.getText();
+			rg = txtRgFuncionario.getText();
 			rg = rg.replace(".", "");
 			primeiro_nome = txtPrimeiroNome.getText();
 			segundo_nome = txtSegundoNome.getText();
@@ -267,12 +268,12 @@ public class FuncionarioPaneController {
 			rua = txtRua.getText();
 			bairro = txtBairro.getText();
 			estado = txtEstado.getText();
-			cep = txtCep.getText();
+			cep = txtCepFuncionario.getText();
 			login = txtLogin.getText();
 			senha = txtSenha.getText();
 			cpf_gerente = txtCpf_gerente.getText();
 			cpf_gerente = cpf_gerente.replace(".", "").replace("-", "");
-			cnpj_Matriz = txtCnpj_matriz.getText();
+			cnpj_Matriz = txtCnpjMatrizFuncionario.getText();
 			cnpj_Matriz = cnpj_Matriz.replace("-", "");
 			String seq_filial = new String(comboBoxSeqFilial.getValue().toString());
 			int seqf = Integer.parseInt(seq_filial);
@@ -289,7 +290,7 @@ public class FuncionarioPaneController {
 			alert.showAndWait();
 		}
 	}
-	
+
 	public void removerFuncionario(){
 		Funcionario funcionario = tabelaFuncionarios.getSelectionModel().getSelectedItem();
 		try{
@@ -309,7 +310,7 @@ public class FuncionarioPaneController {
 
 		}
 	}
-	
+
 	public void carregarComboBoxs(){
 		comboBoxSituacao.setItems(situacao);
 		comboBoxSexo.setItems(sexo);
@@ -328,8 +329,36 @@ public class FuncionarioPaneController {
 		Collections.sort(listseqfilial);
 		seqFilialList = FXCollections.observableArrayList(listseqfilial);
 		comboBoxSeqFilial.setItems(seqFilialList);
-		txtCnpj_matriz.setText("1376-19-273-43530");
-		txtCnpj_matriz.editableProperty().set(false);
+		txtCnpjMatrizFuncionario.setText("1376-19-273-43530");
+		txtCnpjMatrizFuncionario.editableProperty().set(false);
 	}
-	
+
+	@FXML
+	public void txtCpfMask(){
+		TextFieldFormatter tf = new TextFieldFormatter();
+		tf.setMask("###.###.###-##");
+		tf.setCaracteresValidos("0123456789");
+		tf.setTf(txtCpfFuncionario);
+		tf.formatter();
+	}
+
+	@FXML
+	public void txtRgMask(){
+		TextFieldFormatter tf = new TextFieldFormatter();
+		tf.setMask("#.###.###");
+		tf.setCaracteresValidos("0123456789");
+		tf.setTf(txtRgFuncionario);
+		tf.formatter();
+	}
+
+	@FXML
+	public void txtCepMask(){
+		TextFieldFormatter tf = new TextFieldFormatter();
+		tf.setMask("##.###-###");
+		tf.setCaracteresValidos("0123456789");
+		tf.setTf(txtCepFuncionario);
+		tf.formatter();
+	}
+
+
 }
