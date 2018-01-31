@@ -30,6 +30,7 @@ public class FachadaVarejao {
 	private ControladorFuncionario funcionarios;
 
 
+
 	private static FachadaVarejao instance;
 
 	private FachadaVarejao(){
@@ -117,12 +118,12 @@ public class FachadaVarejao {
 
 	//LISTAR FUNCIONARIO
 	public Collection<Funcionario> listarFuncionario() throws Exception{
-		return this.funcionarios.listarFuncionario();
+		return this.funcionarios.listarFuncionarios();
 	}
 
 	//SALVAR FUNCIONARIO
 	public void salvarFuncionario(Funcionario funcionario) throws Exception{
-		this.funcionarios.salvarFuncionario(funcionario);
+		this.funcionarios.cadastrarFuncionario(funcionario);
 	}
 
 	//DELETAR FUNCIONARIO
@@ -131,54 +132,54 @@ public class FachadaVarejao {
 	}
 
 	//LOGIN FUNCIONARIO
-	public boolean efetuarLoginFuncionario(String login, String senha) throws Exception{
+	/*public boolean efetuarLoginFuncionario(String login, String senha) throws Exception{
 		if(this.funcionarios.efetuarLogin(login, senha) == true){
 			return true;
 		}else{
 			return false;
 		}
-	}
-	
+	}*/
+
 	//BUSCAR VENDA
 		public Venda BuscarVenda(int id) throws Exception {
 			return vendas.BuscarVenda(id);
 		}
-		
+
 		//LISTAR VENDAS
 		 public Collection<Venda> ListarVenda() throws Exception{
 			 return vendas.ListarVenda();
 		 }
-		 
+
 		 // CADASTRAR VENDA
 		 public Venda CadastraVenda(Venda venda) throws Exception {
 			 return vendas.CadastraVenda(venda);
 		 }
-		 
+
 		 //DELETAR VENDA
 		 public void DeletarVenda(Venda venda) throws Exception {
 			  vendas.DeletarVenda(venda);
 		 }
-		 
+
 		 //BUSCAR ITEM VENDA
-		 
+
 		 public Item_Venda Buscar_Itens_Venda(int id) throws Exception {
 			 return itens.Buscar_Itens_Venda(id);
 		 }
-		 
+
 		 //LISTAR ITENS VENDA
-		 
+
 		 public Collection<Item_Venda> Listar_Itens_Venda() throws Exception{
 			 return itens.Listar_Itens_Venda();
 		 }
-		 
+
 		 //CADASTRAR ITEM VENDA
-		 
+
 		 public void CadastrarItem_Venda(Item_Venda item) throws Exception {
 			  itens.CadastrarItem_Venda(item);
 		 }
-		 
+
 		 //DELETAR ITEM VENDA
-		 
+
 		 public void Deletar_Item_Venda (Item_Venda item) throws Exception {
 			 itens.Deletar_Item_Venda(item);
 		 }

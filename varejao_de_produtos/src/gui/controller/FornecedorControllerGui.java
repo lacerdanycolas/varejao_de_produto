@@ -82,6 +82,9 @@ public class FornecedorControllerGui implements Initializable {
 	@FXML
 	private Button buttonLimparFornecedor;
 
+	@FXML
+	private Button buttonListaRepresentantes;
+
 	private FachadaVarejao fachada = FachadaVarejao.getInstance();
 	private MainTeste main;
 
@@ -212,6 +215,36 @@ public class FornecedorControllerGui implements Initializable {
 		});
 
 
+		buttonListaRepresentantes.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+				Stage stage;
+				Parent root;
+				try{
+					if(event.getSource()==buttonListaRepresentantes){
+
+						//get reference to the button's stage
+				        stage = (Stage) buttonListaRepresentantes.getScene().getWindow();
+				        //load up OTHER FXML document
+				        root = FXMLLoader.load(getClass().getResource("/gui/view/TelaFornecedorRepresentante.fxml"));
+				    } else {
+						stage = (Stage) buttonListaRepresentantes.getScene().getWindow();
+						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroFornecedor.fxml"));
+					}
+					//create a new scene with root and set the stage
+					Scene scene = new Scene(root);
+				    stage.setScene(scene);
+				    main.changeStage(stage);
+
+			}catch(IOException e){
+				e.printStackTrace();
+			}
+
+
+		}
+		});
+
 		buttonLimparFornecedor.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
@@ -265,7 +298,7 @@ public class FornecedorControllerGui implements Initializable {
 	@FXML
 	private void txtCepKey(){
 		TextFieldFormatter tf = new TextFieldFormatter();
-		tf.setMask("#####-###");
+		tf.setMask("##.###-###");
 		tf.setCaracteresValidos("0123456789");
 		tf.setTf(textFieldCepFornecedor);
 		tf.formatter();
@@ -301,7 +334,7 @@ public class FornecedorControllerGui implements Initializable {
 		estados = FXCollections.observableArrayList(stringestados);
 		comboBoxEstados.setItems(estados);
 	}
-	
+
 	public void sair(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide();
 

@@ -22,8 +22,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
-import negocio.beans.Item_Venda;
-import negocio.beans.Venda;
+import negocio.entities.Item_Venda;
+import negocio.entities.Venda;
 import negocio.controller.FachadaVarejao;
 import negocio.entities.Caixa;
 import negocio.entities.Preferencial_Caixa;
@@ -31,7 +31,7 @@ import negocio.entities.Situacao;
 import negocio.entities.Situacao_Caixa;
 
 public class VendaControllerGui  implements Initializable{
-	
+
 	@FXML
 	private javafx.scene.control.TextField textFieldValor_unitario;
 	@FXML
@@ -42,18 +42,18 @@ public class VendaControllerGui  implements Initializable{
 	private javafx.scene.control.TextField textFieldValor_Desconto_item;
 	@FXML
 	private javafx.scene.control.TextField textField_CpfComprador;
-	
+
 	//private javafx.scene.control.TextField textField_DataVenda;
 	@FXML
 	private javafx.scene.control.TextField textField_IdCaixa;
-	
-	
+
+
 	@FXML
 	javafx.scene.control.Button buttonCadastarVenda;
-	
+
 	@FXML
 	javafx.scene.control.Button buttonAddItem;
-	
+
 	@FXML
 	javafx.scene.control.Button buttonRemoverItem;
 
@@ -69,30 +69,30 @@ public class VendaControllerGui  implements Initializable{
 	private ComboBox<BigDecimal> comboBoxVUnitario;
 	@FXML
 	private ComboBox<BigDecimal> comboBoxDesconto;
-	
-	
+
+
 	private MainTeste main;
 	private FachadaVarejao fachada = FachadaVarejao.getInstance();
 	ArrayList<Item_Venda> items= new ArrayList<Item_Venda>();
 	Item_Venda item_venda;
 	Venda vendas;
     int codigoP;
-	
-	
-	
+
+
+
 	public Item_Venda AddItemLista(int id_venda, int id_produtoref, int quantidade,  BigDecimal valor_unitario,
 			 BigDecimal valor_desconto_item) {
 		Item_Venda item= new Item_Venda(id_venda, id_produtoref, quantidade, valor_unitario, valor_desconto_item);
 		items.add(item);
 		return item;
 	}
-	
 
-	
+
+
 	public void LimparLista(ArrayList<Item_Venda> items) {
 		items.clear();
 	}
-	
+
 	public void RemoverItem(int idProduto) {
 		for(int i=0;i<items.size();i++) {
 			if(items.get(i).getId_produtoref()== idProduto) {
@@ -100,59 +100,59 @@ public class VendaControllerGui  implements Initializable{
 			}
 		}
 	}
-	
+
 	public Venda CadastrarVenda ( String cpf_comprador, Date data_venda,int id_caixa, Item_Venda item) throws Exception {
 		BigDecimal valorTotal= item.Valor_total(items);
 		BigDecimal valorTotalDesconto= item.Valor_Total_Desconto(items);
-		
+
 		Venda venda=new Venda(cpf_comprador,valorTotal,data_venda,valorTotalDesconto,id_caixa);
 		fachada.CadastraVenda(venda);
-		
+
 		return venda;
 	}
-	
+
 	public void CadastroItems(ArrayList<Item_Venda> items,Venda venda) throws Exception {
 		int id_caixa=venda.getId();
 		for(int i=0;i<items.size();i++) {
 			items.get(i).setId(id_caixa);
 			fachada.CadastrarItem_Venda(items.get(i));
 		}
-		
+
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		this.main = MainTeste.getInstance();
-		
+
 		carregandoValoresTela();
 
-		
+
 		buttonCadastarVenda.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				Stage stage = null;
 				Parent root = null;
-				
+
 				if (event.getSource() == buttonCadastarVenda) {
-					
+
 					if(textField_CpfComprador.getText().equals(null)|| textField_IdCaixa.getText().equals(null)) {
-						
+
 						Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
 				            dialogoInfo.setTitle("ATENÇÃO");
 				            dialogoInfo.setHeaderText("Cadastro Venda");
 				            dialogoInfo.setContentText("Os campos Id do Caixa e CPF do comprador são obrigatorios!");
 				            dialogoInfo.showAndWait();
-						
+
 					}else {
-						
+
 					Date data= new Date();
-					
+
 					String cpf_comprador= new String (textField_CpfComprador.getText());
 					Integer id_caixa= new Integer(textField_IdCaixa.getText());
 					try {
@@ -165,11 +165,11 @@ public class VendaControllerGui  implements Initializable{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-						
-						
-					
-						
-						
+
+
+
+
+
 					}
 
 				}else {
@@ -186,45 +186,45 @@ public class VendaControllerGui  implements Initializable{
 					stage.setScene(scene);
 					stage.show();
 					main.changeStage(stage);
-				
+
 				}
-		
-			
+
+
 		});
-		
-		
+
+
 		buttonAddItem.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				Stage stage = null;
 				Parent root = null;
-				
+
 				if (event.getSource() == buttonAddItem) {
-					
+
 					if(textFieldId_produto.getText().equals(null) || textFieldQuantidade.getText().equals(null)|| textFieldValor_Desconto_item.getText().equals(null)||textFieldValor_unitario.getText().equals(null)) {
-						
+
 						Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
 			            dialogoInfo.setTitle("ATENÇÃO");
 			            dialogoInfo.setHeaderText("Cadastro Venda");
 			            dialogoInfo.setContentText("Preencha todos os campos!");
 			            dialogoInfo.showAndWait();
-						
+
 					}else {
-					
+
 					int id_venda=0;
 					Integer id_produtoref= new Integer(textFieldId_produto.getText());
 					Integer quantidade= new Integer(textFieldQuantidade.getText());
 					BigDecimal valor_unitario= new BigDecimal(textFieldValor_unitario.getText());
 					BigDecimal valor_desconto_item= new BigDecimal(textFieldValor_Desconto_item.getText());
 					item_venda= AddItemLista(id_venda, id_produtoref, quantidade, valor_unitario, valor_desconto_item);
-					
-					
+
+
 					textFieldId_produto.clear();
 					textFieldQuantidade.clear();
 					textFieldValor_unitario.clear();
 					textFieldValor_Desconto_item.clear();
-					
+
 				}
 				}else {
 						stage = (Stage) buttonAddItem.getScene().getWindow();
@@ -239,46 +239,46 @@ public class VendaControllerGui  implements Initializable{
 					stage.setScene(scene);
 					stage.show();
 					main.changeStage(stage);
-				
+
 				}
-			
+
 		});
-		
+
 			buttonRemoverItem.setOnAction(e -> {
-				
+
 	            TextInputDialog dialogo = new TextInputDialog();
 	            dialogo.setTitle("Remover Item");
 	            dialogo.setHeaderText("Informe: ");
 	            dialogo.setContentText("Id do produto: ");
 	            if(dialogo.getEditor().getText().equals(null)) {
-	            	
+
 	            	Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
 		            dialogoInfo.setTitle("ATENÇÃO");
 		            dialogoInfo.setHeaderText("Remover Item da Venda");
 		            dialogoInfo.setContentText("Digite um Id Válido");
 		            dialogoInfo.showAndWait();
-				
-	            	
+
+
 	            }else {
 	            	  codigoP= new Integer ( dialogo.getEditor().getText());
 	            	  RemoverItem(codigoP);
 	            }
-	          
-	            
-	        
+
+
+
 
 	        });
 		}
-		
-		
-	
+
+
+
 	public void carregandoValoresTela(){
-		
+
 		ArrayList<Integer> listId = new ArrayList<Integer>();
 		ArrayList<Integer> listQtd = new ArrayList<Integer>();
 		ArrayList<BigDecimal> listVUnita = new ArrayList<BigDecimal>();
 		ArrayList<BigDecimal> listVDesc = new ArrayList<BigDecimal>();
-		
+
 		for (int i=0;i<items.size();i++) {
 			listId.add(items.get(i).getId());
 			listQtd.add((items.get(i).getQuantidade()));
@@ -298,11 +298,11 @@ public class VendaControllerGui  implements Initializable{
 		comboBoxVUnitario.setItems(valor_unitario);
 		comboBoxDesconto.setItems(valor_desconto);
 	}
-	
+
 	public void setApp(MainTeste main) {
 		this.main = main;
 	}
-	
-	
+
+
 
 }

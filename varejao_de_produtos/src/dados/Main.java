@@ -40,7 +40,7 @@ public class Main {
 // refs/remotes/origin/master
 			//Caixa caixa = new Caixa(null, situacao, e_preferencial, null, 1, 26);
 			Dia d = new Dia(27, "Olha o Dia novo");
-			Produtoref produto = new Produtoref("28162152", 460, null, null, new BigDecimal("27.32"), "10", new BigDecimal("0.00"), "Faca de madeira", null, null, null, 3, 4, 4, 2, 9, 17);
+			//Produtoref produto = new Produtoref("28162152", 460, null, null, new BigDecimal("27.32"), "10", new BigDecimal("0.00"), "Faca de madeira", null, null, null, 3, 4, 4, 2, 9, 17);
 			//Caixa caixa3 = new Caixa("teste",situacao,e_preferencial,null,1,24);
 			//produtoRepository.save(produto);
 
