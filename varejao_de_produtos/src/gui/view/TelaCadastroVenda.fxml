@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="503.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CaixaPaneController">
+<AnchorPane prefHeight="503.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.VendaPaneController">
    <children>
       <SplitPane dividerPositions="0.6786427145708582" orientation="VERTICAL" prefHeight="503.0" prefWidth="543.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -40,10 +40,10 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Text>
-                        <Button fx:id="buttonRemoverCaixa" layoutX="402.0" layoutY="299.0" mnemonicParsing="false" onAction="#buttonCadastarVenda" text="Cadastrar Venda" />
+                        <Button fx:id="buttonCadastarVenda" layoutX="402.0" layoutY="299.0" mnemonicParsing="false" text="Cadastrar Venda" />
                         <ImageView fitHeight="164.0" fitWidth="170.0" layoutX="340.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../git/varejao_de_produto/varejao_de_produtos/images/WhatsApp%20Image%202018-01-28%20at%2017.26.04.jpeg" />
+                              <Image url="@../../../images/WhatsApp%20Image%202018-01-28%20at%2017.26.04.jpeg" />
                            </image>
                         </ImageView>
                         <Text fill="WHITE" layoutX="15.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id do Caixa" wrappingWidth="94.0" />
@@ -57,12 +57,12 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tbViewItem" prefHeight="412.0" prefWidth="178.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tabelaVendas" prefHeight="412.0" prefWidth="178.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="tbCollumIdProduto" prefWidth="75.0" text="Id" />
-                      <TableColumn fx:id="tbCollumPreco" prefWidth="75.0" text="Preço (R$)" />
-                        <TableColumn fx:id="tbCollumQuantidade" prefWidth="75.0" text="Quantidade" />
-                        <TableColumn fx:id="tbCollumDesconto" prefWidth="75.0" text="Valor Desconto" />
+                      <TableColumn fx:id="colunaId" prefWidth="75.0" text="Id" />
+                      <TableColumn fx:id="colunaValorTotal" prefWidth="75.0" text="Valor_Total" />
+                        <TableColumn fx:id="colunaIdCaixa" prefWidth="75.0" text="Id_Caixa" />
+                        <TableColumn fx:id="colunaValorDesconto" prefWidth="75.0" text="Valor Desconto" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

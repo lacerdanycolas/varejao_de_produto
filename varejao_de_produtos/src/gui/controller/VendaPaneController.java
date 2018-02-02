@@ -20,7 +20,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import negocio.entities.Item_Venda;
 import negocio.entities.Venda;
@@ -56,7 +59,24 @@ public class VendaPaneController  implements Initializable{
 
 	@FXML
 	javafx.scene.control.Button buttonRemoverItem;
+	
+	@FXML
+	private TableView<Venda> tabelaVendas;
+	
+	@FXML
+	TableColumn<Venda, Integer> colunaId;
+	
+	@FXML
+	TableColumn<Venda, Integer> colunaValorTotal;
+	
+	@FXML
+	TableColumn<Venda, Integer> colunaIdCaixa;
 
+	@FXML
+	TableColumn<Venda, Integer> colunaValorDesconto;
+	
+	private ObservableList<Venda> obListaVenda;
+	
 	private ObservableList<BigDecimal>valor_desconto;
 	private ObservableList<BigDecimal> valor_unitario;
 	private ObservableList<Integer> quantidade;
@@ -101,7 +121,7 @@ public class VendaPaneController  implements Initializable{
 		}
 	}
 
-	public Venda CadastrarVenda ( String cpf_comprador, Date data_venda,int id_caixa, Item_Venda item) throws Exception {
+	public Venda CadastrarVenda (String cpf_comprador, Date data_venda,int id_caixa, Item_Venda item) throws Exception {
 		BigDecimal valorTotal= item.Valor_total(items);
 		BigDecimal valorTotalDesconto= item.Valor_Total_Desconto(items);
 
@@ -125,7 +145,12 @@ public class VendaPaneController  implements Initializable{
 
 		this.main = MainTeste.getInstance();
 
-		carregandoValoresTela();
+		try {
+			carregandoValoresTela();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 
 		buttonCadastarVenda.setOnAction(new EventHandler<ActionEvent>() {
@@ -265,11 +290,22 @@ public class VendaPaneController  implements Initializable{
 	        });
 		}
 
+public void refreshTable() throws Exception{
+	obListaVenda = FXCollections.observableArrayList();
+	obListaVenda.addAll(fachada.ListarVenda());
+	tabelaVendas.setItems(obListaVenda);
+}
 
-
-	public void carregandoValoresTela(){
-
-		ArrayList<Integer> listId = new ArrayList<Integer>();
+	public void carregandoValoresTela() throws Exception{
+		colunaId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+		colunaValorTotal.setCellValueFactory(new PropertyValueFactory<>("Valor_total"));
+		colunaIdCaixa.setCellValueFactory(new PropertyValueFactory<>("Id_caixa"));
+		colunaValorDesconto.setCellValueFactory(new PropertyValueFactory<>("Valor_total_desconto"));
+		
+		obListaVenda = FXCollections.observableArrayList();
+		obListaVenda.addAll(fachada.ListarVenda());
+		tabelaVendas.setItems(obListaVenda);
+/*		ArrayList<Integer> listId = new ArrayList<Integer>();
 		ArrayList<Integer> listQtd = new ArrayList<Integer>();
 		ArrayList<BigDecimal> listVUnita = new ArrayList<BigDecimal>();
 		ArrayList<BigDecimal> listVDesc = new ArrayList<BigDecimal>();
@@ -291,7 +327,7 @@ public class VendaPaneController  implements Initializable{
 		comboBoxId.setItems(id_produto);
 		comboBoxQuant.setItems(quantidade);
 		comboBoxVUnitario.setItems(valor_unitario);
-		comboBoxDesconto.setItems(valor_desconto);
+		comboBoxDesconto.setItems(valor_desconto);*/
 	}
 
 	public void setApp(MainTeste main) {

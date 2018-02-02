@@ -15,7 +15,9 @@ public class Venda {
 	private BigDecimal valor_total_desconto;
 	private int id_caixa;
 		
-	
+	public Venda(){
+		
+	}
 	public Venda(String cpf_comprador, BigDecimal valor_total, Date data_venda, BigDecimal valor_total_desconto,
 			Integer id_caixa) {
 

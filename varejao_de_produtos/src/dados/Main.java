@@ -14,6 +14,7 @@ import negocio.entities.Sexo;
 import negocio.entities.Situacao;
 import negocio.entities.Situacao_Caixa;
 import negocio.entities.Tipo_Funcionario;
+import negocio.entities.Turno;
 
 public class Main {
 
@@ -30,8 +31,12 @@ public class Main {
 		FuncionarioRepository  funcionarioRepository = dados.FuncionarioRepository.getInstance();
 		CaixaRepository caixaRepository = dados.CaixaRepository.getInstance();
 		ProdutorefRepository produtoRepository = dados.ProdutorefRepository.getInstance();
+		TurnoRepository turnoRepository = TurnoRepository.getInstance();
 		try {
-
+			/*Collection<Turno> listaTurnos = turnoRepository.getAll();
+			for(Turno turno: listaTurnos){
+				System.out.println(turno.toString());
+			}*/
 			//Fornecedorref f = new Fornecedorref(21, "Jimmys ltda", "1291829182", "Rua Albacora", "54400-400", "PE", "Piedade", situacao);
 		//	Funcionario func = new Funcionario(21, "03236541123",sexo, estado_civil, "8842161", "Rafael", "Camara", "Figueredo", situacao, "Rua Espardate", "Brasilia teimosa", "PE", "45555555", "admin", "admin", "10303577495",  tipo_func, "2352733254", 14);
 

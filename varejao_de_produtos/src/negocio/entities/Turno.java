@@ -10,9 +10,12 @@ public class Turno {
 	private String descricao;
 	private Time hora_inicio;
 	private Time hora_fim;
-	public Turno(int codigo, String descricao, Time hora_inicio, Time hora_fim) {
+	
+	public Turno(){
 		
-		this.codigo = codigo;
+	}
+	public Turno(String descricao, Time hora_inicio, Time hora_fim) {
+		
 		this.descricao = descricao;
 		this.hora_inicio = hora_inicio;
 		this.hora_fim = hora_fim;

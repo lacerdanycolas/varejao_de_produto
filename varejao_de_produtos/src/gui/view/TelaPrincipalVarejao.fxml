@@ -33,7 +33,7 @@
             <Button fx:id="butFuncionario" layoutX="161.0" layoutY="379.0" mnemonicParsing="false" onAction="#telaFuncionario" text="Funcionario" />
             <Button fx:id="butFornecedor" layoutX="288.0" layoutY="379.0" mnemonicParsing="false" onAction="#telaFornecedor" text="Fornecedor" />
             <Button fx:id="butProduto" layoutX="424.0" layoutY="379.0" mnemonicParsing="false" onAction="#telaProduto" text="Produto" />
-            <Button fx:id="butVenda" layoutX="535.0" layoutY="379.0" mnemonicParsing="false" text="Venda" />
+            <Button fx:id="butVenda" layoutX="535.0" layoutY="379.0" mnemonicParsing="false" onAction="#telaVenda" text="Venda" />
             <Button layoutX="605.0" layoutY="1.0" mnemonicParsing="false" onAction="#voltarTelaLogin" text="&lt;" />
          </children>
          <cursor>
