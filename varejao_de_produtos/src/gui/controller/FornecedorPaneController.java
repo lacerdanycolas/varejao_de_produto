@@ -143,6 +143,7 @@ public class FornecedorPaneController implements Initializable {
 						Fornecedorref fornecedor = new Fornecedorref(nome, cnpj, rua, cep, estadoletra, bairro, situ);
 						try {
 							varejao.salvarFornecedor(fornecedor);
+							lblMensagem.setText("Fornecedor Cadastrado");
 							refreshTable();
 						} catch (Exception e) {
 							Alert alert = new Alert(AlertType.ERROR);

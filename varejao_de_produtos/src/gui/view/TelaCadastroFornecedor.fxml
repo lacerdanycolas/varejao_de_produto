@@ -55,11 +55,7 @@
                            </image>
                         </ImageView>
                         <Text fill="WHITE" layoutX="250.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CEP" />
-<<<<<<< HEAD
                         <Label fx:id="lblMensagem" layoutX="12.0" layoutY="6.0" prefHeight="17.0" prefWidth="236.0" />
-=======
-                        <Button fx:id="buttonListaRepresentantes" layoutX="381.0" layoutY="270.0" mnemonicParsing="false" text="Listagem Representantes" />
->>>>>>> refs/remotes/origin/branch_NycolasLacerda
                      </children>
                   </AnchorPane>
                </children>

@@ -22,7 +22,7 @@ public class ConnectionMySQL {
 	private static String SENHA_SUPERVISOR_ESTOQUE = "estoque";
 
 	private static String COORDENADOR = "root";
-	private static String SENHA_COORDENADOR = "";
+	private static String SENHA_COORDENADOR = "fish1997";
 
 	public static void setUser(int i){
 		try {
