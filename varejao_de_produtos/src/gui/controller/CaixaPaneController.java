@@ -1,21 +1,12 @@
 package gui.controller;
-
-import java.awt.Button;
-import java.awt.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import java.util.ResourceBundle;
-import negocio.controller.ControladorCaixa;
 import negocio.controller.FachadaVarejao;
-import dados.CaixaRepository;
-import dados.RepositorioCaixa;
 import gui.MainTeste;
-import gui.VarejaoDeProdutosApp;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,11 +18,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import negocio.entities.Caixa;
@@ -40,8 +32,8 @@ import negocio.entities.Situacao;
 import negocio.entities.Situacao_Caixa;
 
 
-public class CaixaControllerGui implements Initializable{
-
+public class CaixaPaneController implements Initializable{
+	private FachadaVarejao varejao;
 	@FXML
 	private TableView<Caixa> tbViewCaixa;
 	@FXML
@@ -81,13 +73,15 @@ public class CaixaControllerGui implements Initializable{
 
 	@FXML
 	javafx.scene.control.Button buttonLimparCaixa;
+	
+	@FXML
+	Label lblMensagem;
 
 	private Collection<Caixa> listaCaixa = new ArrayList<Caixa>();
 	private Collection<Caixa> listcaixa2 = new ArrayList<Caixa>();
 	private ObservableList<Caixa> oblistaCaixa;
 
 	private MainTeste main;
-	private FachadaVarejao fachada = FachadaVarejao.getInstance();
 
 
 	private ObservableList<String> situacao = FXCollections.observableArrayList(Situacao_Caixa.ATIVO.toString(),Situacao.INATIVO.toString());
@@ -96,7 +90,9 @@ public class CaixaControllerGui implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		this.varejao = varejao.getInstance();
 		this.main = MainTeste.getInstance();
+		
 
 		carregandoValoresTela();
 		carregarTableViewCaixa();
@@ -107,104 +103,79 @@ public class CaixaControllerGui implements Initializable{
 
 			@Override
 			public void handle(ActionEvent event) {
-				Stage stage = null;
-				Parent root = null;
 				try {
 					if (event.getSource() == buttonSalvarCaixa) {
 						// get reference to the button's stage
 						String descricao = new String(textFieldDescricaoCaixa.getText());
-						Situacao situ;
+						Situacao situ = null;
 						String situacao = comboBoxSituacao.getValue();
-						if(situacao.toString().equals("ATIVO")){
-							situ = Situacao.ATIVO;
-						}else
-							situ = Situacao.INATIVO;
-
+						try{
+							if(situacao.toString().equals("ATIVO")){
+								situ = Situacao.ATIVO;
+							}else{
+								situ = Situacao.INATIVO;
+							}
+						}catch(Exception e){
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("Erro ao cadastrar um caixa.");
+							alert.setHeaderText("Preencha o campo Situacao.");
+							alert.setContentText(e.getMessage());
+							alert.showAndWait();
+						}
 						String preferencial = comboBoxPreferencial.getValue();
-						Preferencial_Caixa pref;
-						if(preferencial.toString().equals("S")){
-							pref = Preferencial_Caixa.S;
-						}else
-							pref = Preferencial_Caixa.N;
-
+						Preferencial_Caixa pref = null;
+						try{
+							if(preferencial.toString().equals("S")){
+								pref = Preferencial_Caixa.S;
+							}else{
+								pref = Preferencial_Caixa.N;
+							}
+						}catch(Exception e){
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("Erro ao cadastrar um caixa.");
+							alert.setHeaderText("Preencha o campo Preferencial.");
+							alert.setContentText(e.getMessage());
+							alert.showAndWait();
+						}
 						String observacao = new String(textFieldObservacaoCaixa.getText());
 
 						String idMatriz = new String(textFieldIdMatrizCaixa.getText());
 						int idm = Integer.parseInt(idMatriz);
-
+						int seqf = 0;
+						try{
 						String seq_filial = new String(comboBoxSeqFilial.getValue().toString());
-						int seqf = Integer.parseInt(seq_filial);
-
-						Caixa caixa = new Caixa(descricao, situ, pref, observacao, idm, seqf);
-
-						try {
-							fachada.getInstance().salvarCaixa(caixa);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						seqf = Integer.parseInt(seq_filial);
+						}catch(Exception e){
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("Erro ao cadastrar um caixa.");
+							alert.setHeaderText("Preencha o campo Sequencial Filial.");
+							alert.setContentText(e.getMessage());
+							alert.showAndWait();						
 						}
+						Caixa caixa = new Caixa(descricao, situ, pref, observacao, idm, seqf);
+						try {
+							varejao.salvarCaixa(caixa);
+							refreshTable();
+						} catch (Exception e) {
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("Erro ao cadastrar um caixa.");
+							alert.setHeaderText("Impossivel cadastrar caixa.");
+							alert.setContentText(e.getMessage());
+							alert.showAndWait();
+						}
+					} 
 
-						stage = (Stage) buttonSalvarCaixa.getScene().getWindow();
-				        //load up OTHER FXML document
-				        root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroCaixa.fxml"));
-
-					} else {
-						stage = (Stage) buttonSalvarCaixa.getScene().getWindow();
-						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroCaixa.fxml"));
-					}
-					// create a new scene with root and set the stage
-					Scene scene = new Scene(root);
-					stage.setScene(scene);
-					main.changeStage(stage);
-
-				} catch (IOException e) {
+				}catch (Exception e) {
 					e.printStackTrace();
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Erro ao cadastrar um caixa.");
+					alert.setHeaderText("Impossivel efetuar cadastro.");
+					alert.setContentText(e.getMessage());
+					alert.showAndWait();
 				}
 
 
 			}
-		});
-
-		//Metodo Remover
-		buttonRemoverCaixa.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event) {
-				Stage stage;
-				Parent root;
-				try{
-
-					Caixa caixaremove = tbViewCaixa.getSelectionModel().getSelectedItem();
-					if(caixaremove!= null && caixaremove instanceof Caixa){
-
-						try {
-							fachada.deletarCaixa(caixaremove);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-					}
-					if(event.getSource()==buttonRemoverCaixa){
-				        //get reference to the button's stage
-				        stage = (Stage) buttonRemoverCaixa.getScene().getWindow();
-				        //load up OTHER FXML document
-				        root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroCaixa.fxml"));
-				    } else {
-						stage = (Stage) buttonRemoverCaixa.getScene().getWindow();
-						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroCaixa.fxml"));
-					}
-					//create a new scene with root and set the stage
-					Scene scene = new Scene(root);
-				    stage.setScene(scene);
-				    main.changeStage(stage);
-
-			}catch(IOException e){
-				e.printStackTrace();
-			}
-
-
-		}
 		});
 
 		buttonLimparCaixa.setOnAction(new EventHandler<ActionEvent>(){
@@ -242,7 +213,35 @@ public class CaixaControllerGui implements Initializable{
 
 	}
 
+//Novo remover, deixa ASSIM!
+	public void removerCaixa(){
+		Caixa caixa = tbViewCaixa.getSelectionModel().getSelectedItem();
+		try{
+			if(caixa !=null && caixa instanceof Caixa){
+				varejao.deletarCaixa(caixa);
+				tbViewCaixa.getItems().remove(tbViewCaixa.getSelectionModel().getSelectedIndex());
+				refreshTable();
+				lblMensagem.setText("Caixa Removido");
+			}else{
+				lblMensagem.setText("Selecione um Caixa para ser removido");
+			}
+		}catch (Exception e){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao remover um caixa.");
+			alert.setHeaderText("Impossivel efetuar remocao.");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
 
+		}
+	}
+
+	public void refreshTable() throws Exception{
+		oblistaCaixa = FXCollections.observableArrayList();
+		oblistaCaixa.addAll(varejao.listarCaixa());
+		tbViewCaixa.setItems(oblistaCaixa);
+	}
+	
+	
 	public void carregarTableViewCaixa() {
 		tbCollumIdCaixa.setCellValueFactory(new PropertyValueFactory<>("Id"));
         tbCollumSituacaoCaixa.setCellValueFactory(new PropertyValueFactory<>("Situacao"));
@@ -250,7 +249,7 @@ public class CaixaControllerGui implements Initializable{
 
         tbCollumSeqFilialCaixa.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSeq_filial().toString()));
         try {
-			listaCaixa = fachada.listarCaixa();
+			listaCaixa = varejao.listarCaixa();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -264,7 +263,7 @@ public void carregandoValoresTela(){
 	comboBoxSituacao.setItems(situacao);
 	comboBoxPreferencial.setItems(preferencial);
 	try {
-		listcaixa2 = fachada.listarCaixa();
+		listcaixa2 = varejao.listarCaixa();
 	} catch (Exception e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();

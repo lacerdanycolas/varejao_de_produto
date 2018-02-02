@@ -34,7 +34,7 @@ public class ProdutoPaneController {
 	Label lblMensagem;
 
 	@FXML
-	private TableView<Produtoref> tbViewProdutoref;
+	private TableView<Produtoref> tabelaProdutos;
 
 	@FXML
 	TableColumn<Produtoref, Integer> tbColumnID;
@@ -47,15 +47,6 @@ public class ProdutoPaneController {
 
 	@FXML
 	TableColumn<Produtoref, String> tbColumnPrecoTabela;
-
-	@FXML
-	TableColumn<Produtoref, String> tbColumnQuantidadeEstoque;
-
-	@FXML
-	TableColumn<Produtoref, String> tbColumnFrequenciaPedido;
-
-	@FXML
-	TableColumn<Produtoref, String> tbColumnQuantidadeMinima;
 
 	@FXML
 	TableColumn<Produtoref, String> tbColumnCST;
@@ -158,31 +149,30 @@ public class ProdutoPaneController {
 
 		varejao = varejao.getInstance();
 
-		tbColumnID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+		tbColumnID.setCellValueFactory(new PropertyValueFactory<>("Id"));
 		tbColumnNome.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNome()));
 		tbColumnCodigoDeBarras.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCodigo_de_barra()));
-		tbColumnPrecoTabela.setCellValueFactory(new PropertyValueFactory<>("Preco de Tabela"));
-		tbColumnQuantidadeEstoque.setCellValueFactory(new PropertyValueFactory<>("Quantidade Estoque"));
-		tbColumnFrequenciaPedido.setCellValueFactory(new PropertyValueFactory<>("Frequencia Pedido"));
-		tbColumnQuantidadeMinima.setCellValueFactory(new PropertyValueFactory<>("Quantidade Minima"));
+		tbColumnPrecoTabela.setCellValueFactory(new PropertyValueFactory<>("Preco_por_tabela"));
 		tbColumnCST.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCst()));
-		tbColumnICMS.setCellValueFactory(new PropertyValueFactory<>("ICMS"));
+		tbColumnICMS.setCellValueFactory(new PropertyValueFactory<>("icms"));
 		tbColumnDescricao.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescricao()));
-		tbColumnPrecoUltimaCompra.setCellValueFactory(new PropertyValueFactory<>("Preco Ultima Compra"));
-		tbColumnIDFornecedor.setCellValueFactory(new PropertyValueFactory<>("ID Fornecedor"));
-		tbColumnIDCategoria.setCellValueFactory(new PropertyValueFactory<>("ID Categoria"));
-		tbColumnIDSubcategoria.setCellValueFactory(new PropertyValueFactory<>("ID"));
-		tbColumnIDUnidade.setCellValueFactory(new PropertyValueFactory<>("ID"));
-		tbColumnIDMarca.setCellValueFactory(new PropertyValueFactory<>("ID"));
-
-
+		tbColumnPrecoUltimaCompra.setCellValueFactory(new PropertyValueFactory<>("Preco_ultima_compra"));
+		//tbColumnIDFornecedor.setCellValueFactory(new PropertyValueFactory<>("Id_fornecedor"));
+		tbColumnIDCategoria.setCellValueFactory(new PropertyValueFactory<>("Id_categoriaref"));
+		tbColumnIDSubcategoria.setCellValueFactory(new PropertyValueFactory<>("Id_sub_categoriaref"));
+		tbColumnIDUnidade.setCellValueFactory(new PropertyValueFactory<>("Id_unidaderef"));
+		tbColumnIDMarca.setCellValueFactory(new PropertyValueFactory<>("Id_marcaref"));
+		tbColumnIDNCM.setCellValueFactory(new PropertyValueFactory<>("id_ncm"));
+		obListaProduto = FXCollections.observableArrayList();
+		obListaProduto.addAll(varejao.listarProduto());
+		tabelaProdutos.setItems(obListaProduto);
 	}
 
 	@FXML
 	public void refreshTable() throws Exception{
 		obListaProduto = FXCollections.observableArrayList();
 		obListaProduto.addAll(varejao.listarProduto());
-		tbViewProdutoref.setItems(obListaProduto);
+		tabelaProdutos.setItems(obListaProduto);
 	}
 
 	public void sair(ActionEvent event) {
@@ -261,11 +251,11 @@ public class ProdutoPaneController {
 	}
 
 	public void removerProduto(){
-		Produtoref produto = tbViewProdutoref.getSelectionModel().getSelectedItem();
+		Produtoref produto = tabelaProdutos.getSelectionModel().getSelectedItem();
 		try{
 			if(produto !=null && produto instanceof Produtoref){
 				varejao.deletarProduto(produto);
-				tbViewProdutoref.getItems().remove(tbViewProdutoref.getSelectionModel().getSelectedIndex());
+				tabelaProdutos.getItems().remove(tabelaProdutos.getSelectionModel().getSelectedIndex());
 				limparForm();
 				refreshTable();
 				lblMensagem.setText("Produto Removido");

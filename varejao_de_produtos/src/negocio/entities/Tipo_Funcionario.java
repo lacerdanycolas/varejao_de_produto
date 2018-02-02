@@ -5,7 +5,7 @@ public enum Tipo_Funcionario {
 	private int id;
 	
 	Tipo_Funcionario (int i){
-		this.id=i;
+		this.id = i;
 	}
 	
 	public int getId(){

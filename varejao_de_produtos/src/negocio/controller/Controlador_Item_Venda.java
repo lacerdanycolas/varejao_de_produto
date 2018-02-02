@@ -7,18 +7,25 @@ import negocio.entities.Item_Venda;
 
 public class Controlador_Item_Venda {
 	
-	private Item_Venda_Repository repo;
+	private static Controlador_Item_Venda instance;
+	private Item_Venda_Repository repositorio;
+	public static Controlador_Item_Venda getInstance(){
+		if(instance==null){
+			instance = new Controlador_Item_Venda();
+		}
+		return instance;
+	}
 	
-	public Controlador_Item_Venda(Item_Venda_Repository rep) {
-		this.repo=rep;
+	public Controlador_Item_Venda() {
+		this.repositorio= Item_Venda_Repository.getInstance();
 	}
 	
 	public Item_Venda Buscar_Itens_Venda(int id) throws Exception {
 		Item_Venda item=null;
 		if(id>0) {
-			item=repo.getOne(id);
+			item=repositorio.getOne(id);
 		}else {
-			throw new IllegalArgumentException("Id inválido");
+			throw new IllegalArgumentException("Id invï¿½lido");
 		}
 		
 		return item;
@@ -26,24 +33,24 @@ public class Controlador_Item_Venda {
 
 	
 	public Collection<Item_Venda> Listar_Itens_Venda() throws Exception{
-		return repo.getAll();
+		return repositorio.getAll();
 	}
 	
 	public void CadastrarItem_Venda(Item_Venda item) throws Exception {
 		if(item.equals(null)) {
 			throw new IllegalArgumentException("dados invalidos");
 		}else {
-			repo.save(item);
+			repositorio.save(item);
 		}
 	}
 	
 	public void Deletar_Item_Venda (Item_Venda item) throws Exception {
 		if(item.equals(null)) {
 			throw new IllegalArgumentException();
-		}else if(repo.getOne(item.getId()).equals(null)) {
+		}else if(repositorio.getOne(item.getId()).equals(null)) {
 			throw new IllegalArgumentException("item inexistente");
 		}else {
-			repo.delete(item);
+			repositorio.delete(item);
 		}
 		
 	}

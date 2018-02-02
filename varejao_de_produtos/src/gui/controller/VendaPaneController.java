@@ -30,7 +30,7 @@ import negocio.entities.Preferencial_Caixa;
 import negocio.entities.Situacao;
 import negocio.entities.Situacao_Caixa;
 
-public class VendaControllerGui  implements Initializable{
+public class VendaPaneController  implements Initializable{
 
 	@FXML
 	private javafx.scene.control.TextField textFieldValor_unitario;
@@ -144,9 +144,9 @@ public class VendaControllerGui  implements Initializable{
 					if(textField_CpfComprador.getText().equals(null)|| textField_IdCaixa.getText().equals(null)) {
 
 						Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
-				            dialogoInfo.setTitle("ATENÇÃO");
+				            dialogoInfo.setTitle("ATENï¿½ï¿½O");
 				            dialogoInfo.setHeaderText("Cadastro Venda");
-				            dialogoInfo.setContentText("Os campos Id do Caixa e CPF do comprador são obrigatorios!");
+				            dialogoInfo.setContentText("Os campos Id do Caixa e CPF do comprador sï¿½o obrigatorios!");
 				            dialogoInfo.showAndWait();
 
 					}else {
@@ -205,7 +205,7 @@ public class VendaControllerGui  implements Initializable{
 					if(textFieldId_produto.getText().equals(null) || textFieldQuantidade.getText().equals(null)|| textFieldValor_Desconto_item.getText().equals(null)||textFieldValor_unitario.getText().equals(null)) {
 
 						Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
-			            dialogoInfo.setTitle("ATENÇÃO");
+			            dialogoInfo.setTitle("ATENï¿½ï¿½O");
 			            dialogoInfo.setHeaderText("Cadastro Venda");
 			            dialogoInfo.setContentText("Preencha todos os campos!");
 			            dialogoInfo.showAndWait();
@@ -253,9 +253,9 @@ public class VendaControllerGui  implements Initializable{
 	            if(dialogo.getEditor().getText().equals(null)) {
 
 	            	Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
-		            dialogoInfo.setTitle("ATENÇÃO");
+		            dialogoInfo.setTitle("ATENï¿½ï¿½O");
 		            dialogoInfo.setHeaderText("Remover Item da Venda");
-		            dialogoInfo.setContentText("Digite um Id Válido");
+		            dialogoInfo.setContentText("Digite um Id Vï¿½lido");
 		            dialogoInfo.showAndWait();
 
 

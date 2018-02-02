@@ -2,28 +2,29 @@ package negocio.controller;
 
 import java.util.Collection;
 
-import dados.CaixaRepository;
 import dados.RepresentanteRepository;
 import exceptions.FormatacaoInvalidaException;
-import negocio.entities.Caixa;
 import negocio.entities.Representante;
 
 public class ControladorRepresentante {
 
-	private RepresentanteRepository repositorioRepresentante;
-
-	public ControladorRepresentante(RepresentanteRepository rep) {
-		if(rep !=null){
-			this.repositorioRepresentante = rep;
-		}else{
-			IllegalArgumentException x = new IllegalArgumentException("Repositorio invalido.");
-			throw x;
+	private RepresentanteRepository repositorio;
+	private static ControladorRepresentante instance;
+	
+	public static ControladorRepresentante getInstance(){
+		if(instance == null){
+			instance = new ControladorRepresentante();
 		}
+		return instance;
+	}
+	
+	public ControladorRepresentante() {
+		this.repositorio = RepresentanteRepository.getInstance();
 	}
 
 	public Representante buscarRepresentante(Integer id) throws Exception{
 		if(id>0 /*and conexao tipo caixa*/){
-			return repositorioRepresentante.getOne(id);
+			return repositorio.getOne(id);
 		}else{
 			IllegalArgumentException x = new IllegalArgumentException("Repositorio invalido.");
 			throw x;
@@ -31,7 +32,7 @@ public class ControladorRepresentante {
 	}
 
 	public Collection<Representante> listarRepresentante() throws Exception{
-		return repositorioRepresentante.getAll();
+		return repositorio.getAll();
 	}
 
 
@@ -41,7 +42,7 @@ public class ControladorRepresentante {
 			throw new FormatacaoInvalidaException();
 
 		else
-			return repositorioRepresentante.save(representante);
+			return repositorio.save(representante);
 
 	}
 
@@ -49,9 +50,9 @@ public class ControladorRepresentante {
 		if(representante == null){
 			throw new FormatacaoInvalidaException();
 		}
-		else if(repositorioRepresentante.getOne(representante.getId()).equals(null))
+		else if(repositorio.getOne(representante.getId()).equals(null))
 			throw new Exception("Representante no existe");
 		else
-			repositorioRepresentante.delete(representante);
+			repositorio.delete(representante);
 	}
 }

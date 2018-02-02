@@ -1,27 +1,15 @@
 package negocio.controller;
 
 import java.util.Collection;
-
-import dados.CaixaRepository;
-import dados.ProdutorefRepository;
-import dados.VendaRepository;
 import negocio.entities.Caixa;
 import negocio.entities.Produtoref;
 import negocio.entities.Venda;
-import dados.FornecedorrefRepository;
-
-import dados.FuncionarioRepository;
-import dados.Item_Venda_Repository;
-import negocio.entities.Caixa;
-
 import negocio.entities.Fornecedorref;
-
 import negocio.entities.Funcionario;
 import negocio.entities.Item_Venda;
 
 
 public class FachadaVarejao {
-
 	private ControladorCaixa caixas;
 	private ControladorProduto produtos;
 	private ControladorVenda vendas;
@@ -29,18 +17,15 @@ public class FachadaVarejao {
 	private Controlador_Item_Venda itens;
 	private ControladorFuncionario funcionarios;
 
-
-
 	private static FachadaVarejao instance;
 
 	private FachadaVarejao(){
-		this.caixas = new ControladorCaixa(CaixaRepository.getInstance());
-		this.produtos = new ControladorProduto(ProdutorefRepository.getInstance());
-		this.vendas = new ControladorVenda(VendaRepository.getInstance());
-		this.fornecedores = new ControladorFornecedorref(FornecedorrefRepository.getInstance());
-		this.itens = new Controlador_Item_Venda(Item_Venda_Repository.getInstance());
-		this.funcionarios = new ControladorFuncionario(FuncionarioRepository.getInstance());
-
+		this.caixas = ControladorCaixa.getInstance();
+		this.produtos = ControladorProduto.getInstance();
+		this.vendas = ControladorVenda.getInstance();
+		this.fornecedores = ControladorFornecedorref.getInstance();
+		this.itens = Controlador_Item_Venda.getInstance();
+		this.funcionarios = ControladorFuncionario.getInstance();
 	}
 
 	public static FachadaVarejao getInstance(){
@@ -58,8 +43,6 @@ public class FachadaVarejao {
 	public Fornecedorref buscarFornecedor(int id) throws Exception{
 		return this.fornecedores.buscarFornecedor(id);
 	}
-
-
 	//LISTAR
 
 	//LISTAR CAIXA
@@ -132,13 +115,9 @@ public class FachadaVarejao {
 	}
 
 	//LOGIN FUNCIONARIO
-	/*public boolean efetuarLoginFuncionario(String login, String senha) throws Exception{
-		if(this.funcionarios.efetuarLogin(login, senha) == true){
-			return true;
-		}else{
-			return false;
-		}
-	}*/
+	public boolean efetuarLoginFuncionario(String login, String senha) throws Exception{
+		return this.funcionarios.efetuarLogin(login, senha);
+	}
 
 	//BUSCAR VENDA
 		public Venda BuscarVenda(int id) throws Exception {
@@ -184,9 +163,9 @@ public class FachadaVarejao {
 			 itens.Deletar_Item_Venda(item);
 		 }
 
-	public void deletarFornecedor(Fornecedorref fornecedor) throws Exception{
-		this.fornecedores.deletarFornecedor(fornecedor);
-	}
+		public void deletarFornecedor(Fornecedorref fornecedor) throws Exception{
+			this.fornecedores.deletarFornecedor(fornecedor);
+		}
 
 
 }

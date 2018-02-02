@@ -3,17 +3,24 @@ package negocio.controller;
 import java.util.Collection;
 
 import dados.FuncionarioRepository;
-import dados.FuncionarioRepository;
-import exceptions.FormatacaoInvalidaException;
 import exceptions.FuncionarioNaoExiste;
 import negocio.entities.Funcionario;
+import varejao_de_produtos.ConnectionMySQL;
 
 public class ControladorFuncionario {
 
+	private static ControladorFuncionario instance;
 	private FuncionarioRepository repositorio;
-
-	public ControladorFuncionario (FuncionarioRepository rep) {
-		this.repositorio=rep;
+	public static ControladorFuncionario getInstance(){
+		if(instance == null){
+			instance = new ControladorFuncionario();
+		}
+		return instance;
+	}
+	
+	
+	private ControladorFuncionario () {
+		this.repositorio = FuncionarioRepository.getInstance();
 	}
 
 	public Funcionario buscarFuncionario (int id) throws Exception,FuncionarioNaoExiste{
@@ -22,6 +29,7 @@ public class ControladorFuncionario {
 
 		if(id> 0) {
 			fun= repositorio.getOne(id);
+			ConnectionMySQL.getConnection().commit();
 			if(fun==null){
 
 				throw new FuncionarioNaoExiste(id);
@@ -35,7 +43,6 @@ public class ControladorFuncionario {
 
 
 	public Collection<Funcionario> listarFuncionarios() throws Exception{
-
 		return repositorio.getAll();
 	}
 
@@ -51,9 +58,25 @@ public class ControladorFuncionario {
 		if(Func.equals(null)) {
 			throw new IllegalArgumentException();
 		}else if(repositorio.getOne(Func.getId()).equals(null))
-			throw new Exception("Funcionario não existe");
+			throw new Exception("Funcionario nï¿½o existe");
 		else
 			repositorio.delete(Func);
+	}
+	
+	public boolean efetuarLogin(String login, String senha) throws Exception{
+		Funcionario retorno = null;
+		for(Funcionario f: this.listarFuncionarios()){
+			if(f.getLogin().equals(login) && f.getSenha().equals(senha)){
+				retorno = f;
+				break;
+			}
+		}
+		if(retorno != null){
+			ConnectionMySQL.setUser(retorno.getTipo().getId());
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 

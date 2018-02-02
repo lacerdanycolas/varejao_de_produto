@@ -3,7 +3,7 @@ package gui;
 import java.io.IOException;
 import java.util.Spliterator;
 
-import gui.controller.CaixaControllerGui;
+import gui.controller.CaixaPaneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -65,7 +65,7 @@ public class MainTeste extends Application{
 		}
 
 		this.rootScene.setCenter(ap);
-		CaixaControllerGui caixacontrol2 = new CaixaControllerGui();
+		CaixaPaneController caixacontrol2 = new CaixaPaneController();
 		loader.setController(caixacontrol2);
 		caixacontrol2.setApp(this);
 	}

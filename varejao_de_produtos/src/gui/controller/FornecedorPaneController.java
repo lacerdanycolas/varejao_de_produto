@@ -5,9 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
-
-import dados.FornecedorrefRepository;
-import dados.ProdutorefRepository;
 import gui.MainTeste;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -29,15 +27,13 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import negocio.controller.FachadaVarejao;
-import negocio.entities.Caixa;
 import negocio.entities.Estados;
 import negocio.entities.Fornecedorref;
-import negocio.entities.Preferencial_Caixa;
 import negocio.entities.Situacao;
 import negocio.entities.Situacao_Caixa;
 
-public class FornecedorControllerGui implements Initializable {
-
+public class FornecedorPaneController implements Initializable {
+	private FachadaVarejao varejao;
 	@FXML
 	private TableView<Fornecedorref> tbViewFornecedor;
 	@FXML
@@ -84,12 +80,15 @@ public class FornecedorControllerGui implements Initializable {
 
 	@FXML
 	private Button buttonListaRepresentantes;
+	
+	@FXML
+	Label lblMensagem;
 
 	private FachadaVarejao fachada = FachadaVarejao.getInstance();
 	private MainTeste main;
 
 	private Collection<Fornecedorref> fornecedorlist = new ArrayList<Fornecedorref>();
-	private ObservableList<Fornecedorref> obsfornecedor;
+	private ObservableList<Fornecedorref> oblistaFornecedor;
 
 	private ObservableList<String> situacaoFornecedor = FXCollections.observableArrayList(Situacao_Caixa.ATIVO.toString(),Situacao_Caixa.INATIVO.toString());
 	private ObservableList<String> estados;
@@ -98,6 +97,7 @@ public class FornecedorControllerGui implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		this.main = MainTeste.getInstance();
+		this.varejao = varejao.getInstance();
 
 		carregarValoresTelaFornecedor();
 		carregarTbViewFornecedor();
@@ -106,19 +106,24 @@ public class FornecedorControllerGui implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-				Stage stage = null;
-				Parent root = null;
 				try {
 					if (event.getSource() == buttonSalvarFornecedor) {
 						// get reference to the button's stage
 						String nome = new String(textFieldNomeFornecedor.getText());
-						Situacao situ;
+						Situacao situ = null;
 						String situacao = comboBoxSituacaoFornecedor.getValue();
-						if(situacao.toString().equals("ATIVO")){
-							situ = Situacao.ATIVO;
-						}else
-							situ = Situacao.INATIVO;
-
+						try{
+							if(situacao.toString().equals("ATIVO")){
+								situ = Situacao.ATIVO;
+							}else
+								situ = Situacao.INATIVO;
+						}catch(Exception e){
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("Erro ao cadastrar um Fornecedor.");
+							alert.setHeaderText("Preencha o campo Situacao.");
+							alert.setContentText(e.getMessage());
+							alert.showAndWait();
+						}
 						String cnpj = textFieldCnpjFornecedor.getText();
 						String rua = textFieldRuaFornecedor.getText();
 						String cep = textFieldCepFornecedor.getText();
@@ -136,28 +141,19 @@ public class FornecedorControllerGui implements Initializable {
 						String bairro = textFieldBairroFornecedor.getText();
 
 						Fornecedorref fornecedor = new Fornecedorref(nome, cnpj, rua, cep, estadoletra, bairro, situ);
-
 						try {
-							fachada.salvarFornecedor(fornecedor);
+							varejao.salvarFornecedor(fornecedor);
+							refreshTable();
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("Erro ao cadastrar um Fornecedor.");
+							alert.setHeaderText("Impssivel efetuar cadastro");
+							alert.setContentText(e.getMessage());
+							alert.showAndWait();
 						}
-
-						stage = (Stage) buttonSalvarFornecedor.getScene().getWindow();
-				        //load up OTHER FXML document
-				        root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroFornecedor.fxml"));
-
-					} else {
-						stage = (Stage) buttonSalvarFornecedor.getScene().getWindow();
-						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroFornecedor.fxml"));
 					}
-					// create a new scene with root and set the stage
-					Scene scene = new Scene(root);
-					stage.setScene(scene);
-					main.changeStage(stage);
 
-				} catch (IOException e) {
+				} catch (Exception e) {
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Erro ao cadastrar um fornecedor.");
 					alert.setHeaderText("Impossivel efetuar cadastro.");
@@ -167,82 +163,6 @@ public class FornecedorControllerGui implements Initializable {
 
 
 			}
-		});
-
-		buttonRemoverFornecedor.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event) {
-				Stage stage;
-				Parent root;
-				try{
-
-					Fornecedorref fornecedorremove = tbViewFornecedor.getSelectionModel().getSelectedItem();
-					if(fornecedorremove!= null && fornecedorremove instanceof Fornecedorref){
-
-						try {
-							fachada.deletarFornecedor(fornecedorremove);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-					}
-					if(event.getSource()==buttonRemoverFornecedor){
-				        //get reference to the button's stage
-				        stage = (Stage) buttonRemoverFornecedor.getScene().getWindow();
-				        //load up OTHER FXML document
-				        root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroFornecedor.fxml"));
-				    } else {
-						stage = (Stage) buttonRemoverFornecedor.getScene().getWindow();
-						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroFornecedor.fxml"));
-					}
-					//create a new scene with root and set the stage
-					Scene scene = new Scene(root);
-				    stage.setScene(scene);
-				    main.changeStage(stage);
-
-			}catch(IOException e){
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Erro ao remover um fornecedor.");
-				alert.setHeaderText("Impossivel efetuar remocao.");
-				alert.setContentText(e.getMessage());
-				alert.showAndWait();
-			}
-
-
-		}
-		});
-
-
-		buttonListaRepresentantes.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event) {
-				Stage stage;
-				Parent root;
-				try{
-					if(event.getSource()==buttonListaRepresentantes){
-
-						//get reference to the button's stage
-				        stage = (Stage) buttonListaRepresentantes.getScene().getWindow();
-				        //load up OTHER FXML document
-				        root = FXMLLoader.load(getClass().getResource("/gui/view/TelaFornecedorRepresentante.fxml"));
-				    } else {
-						stage = (Stage) buttonListaRepresentantes.getScene().getWindow();
-						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroFornecedor.fxml"));
-					}
-					//create a new scene with root and set the stage
-					Scene scene = new Scene(root);
-				    stage.setScene(scene);
-				    main.changeStage(stage);
-
-			}catch(IOException e){
-				e.printStackTrace();
-			}
-
-
-		}
 		});
 
 		buttonLimparFornecedor.setOnAction(new EventHandler<ActionEvent>(){
@@ -280,10 +200,27 @@ public class FornecedorControllerGui implements Initializable {
 
 		}
 		});
+	}
+	
+	public void removerFornecedor(){
+		Fornecedorref fornecedor = tbViewFornecedor.getSelectionModel().getSelectedItem();
+		try{
+			if(fornecedor !=null && fornecedor instanceof Fornecedorref){
+				varejao.deletarFornecedor(fornecedor);
+				tbViewFornecedor.getItems().remove(tbViewFornecedor.getSelectionModel().getSelectedIndex());
+				refreshTable();
+				lblMensagem.setText("Fornecedor Removido");
+			}else{
+				lblMensagem.setText("Selecione um Fornecedor para ser removido");
+			}
+		}catch (Exception e){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao remover um fornecedor.");
+			alert.setHeaderText("Impossivel efetuar remocao.");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
 
-
-
-
+		}
 	}
 
 	@FXML
@@ -320,8 +257,8 @@ public class FornecedorControllerGui implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		obsfornecedor = FXCollections.observableArrayList(fornecedorlist);
-		tbViewFornecedor.setItems(obsfornecedor);
+		oblistaFornecedor = FXCollections.observableArrayList(fornecedorlist);
+		tbViewFornecedor.setItems(oblistaFornecedor);
 	}
 
 	private void carregarValoresTelaFornecedor(){
@@ -338,6 +275,12 @@ public class FornecedorControllerGui implements Initializable {
 	public void sair(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide();
 
+	}
+	
+	public void refreshTable() throws Exception{
+		oblistaFornecedor = FXCollections.observableArrayList();
+		oblistaFornecedor.addAll(varejao.listarFornecedores());
+		tbViewFornecedor.setItems(oblistaFornecedor);
 	}
 
 	public void voltarMenuPrincipal(ActionEvent event) {

@@ -6,21 +6,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="503.0" prefWidth="543.0" style="-fx-background-color: #E80000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="503.0" prefWidth="543.0" style="-fx-background-color: #E80000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ProdutoPaneController">
    <children>
       <Button fx:id="butCadastrar" layoutX="29.0" layoutY="49.0" mnemonicParsing="false" onAction="#cadastrarProduto" text="Cadastrar" />
       <Button fx:id="butRemover" layoutX="118.0" layoutY="49.0" mnemonicParsing="false" onAction="#removerProduto" text="Remover" />
-      <Button fx:id="butBuscar" layoutX="279.0" layoutY="49.0" mnemonicParsing="false" text="Buscar" />
       <Button fx:id="butLimpar" layoutX="204.0" layoutY="49.0" mnemonicParsing="false" onAction="#limparForm" text="Limpar" />
-      <TableView fx:id="tbViewProdutoref" layoutY="345.0" onMouseClicked="#selecionarProduto" prefHeight="159.0" prefWidth="543.0">
+      <TableView fx:id="tabelaProdutos" layoutY="345.0" prefHeight="159.0" prefWidth="543.0">
          <columns>
             <TableColumn fx:id="tbColumnID" prefWidth="49.0" text="ID" />
             <TableColumn fx:id="tbColumnNome" prefWidth="52.0" text="Nome" />
             <TableColumn fx:id="tbColumnCodigoDeBarras" prefWidth="50.0" text="Código de Barras" />
             <TableColumn fx:id="tbColumnPrecoTabela" prefWidth="67.0" text="Preço de Tabela" />
-            <TableColumn fx:id="tbColumnQuantidadeEstoque" prefWidth="66.0" text="Quantidade Estoque" />
-            <TableColumn fx:id="tbColumnFrequenciaPedido" prefWidth="118.0" text="Frequência de Pedido" />
-            <TableColumn fx:id="tbColumnQuantidadeMinima" prefWidth="77.0" text="Quantidade Mínima" />
             <TableColumn fx:id="tbColumnCST" prefWidth="58.0" text="CST" />
             <TableColumn fx:id="tbColumnICMS" prefWidth="138.0" text="ICMS" />
             <TableColumn fx:id="tbColumnDescricao" prefWidth="75.0" text="Descrição" />
@@ -76,8 +72,6 @@
       <TextField fx:id="textFieldIdSubcategoria" layoutX="371.0" layoutY="241.0" prefHeight="27.0" prefWidth="51.0" />
       <TextField fx:id="textFieldIdUnidade" layoutX="371.0" layoutY="272.0" prefHeight="27.0" prefWidth="51.0" />
       <TextField fx:id="textFieldIdMarca" layoutX="371.0" layoutY="303.0" prefHeight="27.0" prefWidth="51.0" />
-      <Label layoutX="383.0" layoutY="84.0" text="ID:" textFill="WHITE" />
-      <TextField fx:id="textFieldID" layoutX="403.0" layoutY="79.0" prefHeight="17.0" prefWidth="65.0" />
       <TextField fx:id="textFieldIdNCM" layoutX="483.0" layoutY="179.0" prefHeight="27.0" prefWidth="51.0" />
       <Label layoutX="435.0" layoutY="185.0" text="ID NCM:" textFill="WHITE" />
    </children>

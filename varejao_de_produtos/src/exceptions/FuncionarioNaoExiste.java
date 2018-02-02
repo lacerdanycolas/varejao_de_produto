@@ -2,6 +2,10 @@ package exceptions;
 
 public class FuncionarioNaoExiste extends Exception  {
 
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 private int Id;
 
   public FuncionarioNaoExiste (int id) {

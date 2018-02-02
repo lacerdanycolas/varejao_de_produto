@@ -38,8 +38,6 @@ public class VarejaoDeProdutosPaneController {
 	private VarejaoDeProdutosApp main;
 
 
-
-
 	@FXML
 	public void initialize() throws Exception {
 
@@ -154,6 +152,26 @@ public class VarejaoDeProdutosPaneController {
 				root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaCadastroFornecedor.fxml"));
 			}else {
 				stage = (Stage) butFornecedor.getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaPrincipalVarejao.fxml"));
+			}
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			varejaoDeProdutosApp.changeStage(stage);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void telaProduto(ActionEvent event){
+		Parent root;
+		Stage stage;
+		try{
+			if(event.getSource() == butProduto){
+				stage = (Stage) butProduto.getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaCadastroProduto.fxml"));
+			}else {
+				stage = (Stage) butProduto.getScene().getWindow();
 				root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaPrincipalVarejao.fxml"));
 			}
 			Scene scene = new Scene(root);
