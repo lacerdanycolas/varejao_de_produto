@@ -35,7 +35,7 @@ public class Main {
 
 		RepresentanteRepository representanteRepository = RepresentanteRepository.getInstance();
 		TurnoRepository turnorep = TurnoRepository.getInstance();
-
+		
 		try {
 			/*Collection<Turno> listaTurnos = turnoRepository.getAll();
 			for(Turno turno: listaTurnos){
