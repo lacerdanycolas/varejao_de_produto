@@ -50,6 +50,7 @@
                            </image>
                         </ImageView>
                         <Text fill="WHITE" layoutX="250.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CEP" />
+                        <Button fx:id="buttonListaRepresentantes" layoutX="381.0" layoutY="270.0" mnemonicParsing="false" text="Listagem Representantes" />
                      </children>
                   </AnchorPane>
                </children>

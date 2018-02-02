@@ -230,7 +230,7 @@ public class FornecedorControllerGui implements Initializable {
 				        root = FXMLLoader.load(getClass().getResource("/gui/view/TelaFornecedorRepresentante.fxml"));
 				    } else {
 						stage = (Stage) buttonListaRepresentantes.getScene().getWindow();
-						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroFornecedor.fxml"));
+						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaFornecedorRepresentante.fxml"));
 					}
 					//create a new scene with root and set the stage
 					Scene scene = new Scene(root);

@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import dados.CaixaRepository;
 import dados.ProdutorefRepository;
+import dados.RepresentanteRepository;
 import dados.VendaRepository;
 import negocio.entities.Caixa;
 import negocio.entities.Produtoref;
@@ -28,7 +29,7 @@ public class FachadaVarejao {
 	private ControladorFornecedorref fornecedores;
 	private Controlador_Item_Venda itens;
 	private ControladorFuncionario funcionarios;
-
+	private ControladorRepresentante representantes;
 
 
 	private static FachadaVarejao instance;
@@ -40,7 +41,7 @@ public class FachadaVarejao {
 		this.fornecedores = new ControladorFornecedorref(FornecedorrefRepository.getInstance());
 		this.itens = new Controlador_Item_Venda(Item_Venda_Repository.getInstance());
 		this.funcionarios = new ControladorFuncionario(FuncionarioRepository.getInstance());
-
+		this.representantes = new ControladorRepresentante(RepresentanteRepository.getInstance());
 	}
 
 	public static FachadaVarejao getInstance(){
@@ -58,7 +59,8 @@ public class FachadaVarejao {
 	public Fornecedorref buscarFornecedor(int id) throws Exception{
 		return this.fornecedores.buscarFornecedor(id);
 	}
-
+	
+	
 
 	//LISTAR
 

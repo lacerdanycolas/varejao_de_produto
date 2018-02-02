@@ -284,12 +284,12 @@ public void carregandoValoresTela(){
 	public void setApp(MainTeste main) {
 		this.main = main;
 	}
-	
+
 	public void sair(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide();
 
 	}
-	
+
 	public void voltarMenuPrincipal(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide();
 		Parent parent;

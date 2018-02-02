@@ -10,12 +10,16 @@ public class Turno {
 	private String descricao;
 	private Time hora_inicio;
 	private Time hora_fim;
+
 	public Turno(int codigo, String descricao, Time hora_inicio, Time hora_fim) {
-		
+
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.hora_inicio = hora_inicio;
 		this.hora_fim = hora_fim;
+	}
+	public Turno(){
+
 	}
 	public int getCodigo() {
 		return codigo;
@@ -41,13 +45,13 @@ public class Turno {
 	public void setHora_fim(Time hora_fim) {
 		this.hora_fim = hora_fim;
 	}
-	
+
 
 	public String toString() {
 		return "Turno [codigo=" + codigo + ", descricao=" + descricao + ", hora_inicio=" + hora_inicio + ", hora_fim="
 				+ hora_fim + "]";
 	}
-	
-	
-	
+
+
+
 }

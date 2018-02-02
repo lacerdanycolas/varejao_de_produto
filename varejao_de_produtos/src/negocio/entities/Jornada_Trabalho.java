@@ -5,18 +5,17 @@ import dados.MeuId;
 public class Jornada_Trabalho {
 	@MeuId
 	private int id;
-	private int id_func;
-	private Trabalha_Sabado trabaS;
+	private Integer id_func;
+	private Trabalha_Sabado trabalho_sabado;
 	private String descricao;
-	
+
 	public Jornada_Trabalho(){
-		
+
 	}
-	public Jornada_Trabalho(int id, int id_func, Trabalha_Sabado trabaS, String descricao) {
-		
-		this.id = id;
+	public Jornada_Trabalho(Integer id_func, Trabalha_Sabado trabaS, String descricao) {
+
 		this.id_func = id_func;
-		this.trabaS = trabaS;
+		this.trabalho_sabado = trabaS;
 		this.descricao = descricao;
 	}
 
@@ -37,11 +36,11 @@ public class Jornada_Trabalho {
 	}
 
 	public Trabalha_Sabado getTrabaS() {
-		return trabaS;
+		return trabalho_sabado;
 	}
 
 	public void setTrabaS(Trabalha_Sabado trabaS) {
-		this.trabaS = trabaS;
+		this.trabalho_sabado = trabaS;
 	}
 
 	public String getDescricao() {
@@ -54,10 +53,10 @@ public class Jornada_Trabalho {
 
 	@Override
 	public String toString() {
-		return "Jornada_Trabalho [id=" + id + ", id_func=" + id_func + ", trabaS=" + trabaS + ", descricao=" + descricao
+		return "Jornada_Trabalho [id=" + id + ", id_func=" + id_func + ", trabaS=" + trabalho_sabado + ", descricao=" + descricao
 				+ "]";
 	}
 
-	
-	
+
+
 }

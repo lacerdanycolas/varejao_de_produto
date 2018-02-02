@@ -10,10 +10,12 @@ import negocio.entities.Fornecedorref;
 import negocio.entities.Funcionario;
 import negocio.entities.Preferencial_Caixa;
 import negocio.entities.Produtoref;
+import negocio.entities.Representante;
 import negocio.entities.Sexo;
 import negocio.entities.Situacao;
 import negocio.entities.Situacao_Caixa;
 import negocio.entities.Tipo_Funcionario;
+import negocio.entities.Turno;
 
 public class Main {
 
@@ -30,6 +32,8 @@ public class Main {
 		FuncionarioRepository  funcionarioRepository = dados.FuncionarioRepository.getInstance();
 		CaixaRepository caixaRepository = dados.CaixaRepository.getInstance();
 		ProdutorefRepository produtoRepository = dados.ProdutorefRepository.getInstance();
+		RepresentanteRepository representanteRepository = RepresentanteRepository.getInstance();
+		TurnoRepository turnorep = TurnoRepository.getInstance();
 		try {
 
 			//Fornecedorref f = new Fornecedorref(21, "Jimmys ltda", "1291829182", "Rua Albacora", "54400-400", "PE", "Piedade", situacao);
@@ -40,6 +44,14 @@ public class Main {
 // refs/remotes/origin/master
 			//Caixa caixa = new Caixa(null, situacao, e_preferencial, null, 1, 26);
 			Dia d = new Dia(27, "Olha o Dia novo");
+			
+			//Collection<Turno> listaturno = turnorep.getAll();
+			//System.out.println(listaturno.toString());
+//			Representante rep = new Representante("11459922455", "Joao Marcio", "joaomarcio@example.com", "33459939");
+//			representanteRepository.save(rep);
+
+		//	Collection<Representante> listrep = representanteRepository.getAll();
+			//System.out.println(listrep.toString());
 			//Produtoref produto = new Produtoref("28162152", 460, null, null, new BigDecimal("27.32"), "10", new BigDecimal("0.00"), "Faca de madeira", null, null, null, 3, 4, 4, 2, 9, 17);
 			//Caixa caixa3 = new Caixa("teste",situacao,e_preferencial,null,1,24);
 			//produtoRepository.save(produto);
