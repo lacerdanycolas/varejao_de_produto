@@ -189,6 +189,7 @@ public class CaixaPaneController implements Initializable{
 
 							textFieldDescricaoCaixa.clear();
 							textFieldObservacaoCaixa.clear();
+							lblMensagem.setText("");
 
 						//get reference to the button's stage
 				        stage = (Stage) buttonLimparCaixa.getScene().getWindow();

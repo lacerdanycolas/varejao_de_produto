@@ -179,6 +179,7 @@ public class FornecedorPaneController implements Initializable {
 							textFieldCnpjFornecedor.clear();
 							textFieldNomeFornecedor.clear();
 							textFieldRuaFornecedor.clear();
+							lblMensagem.setText("");
 
 						//get reference to the button's stage
 				        stage = (Stage) buttonLimparFornecedor.getScene().getWindow();

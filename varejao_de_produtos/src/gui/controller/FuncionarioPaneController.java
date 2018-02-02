@@ -216,7 +216,7 @@ public class FuncionarioPaneController {
 		txtSenha.clear();
 		txtCpf_gerente.clear();
 		txtCnpjMatrizFuncionario.clear();
-
+		lblMensagem.setText("");
 	}
 
 	public void cadastrarFuncionario(){

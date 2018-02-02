@@ -212,6 +212,7 @@ public class ProdutoPaneController {
 		textFieldIdUnidade.clear();
 		textFieldIdMarca.clear();
 		textFieldIdNCM.clear();
+		lblMensagem.setText("");
 
 	}
 
@@ -259,6 +260,8 @@ public class ProdutoPaneController {
 				limparForm();
 				refreshTable();
 				lblMensagem.setText("Produto Removido");
+			}else{
+				lblMensagem.setText("Selecione um Produto para ser Removido");
 			}
 		}catch (Exception e){
 			Alert alert = new Alert(AlertType.ERROR);
@@ -269,5 +272,13 @@ public class ProdutoPaneController {
 
 		}
 	}
-
+	
+	@FXML
+	public void txtCodigoDeBarrapMask(){
+		TextFieldFormatter tf = new TextFieldFormatter();
+		tf.setMask("#########");
+		tf.setCaracteresValidos("0123456789");
+		tf.setTf(textFieldCodigoDeBarras);
+		tf.formatter();
+	}
 }
