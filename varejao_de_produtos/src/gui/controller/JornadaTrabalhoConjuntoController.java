@@ -20,13 +20,17 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import negocio.controller.FachadaVarejao;
@@ -70,6 +74,14 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
     private Button btSalvarPeriodo;
     @FXML
     private Button btDeletarJornada;
+    @FXML
+    private Button btnVoltar;
+    @FXML
+    private Label lblMessage;
+    @FXML
+    private Label lblPeriodo;
+    @FXML
+    private Label lblDeleteJornada;
 
     private MainTeste main;
 	private Collection<Funcionario> listafunc = new ArrayList();
@@ -88,6 +100,7 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 		// TODO Auto-generated method stub
 		fachada = FachadaVarejao.getInstance();
 		main = MainTeste.getInstance();
+
 		carregarTbViewFuncionario();
 		comboBoxTrabalhaSabado.setItems(trabalhaSabado);
 		carregartTbViewJornada();
@@ -112,9 +125,18 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 						Jornada_Trabalho jornadaTrab = new Jornada_Trabalho(funcsalve.getId(),trabSab,descricao);
 						try {
 							Jornada_TrabalhoRepository.getInstance().save(jornadaTrab);
+							Alert alert = new Alert(Alert.AlertType.INFORMATION);
+							alert.setTitle("Tela Cadastro Jornada e Periodo");
+							alert.setHeaderText("Cadastramento Jornada");
+							alert.setContentText("Jornada cadastrada com sucesso!");
+							alert.show();
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("Erro ao cadastrar uma Jornada.");
+							alert.setHeaderText("Impossivel efetuar cadastro.");
+							alert.setContentText(e.getMessage());
+							alert.showAndWait();
 						}
 
 
@@ -131,8 +153,12 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 				    stage.setScene(scene);
 				    main.changeStage(stage);
 
-			}catch(IOException e){
-				e.printStackTrace();
+			}catch(Exception e){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao cadastrar uma Jornada.");
+				alert.setHeaderText("Parametros inválidos ou nulos.");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
 			}
 
 
@@ -169,10 +195,20 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 
 							try {
 								Jornada_dia_turno_conjuntoRepository.getInstance().save(jdt);
+								Alert alert = new Alert(Alert.AlertType.INFORMATION);
+								alert.setTitle("Tela Cadastro Jornada e Periodo");
+								alert.setHeaderText("Cadastramento Período");
+								alert.setContentText("Período cadastrado com sucesso");
+								alert.show();
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
-								e.printStackTrace();
+								Alert alert = new Alert(AlertType.ERROR);
+								alert.setTitle("Erro ao cadastrar um Período.");
+								alert.setHeaderText("Impossivel efetuar cadastro.");
+								alert.setContentText(e.getMessage());
+								alert.showAndWait();
 							}
+
 						//get reference to the button's stage
 				        stage = (Stage) btSalvarPeriodo.getScene().getWindow();
 				        //load up OTHER FXML document
@@ -186,8 +222,12 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 				    stage.setScene(scene);
 				    main.changeStage(stage);
 
-			}catch(IOException e){
-				e.printStackTrace();
+			}catch(Exception e){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao cadastrar um Período.");
+				alert.setHeaderText("Parametros inválidos ou nulos, impossível realizar ação.");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
 			}
 
 
@@ -206,9 +246,19 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 						Jornada_Trabalho jornadarem = tbViewJornada.getSelectionModel().getSelectedItem();
 						try {
 							Jornada_TrabalhoRepository.getInstance().delete(jornadarem);
+							Alert alert = new Alert(Alert.AlertType.INFORMATION);
+							alert.setTitle("Tela Cadastro Jornada e Periodo");
+							alert.setHeaderText("Deletando Jornada");
+							alert.setContentText("Jornada excluida com sucesso");
+							alert.show();
+
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("Erro ao deletar uma jornada.");
+							alert.setHeaderText("Parametros inválidos ou nulos. Selecione uma jornada para deletar");
+							alert.setContentText(e.getMessage());
+							alert.showAndWait();
 						}
 
 
@@ -225,8 +275,12 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 				    stage.setScene(scene);
 				    main.changeStage(stage);
 
-			}catch(IOException e){
-				e.printStackTrace();
+			}catch(Exception e){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao deletar uma Jornada.");
+				alert.setHeaderText("Parametros nulos. Selecione uma jornada para deletar");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
 			}
 
 
@@ -292,5 +346,27 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 
 
 	}
+
+	@FXML
+	public void voltarMenuPrincipal(ActionEvent event) {
+		((Node) event.getSource()).getScene().getWindow().hide();
+		Parent parent;
+		try {
+			parent = FXMLLoader.load(getClass().getResource("/GUI/view/TelaPrincipalVarejao.fxml"));
+			Stage stage3 = new Stage();
+			Scene cena = new Scene(parent);
+			stage3.setScene(cena);
+			stage3.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	public void sair(ActionEvent event) {
+		((Node) event.getSource()).getScene().getWindow().hide();
+
+	}
+
 
 }
