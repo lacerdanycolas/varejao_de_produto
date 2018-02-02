@@ -10,19 +10,19 @@ public class Venda {
 	@MeuId
 	private Integer id;
 	private String cpf_comprador;
-	private Double valor_total;
+	private BigDecimal valor_total;
 	private Date data_venda;
-	private Double valor_total_desconto;
+	private BigDecimal valor_total_desconto;
 	private int id_caixa;
 		
 	
-	public Venda(String cpf_comprador, Double valor_total, Date data_venda, Double valor_total_desconto,
+	public Venda(String cpf_comprador, BigDecimal valorTotal, Date data_venda, BigDecimal valorTotalDesconto,
 			Integer id_caixa) {
 
 		this.cpf_comprador = cpf_comprador;
-		this.valor_total = valor_total;
+		this.valor_total = valorTotal;
 		this.data_venda = data_venda;
-		this.valor_total_desconto = valor_total_desconto;
+		this.valor_total_desconto = valorTotalDesconto;
 		this.id_caixa = id_caixa;
 	}
 
@@ -42,11 +42,11 @@ public class Venda {
 		this.cpf_comprador = cpf_comprador;
 	}
 
-	public Double getValor_total() {
+	public BigDecimal getValor_total() {
 		return valor_total;
 	}
 
-	public void setValor_total(Double valor_total) {
+	public void setValor_total(BigDecimal valor_total) {
 		this.valor_total = valor_total;
 	}
 
@@ -58,11 +58,11 @@ public class Venda {
 		this.data_venda = data_venda;
 	}
 
-	public Double getValor_total_desconto() {
+	public BigDecimal getValor_total_desconto() {
 		return valor_total_desconto;
 	}
 
-	public void setValor_total_desconto(Double valor_total_desconto) {
+	public void setValor_total_desconto(BigDecimal valor_total_desconto) {
 		this.valor_total_desconto = valor_total_desconto;
 	}
 

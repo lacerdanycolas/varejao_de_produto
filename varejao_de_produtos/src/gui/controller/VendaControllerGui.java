@@ -20,10 +20,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import negocio.beans.Item_Venda;
-import negocio.beans.Venda;
+import negocio.entities.Item_Venda;
+import negocio.entities.Venda;
 import negocio.controller.FachadaVarejao;
 import negocio.entities.Caixa;
 import negocio.entities.Preferencial_Caixa;
@@ -43,7 +46,6 @@ public class VendaControllerGui  implements Initializable{
 	@FXML
 	private javafx.scene.control.TextField textField_CpfComprador;
 	
-	//private javafx.scene.control.TextField textField_DataVenda;
 	@FXML
 	private javafx.scene.control.TextField textField_IdCaixa;
 	
@@ -61,19 +63,30 @@ public class VendaControllerGui  implements Initializable{
 	private ObservableList<BigDecimal> valor_unitario;
 	private ObservableList<Integer> quantidade;
 	private ObservableList<Integer> id_produto;
-	@FXML
-	private ComboBox<Integer> comboBoxId;
-	@FXML
-	private ComboBox<Integer> comboBoxQuant;
-	@FXML
-	private ComboBox<BigDecimal> comboBoxVUnitario;
-	@FXML
-	private ComboBox<BigDecimal> comboBoxDesconto;
 	
+	@FXML
+	private TableView<Item_Venda> tbViewItem;
+	
+	@FXML
+	private TableColumn<Item_Venda, Integer> tbCollumIdProduto;
+	
+	@FXML
+	private TableColumn<Item_Venda, BigDecimal> tbCollumPreco;
+	
+	@FXML
+	private TableColumn<Item_Venda, Integer> tbCollumQuantidade;
+	
+	@FXML
+	private TableColumn<Item_Venda, BigDecimal> tbCollumDesconto;
+	
+	
+
+	
+	private ObservableList<Item_Venda> listaItens;
 	
 	private MainTeste main;
 	private FachadaVarejao fachada = FachadaVarejao.getInstance();
-	ArrayList<Item_Venda> items= new ArrayList<Item_Venda>();
+	private ArrayList<Item_Venda> items= new ArrayList<Item_Venda>();
 	Item_Venda item_venda;
 	Venda vendas;
     int codigoP;
@@ -120,8 +133,14 @@ public class VendaControllerGui  implements Initializable{
 		
 	}
 	
-	
-	
+
+	@FXML
+	public void  AtualizaTabela () throws Exception{
+		listaItens = FXCollections.observableArrayList();
+		listaItens.addAll(items);
+		tbViewItem.setItems(listaItens);
+		
+	}
 	
 	
 	
@@ -130,7 +149,18 @@ public class VendaControllerGui  implements Initializable{
 		
 		this.main = MainTeste.getInstance();
 		
-		carregandoValoresTela();
+		tbCollumIdProduto.setCellValueFactory(new PropertyValueFactory<Item_Venda,Integer>("Id"));
+		tbCollumPreco.setCellValueFactory(new PropertyValueFactory<Item_Venda,BigDecimal>("Preço(R$"));
+		tbCollumQuantidade.setCellValueFactory(new PropertyValueFactory<Item_Venda,Integer>("Quantidade"));
+		tbCollumDesconto.setCellValueFactory(new PropertyValueFactory<Item_Venda,BigDecimal>("Desconto(R$"));
+		
+		
+		listaItens = FXCollections.observableArrayList();
+		listaItens.addAll(items);
+		tbViewItem.setItems(listaItens);
+
+		
+	
 
 		
 		buttonCadastarVenda.setOnAction(new EventHandler<ActionEvent>() {
@@ -158,6 +188,7 @@ public class VendaControllerGui  implements Initializable{
 					try {
 						vendas= CadastrarVenda(cpf_comprador,data, id_caixa, item_venda);
 						CadastroItems(items, vendas);
+						AtualizaTabela();
 						LimparLista(items);
 						textField_CpfComprador.clear();
 						textField_IdCaixa.clear();
@@ -218,7 +249,12 @@ public class VendaControllerGui  implements Initializable{
 					BigDecimal valor_unitario= new BigDecimal(textFieldValor_unitario.getText());
 					BigDecimal valor_desconto_item= new BigDecimal(textFieldValor_Desconto_item.getText());
 					item_venda= AddItemLista(id_venda, id_produtoref, quantidade, valor_unitario, valor_desconto_item);
-					
+					try {
+						AtualizaTabela();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 					textFieldId_produto.clear();
 					textFieldQuantidade.clear();
@@ -257,7 +293,12 @@ public class VendaControllerGui  implements Initializable{
 		            dialogoInfo.setHeaderText("Remover Item da Venda");
 		            dialogoInfo.setContentText("Digite um Id Válido");
 		            dialogoInfo.showAndWait();
-				
+		            try {
+						AtualizaTabela();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 	            	
 	            }else {
 	            	  codigoP= new Integer ( dialogo.getEditor().getText());
@@ -270,39 +311,19 @@ public class VendaControllerGui  implements Initializable{
 	        });
 		}
 		
-		
-	
-	public void carregandoValoresTela(){
-		
-		ArrayList<Integer> listId = new ArrayList<Integer>();
-		ArrayList<Integer> listQtd = new ArrayList<Integer>();
-		ArrayList<BigDecimal> listVUnita = new ArrayList<BigDecimal>();
-		ArrayList<BigDecimal> listVDesc = new ArrayList<BigDecimal>();
-		
-		for (int i=0;i<items.size();i++) {
-			listId.add(items.get(i).getId());
-			listQtd.add((items.get(i).getQuantidade()));
-			listVUnita.add(items.get(i).getValor_unitario());
-			listVDesc.add(items.get(i).getValor_desconto_item());
-		}
-		Collections.sort(listId);
-		Collections.sort(listQtd);
-		Collections.sort(listVUnita);
-		Collections.sort(listVDesc);
-		id_produto = FXCollections.observableArrayList(listId);
-		quantidade = FXCollections.observableArrayList(listQtd);
-		valor_unitario=FXCollections.observableArrayList(listVUnita);
-		valor_desconto= FXCollections.observableArrayList(listVDesc);
-		comboBoxId.setItems(id_produto);
-		comboBoxQuant.setItems(quantidade);
-		comboBoxVUnitario.setItems(valor_unitario);
-		comboBoxDesconto.setItems(valor_desconto);
-	}
 	
 	public void setApp(MainTeste main) {
 		this.main = main;
 	}
 	
 	
+	@FXML
+	public void txtCpfMask(){
+		TextFieldFormatter tf = new TextFieldFormatter();
+		tf.setMask("###.###.###-##");
+		tf.setCaracteresValidos("0123456789");
+		tf.setTf(textField_CpfComprador);
+		tf.formatter();
+	}
 
 }

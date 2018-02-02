@@ -43,7 +43,7 @@
                         <Button fx:id="buttonRemoverCaixa" layoutX="402.0" layoutY="299.0" mnemonicParsing="false" onAction="#buttonCadastarVenda" text="Cadastrar Venda" />
                         <ImageView fitHeight="164.0" fitWidth="170.0" layoutX="340.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../git/varejao_de_produto/varejao_de_produtos/images/WhatsApp%20Image%202018-01-28%20at%2017.26.04.jpeg" />
+                              <Image url="@../../../../../../Pictures/varejaoFraldas.jpg" />
                            </image>
                         </ImageView>
                         <Text fill="WHITE" layoutX="15.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id do Caixa" wrappingWidth="94.0" />
