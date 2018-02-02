@@ -29,6 +29,9 @@ public class VarejaoDeProdutosPaneController {
 	@FXML
 	Button butVenda;
 
+	@FXML
+	Button butJornadaTrabalho;
+
 
 	@FXML
 	Button	buttonLogin;
@@ -93,7 +96,7 @@ public class VarejaoDeProdutosPaneController {
 			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	public void telaFornecedor(ActionEvent event){
 		Parent root;
@@ -162,6 +165,27 @@ public class VarejaoDeProdutosPaneController {
 		
 		}
 	}
+
+	@FXML
+	public void telaJornadaTrabalho(ActionEvent event){
+		Parent root;
+		Stage stage;
+		try{
+			if(event.getSource() == butJornadaTrabalho){
+				stage = (Stage) butJornadaTrabalho.getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroJornadaConjunto.fxml"));
+			}else {
+				stage = (Stage) butJornadaTrabalho.getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaPrincipalVarejao.fxml"));
+			}
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			varejaoDeProdutosApp.changeStage(stage);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
 
 	public void sair(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide();

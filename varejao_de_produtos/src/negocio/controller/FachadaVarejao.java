@@ -1,6 +1,11 @@
 package negocio.controller;
 
 import java.util.Collection;
+
+import dados.CaixaRepository;
+import dados.ProdutorefRepository;
+import dados.RepresentanteRepository;
+import dados.VendaRepository;
 import negocio.entities.Caixa;
 import negocio.entities.Produtoref;
 import negocio.entities.Venda;
@@ -17,15 +22,23 @@ public class FachadaVarejao {
 	private Controlador_Item_Venda itens;
 	private ControladorFuncionario funcionarios;
 
+	private ControladorRepresentante representantes;
+
+
+
 	private static FachadaVarejao instance;
 
 	private FachadaVarejao(){
+
 		this.caixas = ControladorCaixa.getInstance();
 		this.produtos = ControladorProduto.getInstance();
 		this.vendas = ControladorVenda.getInstance();
 		this.fornecedores = ControladorFornecedorref.getInstance();
 		this.itens = Controlador_Item_Venda.getInstance();
 		this.funcionarios = ControladorFuncionario.getInstance();
+
+
+
 	}
 
 	public static FachadaVarejao getInstance(){
@@ -43,6 +56,7 @@ public class FachadaVarejao {
 	public Fornecedorref buscarFornecedor(int id) throws Exception{
 		return this.fornecedores.buscarFornecedor(id);
 	}
+
 	//LISTAR
 
 	//LISTAR CAIXA

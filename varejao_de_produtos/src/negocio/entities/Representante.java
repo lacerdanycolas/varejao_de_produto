@@ -1,7 +1,10 @@
 package negocio.entities;
 
+import dados.MeuId;
+
 public class Representante {
 
+	@MeuId
 	private Integer id;
 	private String cpf;
 	private String nome;
@@ -44,6 +47,13 @@ public class Representante {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+	@Override
+	public String toString() {
+		return "Representante [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", email=" + email + ", telefone="
+				+ telefone + "]";
+	}
+
 
 
 
