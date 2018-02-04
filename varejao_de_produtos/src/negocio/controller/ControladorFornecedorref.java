@@ -3,43 +3,49 @@ package negocio.controller;
 import java.util.Collection;
 
 import dados.FornecedorrefRepository;
-import negocio.entities.Caixa;
 import negocio.entities.Fornecedorref;
 
 public class ControladorFornecedorref {
 
-	private FornecedorrefRepository rep;
-
-	public ControladorFornecedorref(FornecedorrefRepository rep) {
-		this.rep = rep;
+	private FornecedorrefRepository repositorio;
+	private static ControladorFornecedorref instance;
+	
+	public static ControladorFornecedorref getInstance(){
+		if(instance == null){
+			instance = new ControladorFornecedorref();
+		}
+		return instance;
+	}
+	public ControladorFornecedorref() {
+		this.repositorio = FornecedorrefRepository.getInstance();
 	}
 
 	public Fornecedorref buscarFornecedor(int id) throws Exception{
 		if(id>0 /*and conexao tipo caixa*/){
-			return rep.getOne(id);
+			return repositorio.getOne(id);
 		}
 		return null;
 	}
 
 	public Collection<Fornecedorref> listarFornecedor() throws Exception{
-		return rep.getAll();
+		return repositorio.getAll();
 	}
 
 	public void salvarFornecedor(Fornecedorref fornecedor) throws Exception{
 		if(fornecedor.equals(null))
 			throw new IllegalArgumentException();
 		else
-			rep.save(fornecedor);
+			repositorio.save(fornecedor);
 	}
 
 	public void deletarFornecedor(Fornecedorref fornecedor) throws Exception{
 		if(fornecedor.equals(null)){
 			throw new IllegalArgumentException();
 		}
-		else if(rep.getOne(fornecedor.getId()).equals(null))
-			throw new Exception("Fornecedor não existe");
+		else if(repositorio.getOne(fornecedor.getId()).equals(null))
+			throw new Exception("Fornecedor nï¿½o existe");
 		else
-			rep.delete(fornecedor);
+			repositorio.delete(fornecedor);
 	}
 
 }

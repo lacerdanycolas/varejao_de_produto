@@ -15,14 +15,17 @@ public class Venda {
 	private BigDecimal valor_total_desconto;
 	private int id_caixa;
 		
-	
-	public Venda(String cpf_comprador, BigDecimal valorTotal, Date data_venda, BigDecimal valorTotalDesconto,
+
+	public Venda(){
+		
+	}
+	public Venda(String cpf_comprador, BigDecimal valor_total, Date data_venda, BigDecimal valor_total_desconto,
 			Integer id_caixa) {
 
 		this.cpf_comprador = cpf_comprador;
-		this.valor_total = valorTotal;
+		this.valor_total = valor_total;
 		this.data_venda = data_venda;
-		this.valor_total_desconto = valorTotalDesconto;
+		this.valor_total_desconto = valor_total_desconto;
 		this.id_caixa = id_caixa;
 	}
 

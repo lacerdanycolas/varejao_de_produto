@@ -9,7 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class VarejaoDeProdutosPaneController {
@@ -27,6 +29,9 @@ public class VarejaoDeProdutosPaneController {
 	@FXML
 	Button butVenda;
 
+	@FXML
+	Button butJornadaTrabalho;
+
 
 	@FXML
 	Button	buttonLogin;
@@ -38,70 +43,10 @@ public class VarejaoDeProdutosPaneController {
 	private VarejaoDeProdutosApp main;
 
 
-
-
 	@FXML
 	public void initialize() throws Exception {
-
-
 		this.setVarejaoDeProdutosApp(main.getInstance());
-	 /*buttonLogin.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				Stage stage = null;
-				Parent root = null;
-				try {
-					if (event.getSource() == buttonLogin) {
-						// get reference to the button's stage
-						stage = (Stage) buttonLogin.getScene().getWindow();
-						// load up OTHER FXML document
-						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroCaixa.fxml"));
-					}
-					// create a new scene with root and set the stage
-					Scene scene = new Scene(root);
-					stage.setScene(scene);
-					main.changeStage(stage);
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-
-			}
-		});*/
-
-	 /*buttonTelaFornecedor.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				Stage stage = null;
-				Parent root = null;
-				try {
-					if (event.getSource() == buttonTelaFornecedor) {
-						// get reference to the button's stage
-						stage = (Stage) buttonTelaFornecedor.getScene().getWindow();
-						// load up OTHER FXML document
-						root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroFornecedor.fxml"));
-					}
-					// create a new scene with root and set the stage
-					Scene scene = new Scene(root);
-					stage.setScene(scene);
-					main.changeStage(stage);
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}catch(NullPointerException e){
-
-				}
-
-
-			}
-		});*/
-
-
 		this.setVarejaoDeProdutosApp(VarejaoDeProdutosApp.getInstance());
-
 	}
 
 	@FXML
@@ -120,7 +65,11 @@ public class VarejaoDeProdutosPaneController {
 			stage.setScene(scene);
 			varejaoDeProdutosApp.changeStage(stage);
 		}catch (Exception e){
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao carregar tela de Caixa.");
+			alert.setHeaderText("Impssivel Carregar tela");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
 		}
 	}
 
@@ -140,10 +89,14 @@ public class VarejaoDeProdutosPaneController {
 			stage.setScene(scene);
 			varejaoDeProdutosApp.changeStage(stage);
 		}catch (Exception e){
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao carregar tela de Funcionario.");
+			alert.setHeaderText("Impssivel Carregar tela");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	public void telaFornecedor(ActionEvent event){
 		Parent root;
@@ -160,9 +113,79 @@ public class VarejaoDeProdutosPaneController {
 			stage.setScene(scene);
 			varejaoDeProdutosApp.changeStage(stage);
 		}catch (Exception e){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao carregar tela de Fornecedor.");
+			alert.setHeaderText("Impssivel Carregar tela");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		}
+	}
+	
+	@FXML
+	public void telaProduto(ActionEvent event){
+		Parent root;
+		Stage stage;
+		try{
+			if(event.getSource() == butProduto){
+				stage = (Stage) butProduto.getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaCadastroProduto.fxml"));
+			}else {
+				stage = (Stage) butProduto.getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaPrincipalVarejao.fxml"));
+			}
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			varejaoDeProdutosApp.changeStage(stage);
+		}catch (Exception e){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao carregar tela de Produto.");
+			alert.setHeaderText("Impssivel Carregar tela");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		}
+	}
+	
+	@FXML
+	public void telaVenda(ActionEvent event){
+		Parent root;
+		Stage stage;
+		try{
+			if(event.getSource() == butVenda){
+				stage = (Stage) butVenda.getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaCadastroVenda.fxml"));
+			}else {
+				stage = (Stage) butVenda.getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaPrincipalVarejao.fxml"));
+			}
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			varejaoDeProdutosApp.changeStage(stage);
+		}catch (Exception e){
+			e.printStackTrace();
+		
+		}
+	}
+
+	@FXML
+	public void telaJornadaTrabalho(ActionEvent event){
+		Parent root;
+		Stage stage;
+		try{
+			if(event.getSource() == butJornadaTrabalho){
+				stage = (Stage) butJornadaTrabalho.getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/gui/view/TelaCadastroJornadaConjunto.fxml"));
+			}else {
+				stage = (Stage) butJornadaTrabalho.getScene().getWindow();
+				root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaPrincipalVarejao.fxml"));
+			}
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			varejaoDeProdutosApp.changeStage(stage);
+		}catch (Exception e){
 			e.printStackTrace();
 		}
 	}
+
 
 	public void sair(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide();

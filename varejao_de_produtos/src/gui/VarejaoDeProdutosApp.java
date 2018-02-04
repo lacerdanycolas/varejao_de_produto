@@ -3,7 +3,6 @@ package gui;
 import java.io.IOException;
 
 import gui.controller.LoginPaneController;
-import gui.controller.VarejaoDeProdutosPaneController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;

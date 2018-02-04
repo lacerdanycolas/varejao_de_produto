@@ -29,20 +29,24 @@ public class LoginPaneController{
 	public void efetuarLogin(ActionEvent event){
 		Parent root;
 		Stage stage;
+		varejao = FachadaVarejao.getInstance();
 		try{
-			/*if(varejao.efetuarLoginFuncionario(txtLogin.getText(), txtSenha.getText()) == true){*/
+			if(varejao.efetuarLoginFuncionario(txtLogin.getText(), txtSenha.getText())){
 				if(event.getSource() == butLogin){
 					stage = (Stage) butLogin.getScene().getWindow();
 					root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaPrincipalVarejao.fxml"));
-				}else {
-					stage = (Stage) butLogin.getScene().getWindow();
-					root = FXMLLoader.load(getClass().getResource("/GUI/view/TelaLoginVarejao.fxml"));
+					Scene scene = new Scene(root);
+					stage.setScene(scene);
+					varejaoDeProdutosApp.changeStage(stage);
 				}
-				Scene scene = new Scene(root);
-				stage.setScene(scene);
-				varejaoDeProdutosApp.changeStage(stage);
-			/*}*/
+			}else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao executar o login.");
+				alert.setHeaderText("Impossivel efetuar login.");
+				alert.showAndWait();
+			}
 		} catch(Exception e){
+			e.printStackTrace();
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Erro ao executar o login.");
 			alert.setHeaderText("Impossivel efetuar login.");

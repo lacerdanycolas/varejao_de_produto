@@ -1,27 +1,26 @@
 package gui;
 
 import java.io.IOException;
-import java.util.Spliterator;
 
 import gui.controller.CaixaPaneController;
+import gui.controller.VendaControllerGui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class MainTeste extends Application{
+public class TesteVenda  extends Application{
 
 	private Stage primaryStage;
 	private BorderPane rootScene;
 
-	private static MainTeste instance;
+	private static TesteVenda instance;
 
-	public static MainTeste getInstance(){
+	public static TesteVenda getInstance(){
 		if(instance == null){
-			instance = new MainTeste();
+			instance = new TesteVenda();
 		}
 		return instance;
 	}
@@ -31,14 +30,14 @@ public class MainTeste extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Caixa");
+		this.primaryStage.setTitle("Venda");
 		this.primaryStage.sizeToScene();
 		this.rootScene = new BorderPane();
 
 		Scene scene = new Scene(rootScene, 660, 565);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		carregarTelaCaixa();
+		carregarTelaVenda();
 	}
 
 	public static void main(String[] args) {
@@ -53,9 +52,9 @@ public class MainTeste extends Application{
 		this.primaryStage = stage;
 	}
 
-	public void carregarTelaCaixa(){
+	public void carregarTelaVenda(){
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/gui/view/TelaCadastroCaixa.fxml"));
+		loader.setLocation(getClass().getResource("/gui/view/TelaCadastroVenda.fxml"));
 		AnchorPane ap = null;
 		try {
 			ap = (AnchorPane) loader.load();
@@ -65,10 +64,10 @@ public class MainTeste extends Application{
 		}
 
 		this.rootScene.setCenter(ap);
-		CaixaPaneController caixacontrol2 = new CaixaPaneController();
-		loader.setController(caixacontrol2);
-		caixacontrol2.setApp(this);
-
+		VendaControllerGui vendacontroller = new VendaControllerGui();
+		loader.setController(vendacontroller);
+		vendacontroller.setApp(this);
 	}
+	
 
 }

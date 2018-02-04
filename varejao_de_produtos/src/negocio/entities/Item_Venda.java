@@ -15,13 +15,15 @@ public class Item_Venda {
 	private BigDecimal valor_desconto_item;
 	
 	
-	public Item_Venda(Integer id_venda, Integer id_produtoref, Integer quantidade, BigDecimal valor_unitario2,
-			BigDecimal valor_desconto_item2) {
+
+	public Item_Venda(Integer id_venda, Integer id_produtoref, Integer quantidade, BigDecimal valor_unitario,
+			BigDecimal valor_desconto_item) {
+
 		this.id_venda = id_venda;
 		this.id_produtoref = id_produtoref;
 		this.quantidade = quantidade;
-		this.valor_unitario = valor_unitario2;
-		this.valor_desconto_item = valor_desconto_item2;
+		this.valor_unitario = valor_unitario;
+		this.valor_desconto_item = valor_desconto_item;
 	}
 
 

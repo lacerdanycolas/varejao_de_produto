@@ -1,30 +1,29 @@
 package negocio.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
+import java.util.Collection;
 import dados.CaixaRepository;
 import exceptions.FormatacaoInvalidaException;
 import negocio.entities.Caixa;
-import varejao_de_produtos.ConnectionMySQL;
 
 public class ControladorCaixa {
 
-	private CaixaRepository repositoroioCaixa;
-
-	public ControladorCaixa(CaixaRepository rep) {
-		if(rep !=null){
-			this.repositoroioCaixa = rep;
-		}else{
-			IllegalArgumentException x = new IllegalArgumentException("Repositorio invalido.");
-			throw x;
+	private CaixaRepository repositoroio;
+	private static ControladorCaixa instance;
+	public static ControladorCaixa getInstance(){
+		if(instance==null){
+			instance = new ControladorCaixa();
 		}
+		return instance;
+	}
+
+	public ControladorCaixa() {
+		this.repositoroio = CaixaRepository.getInstance();
 	}
 
 	public Caixa buscarCaixa(Integer id) throws Exception{
 		if(id>0 /*and conexao tipo caixa*/){
-			return repositoroioCaixa.getOne(id);
+			return repositoroio.getOne(id);
 		}else{
 			IllegalArgumentException x = new IllegalArgumentException("Repositorio invalido.");
 			throw x;
@@ -32,7 +31,7 @@ public class ControladorCaixa {
 	}
 
 	public Collection<Caixa> listarCaixa() throws Exception{
-		return repositoroioCaixa.getAll();
+		return repositoroio.getAll();
 	}
 
 
@@ -42,7 +41,7 @@ public class ControladorCaixa {
 			throw new FormatacaoInvalidaException();
 
 		else
-			return repositoroioCaixa.save(caixa);
+			return repositoroio.save(caixa);
 
 	}
 
@@ -50,10 +49,10 @@ public class ControladorCaixa {
 		if(caixa == null){
 			throw new FormatacaoInvalidaException();
 		}
-		else if(repositoroioCaixa.getOne(caixa.getId()).equals(null))
+		else if(repositoroio.getOne(caixa.getId()).equals(null))
 			throw new Exception("Caixa no existe");
 		else
-			repositoroioCaixa.delete(caixa);
+			repositoroio.delete(caixa);
 	}
 
 

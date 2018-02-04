@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="503.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CaixaControllerGui">
+<AnchorPane prefHeight="503.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CaixaPaneController">
    <children>
       <SplitPane dividerPositions="0.6786427145708582" orientation="VERTICAL" prefHeight="503.0" prefWidth="543.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -42,7 +42,7 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Text>
-                        <Button fx:id="buttonRemoverCaixa" layoutX="228.0" layoutY="41.0" mnemonicParsing="false" text="Remover" />
+                        <Button layoutX="228.0" layoutY="41.0" mnemonicParsing="false" onAction="#removerCaixa" text="Remover" />
                         <Button fx:id="buttonLimparCaixa" layoutX="318.0" layoutY="41.0" mnemonicParsing="false" text="Limpar" />
                         <ComboBox fx:id="comboBoxSeqFilial" layoutX="141.0" layoutY="299.0" prefHeight="25.0" prefWidth="119.0" promptText="Selecione..." />
                         <ImageView fitHeight="164.0" fitWidth="170.0" layoutX="340.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
@@ -52,6 +52,7 @@
                         </ImageView>
                         <Button layoutX="478.0" layoutY="10.0" mnemonicParsing="false" onAction="#voltarMenuPrincipal" text="&lt;" />
                         <Button layoutX="506.0" layoutY="10.0" mnemonicParsing="false" onAction="#sair" text="X" textFill="#eb0b0b" />
+                        <Label fx:id="lblMensagem" layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="239.0" />
                      </children>
                   </AnchorPane>
                </children>

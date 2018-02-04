@@ -10,10 +10,12 @@ import negocio.entities.Fornecedorref;
 import negocio.entities.Funcionario;
 import negocio.entities.Preferencial_Caixa;
 import negocio.entities.Produtoref;
+import negocio.entities.Representante;
 import negocio.entities.Sexo;
 import negocio.entities.Situacao;
 import negocio.entities.Situacao_Caixa;
 import negocio.entities.Tipo_Funcionario;
+import negocio.entities.Turno;
 
 public class Main {
 
@@ -30,8 +32,15 @@ public class Main {
 		FuncionarioRepository  funcionarioRepository = dados.FuncionarioRepository.getInstance();
 		CaixaRepository caixaRepository = dados.CaixaRepository.getInstance();
 		ProdutorefRepository produtoRepository = dados.ProdutorefRepository.getInstance();
-		try {
 
+		RepresentanteRepository representanteRepository = RepresentanteRepository.getInstance();
+		TurnoRepository turnorep = TurnoRepository.getInstance();
+
+		try {
+			/*Collection<Turno> listaTurnos = turnoRepository.getAll();
+			for(Turno turno: listaTurnos){
+				System.out.println(turno.toString());
+			}*/
 			//Fornecedorref f = new Fornecedorref(21, "Jimmys ltda", "1291829182", "Rua Albacora", "54400-400", "PE", "Piedade", situacao);
 		//	Funcionario func = new Funcionario(21, "03236541123",sexo, estado_civil, "8842161", "Rafael", "Camara", "Figueredo", situacao, "Rua Espardate", "Brasilia teimosa", "PE", "45555555", "admin", "admin", "10303577495",  tipo_func, "2352733254", 14);
 
@@ -40,17 +49,29 @@ public class Main {
 // refs/remotes/origin/master
 			//Caixa caixa = new Caixa(null, situacao, e_preferencial, null, 1, 26);
 			Dia d = new Dia(27, "Olha o Dia novo");
-			Produtoref produto = new Produtoref("28162152", 460, null, null, new BigDecimal("27.32"), "10", new BigDecimal("0.00"), "Faca de madeira", null, null, null, 3, 4, 4, 2, 9, 17);
+
+/*			Produtoref produto = new Produtoref("28162152", null, null, new BigDecimal("27.32"), "10", new BigDecimal("0.00"), "Faca de madeira", null, null, null, 3, 4, 4, 2, 9, 17);
+=======
+
+			//Collection<Turno> listaturno = turnorep.getAll();
+			//System.out.println(listaturno.toString());
+//			Representante rep = new Representante("11459922455", "Joao Marcio", "joaomarcio@example.com", "33459939");
+//			representanteRepository.save(rep);
+
+		//	Collection<Representante> listrep = representanteRepository.getAll();
+			//System.out.println(listrep.toString());
+			//Produtoref produto = new Produtoref("28162152", 460, null, null, new BigDecimal("27.32"), "10", new BigDecimal("0.00"), "Faca de madeira", null, null, null, 3, 4, 4, 2, 9, 17);
+>>>>>>> refs/remotes/origin/branch_NycolasLacerda
 			//Caixa caixa3 = new Caixa("teste",situacao,e_preferencial,null,1,24);
-			//produtoRepository.save(produto);
+			produtoRepository.save(produto);
 
 			//caixaRepository.save(caixa3);
 
 
-//			Collection<Produtoref> listaProdutos = produtoRepository.getAll();
-//			for(Produtoref prod : listaProdutos){
-//				System.out.println(prod.toString());
-//			}
+			Collection<Produtoref> listaProdutos = produtoRepository.getAll();
+			for(Produtoref prod : listaProdutos){
+				System.out.println(prod.toString());
+			}*/
 
 
 			//caixaRepository.save(caixa);

@@ -4,24 +4,17 @@ import java.util.Collection;
 
 import dados.CaixaRepository;
 import dados.ProdutorefRepository;
+import dados.RepresentanteRepository;
 import dados.VendaRepository;
 import negocio.entities.Caixa;
 import negocio.entities.Produtoref;
 import negocio.entities.Venda;
-import dados.FornecedorrefRepository;
-
-import dados.FuncionarioRepository;
-import dados.Item_Venda_Repository;
-import negocio.entities.Caixa;
-
 import negocio.entities.Fornecedorref;
-
 import negocio.entities.Funcionario;
 import negocio.entities.Item_Venda;
 
 
 public class FachadaVarejao {
-
 	private ControladorCaixa caixas;
 	private ControladorProduto produtos;
 	private ControladorVenda vendas;
@@ -29,16 +22,22 @@ public class FachadaVarejao {
 	private Controlador_Item_Venda itens;
 	private ControladorFuncionario funcionarios;
 
+	private ControladorRepresentante representantes;
+
+
 
 	private static FachadaVarejao instance;
 
 	private FachadaVarejao(){
-		this.caixas = new ControladorCaixa(CaixaRepository.getInstance());
-		this.produtos = new ControladorProduto(ProdutorefRepository.getInstance());
-		this.vendas = new ControladorVenda(VendaRepository.getInstance());
-		this.fornecedores = new ControladorFornecedorref(FornecedorrefRepository.getInstance());
-		this.itens = new Controlador_Item_Venda(Item_Venda_Repository.getInstance());
-		this.funcionarios = new ControladorFuncionario(FuncionarioRepository.getInstance());
+
+		this.caixas = ControladorCaixa.getInstance();
+		this.produtos = ControladorProduto.getInstance();
+		this.vendas = ControladorVenda.getInstance();
+		this.fornecedores = ControladorFornecedorref.getInstance();
+		this.itens = Controlador_Item_Venda.getInstance();
+		this.funcionarios = ControladorFuncionario.getInstance();
+
+
 
 	}
 
@@ -57,7 +56,6 @@ public class FachadaVarejao {
 	public Fornecedorref buscarFornecedor(int id) throws Exception{
 		return this.fornecedores.buscarFornecedor(id);
 	}
-
 
 	//LISTAR
 
@@ -117,12 +115,12 @@ public class FachadaVarejao {
 
 	//LISTAR FUNCIONARIO
 	public Collection<Funcionario> listarFuncionario() throws Exception{
-		return this.funcionarios.listarFuncionario();
+		return this.funcionarios.listarFuncionarios();
 	}
 
 	//SALVAR FUNCIONARIO
 	public void salvarFuncionario(Funcionario funcionario) throws Exception{
-		this.funcionarios.salvarFuncionario(funcionario);
+		this.funcionarios.cadastrarFuncionario(funcionario);
 	}
 
 	//DELETAR FUNCIONARIO
@@ -132,60 +130,56 @@ public class FachadaVarejao {
 
 	//LOGIN FUNCIONARIO
 	public boolean efetuarLoginFuncionario(String login, String senha) throws Exception{
-		if(this.funcionarios.efetuarLogin(login, senha) == true){
-			return true;
-		}else{
-			return false;
-		}
+		return this.funcionarios.efetuarLogin(login, senha);
 	}
-	
+
 	//BUSCAR VENDA
 		public Venda BuscarVenda(int id) throws Exception {
 			return vendas.BuscarVenda(id);
 		}
-		
+
 		//LISTAR VENDAS
 		 public Collection<Venda> ListarVenda() throws Exception{
 			 return vendas.ListarVenda();
 		 }
-		 
+
 		 // CADASTRAR VENDA
 		 public Venda CadastraVenda(Venda venda) throws Exception {
 			 return vendas.CadastraVenda(venda);
 		 }
-		 
+
 		 //DELETAR VENDA
 		 public void DeletarVenda(Venda venda) throws Exception {
 			  vendas.DeletarVenda(venda);
 		 }
-		 
+
 		 //BUSCAR ITEM VENDA
-		 
+
 		 public Item_Venda Buscar_Itens_Venda(int id) throws Exception {
 			 return itens.Buscar_Itens_Venda(id);
 		 }
-		 
+
 		 //LISTAR ITENS VENDA
-		 
+
 		 public Collection<Item_Venda> Listar_Itens_Venda() throws Exception{
 			 return itens.Listar_Itens_Venda();
 		 }
-		 
+
 		 //CADASTRAR ITEM VENDA
-		 
+
 		 public void CadastrarItem_Venda(Item_Venda item) throws Exception {
 			  itens.CadastrarItem_Venda(item);
 		 }
-		 
+
 		 //DELETAR ITEM VENDA
-		 
+
 		 public void Deletar_Item_Venda (Item_Venda item) throws Exception {
 			 itens.Deletar_Item_Venda(item);
 		 }
 
-	public void deletarFornecedor(Fornecedorref fornecedor) throws Exception{
-		this.fornecedores.deletarFornecedor(fornecedor);
-	}
+		public void deletarFornecedor(Fornecedorref fornecedor) throws Exception{
+			this.fornecedores.deletarFornecedor(fornecedor);
+		}
 
 
 }

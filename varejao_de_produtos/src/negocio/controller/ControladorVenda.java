@@ -8,9 +8,16 @@ import negocio.entities.Venda;
 public class ControladorVenda {
 	
 	private VendaRepository repositorio;
+	private static ControladorVenda instance;
 	
-	 public ControladorVenda(VendaRepository rep) {
-		this.repositorio=rep;
+	public static ControladorVenda getInstance(){
+		if(instance == null){
+			instance = new ControladorVenda();
+		}
+		return instance;
+	}
+	 public ControladorVenda() {
+		this.repositorio = VendaRepository.getInstance();
 	}
 	 
 	 public Venda BuscarVenda (int id) throws Exception {
@@ -41,9 +48,9 @@ public class ControladorVenda {
 	 
 	 public void DeletarVenda(Venda venda) throws Exception {
 		 if(venda.equals(null)) {
-			 throw new IllegalArgumentException("Não exite");
+			 throw new IllegalArgumentException("Nï¿½o exite");
 		 }else if(repositorio.getOne(venda.getId()).equals(null)) {
-			 throw new IllegalArgumentException("Venda não existe");
+			 throw new IllegalArgumentException("Venda nï¿½o existe");
 		 }
 		 else {
 			 repositorio.delete(venda);

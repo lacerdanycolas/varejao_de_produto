@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,8 +24,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import negocio.controller.FachadaVarejao;
-import negocio.entities.Caixa;
 import negocio.entities.Estado_Civil;
+import negocio.entities.Estados;
 import negocio.entities.Funcionario;
 import negocio.entities.Sexo;
 import negocio.entities.Situacao;
@@ -110,9 +109,6 @@ public class FuncionarioPaneController {
 	TextField txtBairro;
 
 	@FXML
-	TextField txtEstado;
-
-	@FXML
 	TextField txtCepFuncionario;
 
 	@FXML
@@ -126,7 +122,10 @@ public class FuncionarioPaneController {
 
 	@FXML
 	TextField txtCnpjMatrizFuncionario;
-
+	
+	@FXML
+	private ComboBox<String> comboBoxEstados;
+	
 	@FXML
 	private ComboBox<String> comboBoxSituacao;
 
@@ -150,11 +149,12 @@ public class FuncionarioPaneController {
 	private ObservableList<String> estadoCivil = FXCollections.observableArrayList(Estado_Civil.SOLTEIRO.toString(),Estado_Civil.CASADO.toString(),Estado_Civil.DIVORCIADO.toString());
 	private ObservableList<String> tipoFuncionario = FXCollections.observableArrayList(Tipo_Funcionario.OPERADOR_DE_CAIXA.toString(), Tipo_Funcionario.SUPERVISOR_DE_CAIXA.toString(), Tipo_Funcionario.COORDENADOR.toString(), Tipo_Funcionario.CARREGADOR.toString(), Tipo_Funcionario.SUPERVISOR_DE_ESTOQUE.toString());
 	private ObservableList<Integer> seqFilialList;
-
+	private ObservableList<String> estados;
+	private Estados[] arrayestados = Estados.values();
 	@FXML
 	private void initialize() throws Exception{
 
-		varejao = varejao.getInstance();
+		this.varejao = varejao.getInstance();
 
 		colunaId.setCellValueFactory(new PropertyValueFactory<>("Id"));
 		colunaCPF.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCpf()));
@@ -211,52 +211,84 @@ public class FuncionarioPaneController {
 		txtTerceiroNome.clear();
 		txtRua.clear();
 		txtBairro.clear();
-		txtEstado.clear();
 		txtCepFuncionario.clear();
 		txtLogin.clear();
 		txtSenha.clear();
 		txtCpf_gerente.clear();
 		txtCnpjMatrizFuncionario.clear();
-
+		lblMensagem.setText("");
 	}
 
 	public void cadastrarFuncionario(){
 		try{
 			String cpf, rg, primeiro_nome, segundo_nome, terceiro_nome, rua, bairro, estado, cep, login, senha, cpf_gerente, cnpj_Matriz;
-			Sexo sexo;
+			Sexo sexo = null;
 			String sexoString = comboBoxSexo.getValue();
-			if(sexoString.toString().equals("M")){
-				sexo = Sexo.M;
-			}else {
-				sexo = Sexo.F;
+			try{
+				if(sexoString.toString().equals("M")){
+					sexo = Sexo.M;
+				}else {
+					sexo = Sexo.F;
+				}
+			}catch(Exception e){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao cadastrar um Funcionario.");
+				alert.setHeaderText("Preencha o campo Sexo.");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
 			}
-			Estado_Civil estadoCivil;
+			Estado_Civil estadoCivil = null;
 			String estadoCivilString = comboBoxEstadoCivil.getValue();
-			if(estadoCivilString.toString().equals("SOLTEIRO")){
-				estadoCivil = Estado_Civil.SOLTEIRO;
-			}else if(estadoCivilString.toString().equals("CASADO")){
-				estadoCivil = Estado_Civil.CASADO;
-			}else{
-				estadoCivil = Estado_Civil.DIVORCIADO;
+			try{
+				if(estadoCivilString.toString().equals("SOLTEIRO")){
+					estadoCivil = Estado_Civil.SOLTEIRO;
+				}else if(estadoCivilString.toString().equals("CASADO")){
+					estadoCivil = Estado_Civil.CASADO;
+				}else{
+					estadoCivil = Estado_Civil.DIVORCIADO;
+				}
+			}catch(Exception e){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao cadastrar um Funcionario.");
+				alert.setHeaderText("Preencha o campo Estado_Civil.");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
 			}
-			Situacao situacao;
+			Situacao situacao = null;
 			String situacaoString = comboBoxSituacao.getValue();
-			if(situacaoString.toString().equals("ATIVO")){
-				situacao = Situacao.ATIVO;
-			}else
-				situacao = Situacao.INATIVO;
-			Tipo_Funcionario tipoFuncionario;
+			try{
+				if(situacaoString.toString().equals("ATIVO")){
+					situacao = Situacao.ATIVO;
+				}else{
+					situacao = Situacao.INATIVO;
+				}
+			}catch(Exception e){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao cadastrar um Funcionario.");
+				alert.setHeaderText("Preencha o campo Situacao.");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
+			}
+			Tipo_Funcionario tipoFuncionario = null;
 			String tipoFuncionarioString = comboBoxTipoFuncionario.getValue();
-			if(tipoFuncionarioString.toString().equals("OPERADOR_DE_CAIXA")){
-				tipoFuncionario = Tipo_Funcionario.OPERADOR_DE_CAIXA;
-			}else if(tipoFuncionarioString.toString().equals("SUPERVISOR_DE_CAIXA")){
-				tipoFuncionario = Tipo_Funcionario.SUPERVISOR_DE_CAIXA;
-			}else if(tipoFuncionarioString.toString().equals("COORDENADOR")){
-				tipoFuncionario = Tipo_Funcionario.COORDENADOR;
-			}else if(tipoFuncionarioString.toString().equals("CARREGADOR")){
-				tipoFuncionario = Tipo_Funcionario.CARREGADOR;
-			}else{
-				tipoFuncionario = Tipo_Funcionario.SUPERVISOR_DE_ESTOQUE;
+			try{
+				if(tipoFuncionarioString.toString().equals("OPERADOR_DE_CAIXA")){
+					tipoFuncionario = Tipo_Funcionario.OPERADOR_DE_CAIXA;
+				}else if(tipoFuncionarioString.toString().equals("SUPERVISOR_DE_CAIXA")){
+					tipoFuncionario = Tipo_Funcionario.SUPERVISOR_DE_CAIXA;
+				}else if(tipoFuncionarioString.toString().equals("COORDENADOR")){
+					tipoFuncionario = Tipo_Funcionario.COORDENADOR;
+				}else if(tipoFuncionarioString.toString().equals("CARREGADOR")){
+					tipoFuncionario = Tipo_Funcionario.CARREGADOR;
+				}else{
+					tipoFuncionario = Tipo_Funcionario.SUPERVISOR_DE_ESTOQUE;
+				}
+			}catch(Exception e){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao cadastrar um Funcionario.");
+				alert.setHeaderText("Preencha o campo Tipo.");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
 			}
 			cpf = txtCpfFuncionario.getText();
 			cpf = cpf.replace(".", "").replace("-", "");
@@ -267,7 +299,15 @@ public class FuncionarioPaneController {
 			terceiro_nome = txtTerceiroNome.getText();
 			rua = txtRua.getText();
 			bairro = txtBairro.getText();
-			estado = txtEstado.getText();
+			String estadoletra = comboBoxEstados.getValue();
+			Estados estadosigla = null;
+			String UF;
+
+			for(int i=0;i<arrayestados.length;i++){
+				if(arrayestados[i].toString().equals(estadoletra)){
+					estadosigla = arrayestados[i];
+				}
+			}
 			cep = txtCepFuncionario.getText();
 			login = txtLogin.getText();
 			senha = txtSenha.getText();
@@ -275,9 +315,18 @@ public class FuncionarioPaneController {
 			cpf_gerente = cpf_gerente.replace(".", "").replace("-", "");
 			cnpj_Matriz = txtCnpjMatrizFuncionario.getText();
 			cnpj_Matriz = cnpj_Matriz.replace("-", "");
+			int seqf = 0;
+			try{
 			String seq_filial = new String(comboBoxSeqFilial.getValue().toString());
-			int seqf = Integer.parseInt(seq_filial);
-			Funcionario aux = new Funcionario(cpf, sexo, estadoCivil, rg, primeiro_nome, segundo_nome, terceiro_nome, situacao, rua, bairro, estado, cep, login, senha, cpf_gerente, tipoFuncionario, cnpj_Matriz, seqf);
+			seqf = Integer.parseInt(seq_filial);
+			}catch(Exception e){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao cadastrar um Funcionario.");
+				alert.setHeaderText("Preencha o campo Sequencial Filial.");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();	
+			}
+			Funcionario aux = new Funcionario(cpf, sexo, estadoCivil, rg, primeiro_nome, segundo_nome, terceiro_nome, situacao, rua, bairro, estadoletra, cep, login, senha, cpf_gerente, tipoFuncionario, cnpj_Matriz, seqf);
 			varejao.salvarFuncionario(aux);
 			refreshTable();
 			limparForm();
@@ -300,6 +349,8 @@ public class FuncionarioPaneController {
 				limparForm();
 				refreshTable();
 				lblMensagem.setText("Funcionario Removido");
+			}else{
+				lblMensagem.setText("Selecione um funcionario para ser removido");
 			}
 		}catch (Exception e){
 			Alert alert = new Alert(AlertType.ERROR);
@@ -331,6 +382,12 @@ public class FuncionarioPaneController {
 		comboBoxSeqFilial.setItems(seqFilialList);
 		txtCnpjMatrizFuncionario.setText("1376-19-273-43530");
 		txtCnpjMatrizFuncionario.editableProperty().set(false);
+		ArrayList<String> stringestados = new ArrayList<String>();
+		for(int i=0; i < arrayestados.length; i++){
+			stringestados.add(arrayestados[i].toString());
+		}
+		estados = FXCollections.observableArrayList(stringestados);
+		comboBoxEstados.setItems(estados);
 	}
 
 	@FXML
@@ -360,5 +417,13 @@ public class FuncionarioPaneController {
 		tf.formatter();
 	}
 
+	@FXML
+	public void txtCpf_GerenteMask(){
+		TextFieldFormatter tf = new TextFieldFormatter();
+		tf.setMask("###.###.###-##");
+		tf.setCaracteresValidos("0123456789");
+		tf.setTf(txtCpf_gerente);
+		tf.formatter();
+	}
 
 }
