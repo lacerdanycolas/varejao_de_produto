@@ -43,6 +43,7 @@ public class ControladorCaixa {
 		else
 			return repositoroio.save(caixa);
 
+
 	}
 
 	public void deletarCaixa(Caixa caixa) throws Exception{
@@ -57,4 +58,14 @@ public class ControladorCaixa {
 
 
 
+	public void alterarCaixa (Caixa novoCaixa) throws Exception {
+		if (novoCaixa == null) {
+			throw new FormatacaoInvalidaException();
+		} else if (novoCaixa != null) {
+			this.repositoroio.update(novoCaixa);
+			this.repositoroio.save(novoCaixa);
+		}
+	}
+
 }
+
