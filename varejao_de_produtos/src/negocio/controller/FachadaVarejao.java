@@ -74,6 +74,10 @@ public class FachadaVarejao {
 		this.caixas.salvarCaixa(caixa);
 	}
 
+	public void alterarCaixa(Caixa caixa) throws Exception {
+		this.caixas.alterarCaixa(caixa);
+	}
+
 
 	public void salvarFornecedor(Fornecedorref fornecedor) throws Exception{
 		this.fornecedores.salvarFornecedor(fornecedor);
@@ -180,7 +184,6 @@ public class FachadaVarejao {
 		public void deletarFornecedor(Fornecedorref fornecedor) throws Exception{
 			this.fornecedores.deletarFornecedor(fornecedor);
 		}
-
 
 }
 

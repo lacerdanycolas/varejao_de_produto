@@ -55,6 +55,13 @@ public class ControladorCaixa {
 			repositoroio.delete(caixa);
 	}
 
-
+	public void alterarCaixa (Caixa novoCaixa) throws Exception {
+		if (novoCaixa == null) {
+			throw new FormatacaoInvalidaException();
+		} else if (novoCaixa != null) {
+			this.repositoroio.update(novoCaixa);
+			this.repositoroio.save(novoCaixa);
+		}
+	}
 
 }

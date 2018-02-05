@@ -27,6 +27,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import negocio.entities.Caixa;
+import negocio.entities.Funcionario;
 import negocio.entities.Preferencial_Caixa;
 import negocio.entities.Situacao;
 import negocio.entities.Situacao_Caixa;
@@ -73,7 +74,10 @@ public class CaixaPaneController implements Initializable{
 
 	@FXML
 	javafx.scene.control.Button buttonLimparCaixa;
-	
+
+	@FXML
+	javafx.scene.control.Button buttonAlterarCaixa;
+
 	@FXML
 	Label lblMensagem;
 
@@ -92,7 +96,7 @@ public class CaixaPaneController implements Initializable{
 		// TODO Auto-generated method stub
 		this.varejao = varejao.getInstance();
 		this.main = MainTeste.getInstance();
-		
+
 
 		carregandoValoresTela();
 		carregarTableViewCaixa();
@@ -150,7 +154,7 @@ public class CaixaPaneController implements Initializable{
 							alert.setTitle("Erro ao cadastrar um caixa.");
 							alert.setHeaderText("Preencha o campo Sequencial Filial.");
 							alert.setContentText(e.getMessage());
-							alert.showAndWait();						
+							alert.showAndWait();
 						}
 						Caixa caixa = new Caixa(descricao, situ, pref, observacao, idm, seqf);
 						try {
@@ -163,7 +167,7 @@ public class CaixaPaneController implements Initializable{
 							alert.setContentText(e.getMessage());
 							alert.showAndWait();
 						}
-					} 
+					}
 
 				}catch (Exception e) {
 					e.printStackTrace();
@@ -241,8 +245,8 @@ public class CaixaPaneController implements Initializable{
 		oblistaCaixa.addAll(varejao.listarCaixa());
 		tbViewCaixa.setItems(oblistaCaixa);
 	}
-	
-	
+
+
 	public void carregarTableViewCaixa() {
 		tbCollumIdCaixa.setCellValueFactory(new PropertyValueFactory<>("Id"));
         tbCollumSituacaoCaixa.setCellValueFactory(new PropertyValueFactory<>("Situacao"));
@@ -280,16 +284,35 @@ public void carregandoValoresTela(){
 	textFieldIdMatrizCaixa.editableProperty().set(false);
 }
 
+public void alterarCaixa() {
+	Caixa caixa = tbViewCaixa.getSelectionModel().getSelectedItem();
+	try{
+		if(caixa !=null && caixa instanceof Caixa){
+			varejao.alterarCaixa(caixa);
+			refreshTable();
+			lblMensagem.setText("Caixa alterado");
+		}else{
+			lblMensagem.setText("Selecione um caixa para ser alterado");
+		}
+	}catch (Exception e){
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Erro ao alterar um funcionario.");
+		alert.setHeaderText("Impossivel efetuar alteração.");
+		alert.setContentText(e.getMessage());
+		alert.showAndWait();
+
+	}
+}
 
 	public void setApp(MainTeste main) {
 		this.main = main;
 	}
-	
+
 	public void sair(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide();
 
 	}
-	
+
 	public void voltarMenuPrincipal(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide();
 		Parent parent;
