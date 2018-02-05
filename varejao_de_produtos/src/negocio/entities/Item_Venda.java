@@ -15,8 +15,10 @@ public class Item_Venda {
 	private BigDecimal valor_desconto_item;
 	
 	
+
 	public Item_Venda(Integer id_venda, Integer id_produtoref, Integer quantidade, BigDecimal valor_unitario,
 			BigDecimal valor_desconto_item) {
+
 		this.id_venda = id_venda;
 		this.id_produtoref = id_produtoref;
 		this.quantidade = quantidade;
@@ -83,23 +85,6 @@ public class Item_Venda {
 		this.valor_desconto_item = valor_desconto_item;
 	}
 	
-	public BigDecimal Valor_total(ArrayList<Item_Venda> lista) {
-		BigDecimal decimal = null;
-		
-		for(int i=0; i<lista.size();i++) {
-			decimal=lista.get(i).getValor_unitario().add(decimal);
-		}
-		return decimal;
-	}
-	
-	public BigDecimal Valor_Total_Desconto(ArrayList<Item_Venda> lista) {
-		BigDecimal decimal = null;
-		
-		for(int i=0; i<lista.size();i++) {
-			decimal=lista.get(i).getValor_desconto_item().add(decimal);
-		}
-		return decimal;
-	}
 	
 
 

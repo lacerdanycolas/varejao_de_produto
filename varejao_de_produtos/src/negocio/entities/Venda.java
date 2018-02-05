@@ -15,6 +15,7 @@ public class Venda {
 	private BigDecimal valor_total_desconto;
 	private int id_caixa;
 		
+
 	public Venda(){
 		
 	}

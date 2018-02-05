@@ -1,3 +1,4 @@
+
 package gui.controller;
 
 import java.io.IOException;
@@ -370,3 +371,5 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 
 
 }
+
+

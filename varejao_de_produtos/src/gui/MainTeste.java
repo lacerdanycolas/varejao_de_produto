@@ -68,6 +68,7 @@ public class MainTeste extends Application{
 		CaixaPaneController caixacontrol2 = new CaixaPaneController();
 		loader.setController(caixacontrol2);
 		caixacontrol2.setApp(this);
+
 	}
 
 }
