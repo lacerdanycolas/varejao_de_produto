@@ -26,21 +26,11 @@
                <children>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="358.0" prefWidth="430.0" style="-fx-background-color: #E80000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TextField fx:id="textField_IdCaixa" layoutX="107.0" layoutY="33.0" prefHeight="25.0" prefWidth="84.0" />
-                        <TextField id="textFieldDescricaoCaixa" fx:id="textFieldId_produto" layoutX="141.0" layoutY="103.0" prefHeight="25.0" prefWidth="119.0" />
-                        <Text fill="WHITE" layoutX="37.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id do produto" wrappingWidth="94.0" />
-                        <Text fill="WHITE" layoutX="37.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço (R$)" wrappingWidth="73.65185546875" />
-                        <TextField id="textFieldObservacaoCaixa" fx:id="textFieldQuantidade" layoutX="141.0" layoutY="204.0" prefHeight="25.0" prefWidth="119.0" />
-                        <Text id="textFieldObservacaoCaixa" fill="WHITE" layoutX="37.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantidade" wrappingWidth="73.65185546875" />
-                        <TextField id="textFieldIdMatrizCaixa" fx:id="textFieldValor_Desconto_item" layoutX="142.0" layoutY="255.0" prefHeight="25.0" prefWidth="119.0" />
-                        <Text fill="WHITE" layoutX="14.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valor do Desconto" wrappingWidth="119.0" />
-                        <Button id="buttonSalvarCaixa" fx:id="buttonAddItem" layoutX="48.0" layoutY="299.0" mnemonicParsing="false" text="Adicionar Item" />
                         <Text fill="WHITE" layoutX="254.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VENDA" textAlignment="CENTER" wrappingWidth="83.91210651397705">
                            <font>
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Text>
-                        <Button fx:id="buttonRemoverCaixa" layoutX="402.0" layoutY="299.0" mnemonicParsing="false" onAction="#buttonCadastarVenda" text="Cadastrar Venda" />
                         <ImageView fitHeight="164.0" fitWidth="170.0" layoutX="340.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../Pictures/varejaoFraldas.jpg" />
@@ -49,8 +39,18 @@
                         <Text fill="WHITE" layoutX="15.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id do Caixa" wrappingWidth="94.0" />
                         <Text fill="WHITE" layoutX="229.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF  do Comprador" wrappingWidth="133.0" />
                         <TextField fx:id="textField_CpfComprador" layoutX="363.0" layoutY="33.0" />
-                        <TextField fx:id="textFieldValor_unitario" layoutX="142.0" layoutY="156.0" prefHeight="25.0" prefWidth="119.0" />
-                        <Button fx:id="buttonRemoverItem" layoutX="163.0" layoutY="299.0" mnemonicParsing="false" text="Remover Item" />
+                        <Text fill="WHITE" layoutX="20.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id produto" wrappingWidth="83.912109375" />
+                        <Text fill="WHITE" layoutX="20.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço (R$)" />
+                        <Text fill="WHITE" layoutX="20.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantidade" />
+                        <Text fill="WHITE" layoutX="9.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço Desconto" wrappingWidth="83.2734375" />
+                        <TextField fx:id="textFieldId_produto" layoutX="104.0" layoutY="99.0" />
+                        <TextField fx:id="textFieldValor_unitario" layoutX="104.0" layoutY="136.0" />
+                        <TextField fx:id="textFieldQuantidade" layoutX="104.0" layoutY="173.0" />
+                        <TextField fx:id="textFieldValor_Desconto_item" layoutX="109.0" layoutY="208.0" />
+                        <Button fx:id="buttonAddItem" layoutX="25.0" layoutY="280.0" mnemonicParsing="false" text="Adicionar Item" />
+                        <Button fx:id="buttonRemoverItem" layoutX="140.0" layoutY="280.0" mnemonicParsing="false" text="Remover Item" />
+                        <Button fx:id="buttonCadastarVenda" layoutX="271.0" layoutY="280.0" mnemonicParsing="false" text="Cadastrar Venda" />
+                        <TextField fx:id="textField_IdCaixa" layoutX="82.0" layoutY="33.0" prefHeight="25.0" prefWidth="121.0" />
                      </children>
                   </AnchorPane>
                </children>

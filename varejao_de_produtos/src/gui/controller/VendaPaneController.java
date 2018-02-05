@@ -121,15 +121,6 @@ public class VendaPaneController  implements Initializable{
 		}
 	}
 
-	public Venda CadastrarVenda (String cpf_comprador, Date data_venda,int id_caixa, Item_Venda item) throws Exception {
-		BigDecimal valorTotal= item.Valor_total(items);
-		BigDecimal valorTotalDesconto= item.Valor_Total_Desconto(items);
-
-		Venda venda=new Venda(cpf_comprador,valorTotal,data_venda,valorTotalDesconto,id_caixa);
-		fachada.CadastraVenda(venda);
-
-		return venda;
-	}
 
 	public void CadastroItems(ArrayList<Item_Venda> items,Venda venda) throws Exception {
 		int id_caixa=venda.getId();
@@ -176,7 +167,7 @@ public class VendaPaneController  implements Initializable{
 					String cpf_comprador= new String (textField_CpfComprador.getText());
 					Integer id_caixa= new Integer(textField_IdCaixa.getText());
 					try {
-						vendas= CadastrarVenda(cpf_comprador,data, id_caixa, item_venda);
+	
 						CadastroItems(items, vendas);
 						LimparLista(items);
 						textField_CpfComprador.clear();
