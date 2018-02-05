@@ -31,7 +31,7 @@ private static String url="jdbc:mysql://127.0.0.1/varejao_de_produtos";
 //			if(i == currentUser){
 				if(conexao == null){
 					conexao = DriverManager.getConnection(url,COORDENADOR,SENHA_COORDENADOR);
-//					conexao=DriverManager.getConnection(url);
+
 				}
 //			}else{
 //				switch (i){
