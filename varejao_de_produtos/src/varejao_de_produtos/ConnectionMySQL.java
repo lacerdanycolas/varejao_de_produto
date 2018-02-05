@@ -27,7 +27,7 @@ private static String url="jdbc:mysql://127.0.0.1/varejao_de_produtos";
 
 	public static void setUser(int i){
 		try {
-			Class.forName(driver);
+	//		Class.forName(driver);
 //			if(i == currentUser){
 				if(conexao == null){
 					conexao = DriverManager.getConnection(url,COORDENADOR,SENHA_COORDENADOR);
@@ -53,8 +53,6 @@ private static String url="jdbc:mysql://127.0.0.1/varejao_de_produtos";
 //			}
 		} catch (SQLException e1){
 			e1.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		}
 	}
 
