@@ -357,10 +357,14 @@ public void alterarCaixa() {
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
 		}
-		aux.setDescricao(textFieldDescricaoCaixa.getText());
+		if(descricao != null){
+		aux.setDescricao(descricao);
+		}
 		aux.setSituacao(situ);
 		aux.setE_preferencial(pref);
+		if(observacao != null){
 		aux.setObservacao(observacao);
+		}
 		aux.setId_matriz(idm);
 		aux.setSeq_filial(seqf);
 		try{
@@ -368,7 +372,12 @@ public void alterarCaixa() {
 			lblMensagem.setText("Caixa alterado");
 			refreshTable();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao alterar um caixa.");
+			alert.setHeaderText("Impossivel efetuar alteracao.");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+
 		}
 		
 	}catch (Exception e){

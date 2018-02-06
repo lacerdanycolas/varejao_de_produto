@@ -18,6 +18,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -174,14 +175,10 @@ public class VendaControllerGui  implements Initializable{
 
 		this.main = MainTeste.getInstance();
 
-		tbCollumIdProduto.setCellValueFactory(new PropertyValueFactory<Item_Venda,Integer>("id_produtoref"));
-		tbCollumPreco.setCellValueFactory(new PropertyValueFactory<Item_Venda,BigDecimal>("valor_unitario"));
+		tbCollumIdProduto.setCellValueFactory(new PropertyValueFactory<Item_Venda,Integer>("Id_produtoref"));
+		tbCollumPreco.setCellValueFactory(new PropertyValueFactory<Item_Venda,BigDecimal>("Valor_unitario"));
 		tbCollumQuantidade.setCellValueFactory(new PropertyValueFactory<Item_Venda,Integer>("Quantidade"));
-		tbCollumDesconto.setCellValueFactory(new PropertyValueFactory<Item_Venda,BigDecimal>("valor_desconto_item"));
-
-
-
-
+		tbCollumDesconto.setCellValueFactory(new PropertyValueFactory<Item_Venda,BigDecimal>("Valor_desconto_item"));
 
 		listaItens = FXCollections.observableArrayList();
 		listaItens.addAll(items);
@@ -213,7 +210,7 @@ public class VendaControllerGui  implements Initializable{
 						textField_CpfComprador.clear();
 						textField_IdCaixa.clear();
 						  Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
-						  dialogoInfo.setTitle("Informação");
+						  dialogoInfo.setTitle("Informaï¿½ï¿½o");
 				            dialogoInfo.setHeaderText("Cadastro da Venda");
 				            dialogoInfo.setContentText("Venda cadastrada com sucesso");
 				            dialogoInfo.showAndWait();
@@ -229,9 +226,9 @@ public class VendaControllerGui  implements Initializable{
 
 					}catch(Exception e) {
 						Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
-			            dialogoInfo.setTitle("ATENÇÃO");
+			            dialogoInfo.setTitle("ATENï¿½ï¿½O");
 			            dialogoInfo.setHeaderText("Cadastro Venda");
-			            dialogoInfo.setContentText("Os campos Id do Caixa e CPF do comprador são obrigatorios!");
+			            dialogoInfo.setContentText("Os campos Id do Caixa e CPF do comprador sï¿½o obrigatorios!");
 			            dialogoInfo.showAndWait();
 					}
 
@@ -289,7 +286,7 @@ public class VendaControllerGui  implements Initializable{
 
 				}catch(Exception e) {
 					Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
-		            dialogoInfo.setTitle("ATENÇÃO");
+		            dialogoInfo.setTitle("ATENï¿½ï¿½O");
 		            dialogoInfo.setHeaderText("Cadastro de Itens");
 		            dialogoInfo.setContentText("Preencha todos os campos!");
 		            dialogoInfo.showAndWait();
@@ -326,8 +323,8 @@ public class VendaControllerGui  implements Initializable{
 	            	items.remove(item);
 	            	tbViewItem.getItems().remove(tbViewItem.getSelectionModel().getSelectedIndex());
 					AtualizaTabela();
-					 dialogoInfo.setTitle("Informação");
-			            dialogoInfo.setHeaderText("Remoção Item da Venda");
+					 dialogoInfo.setTitle("Informaï¿½ï¿½o");
+			            dialogoInfo.setHeaderText("Remoï¿½ï¿½o Item da Venda");
 			            dialogoInfo.setContentText("Item removido com sucesso");
 			            dialogoInfo.showAndWait();
 
@@ -344,9 +341,9 @@ public class VendaControllerGui  implements Initializable{
 	          } catch(Exception e2) {
 
 	            	Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
-		            dialogoInfo.setTitle("ATENÇÃO");
+		            dialogoInfo.setTitle("ATENï¿½ï¿½O");
 		            dialogoInfo.setHeaderText("Remover Item da Venda");
-		            dialogoInfo.setContentText("Selecione um item para removê-lo");
+		            dialogoInfo.setContentText("Selecione um item para removï¿½-lo");
 		            dialogoInfo.showAndWait();
 	            }
 
@@ -356,7 +353,26 @@ public class VendaControllerGui  implements Initializable{
 	        });
 		}
 
+	
 
+	public void sair(ActionEvent event) {
+		((Node) event.getSource()).getScene().getWindow().hide();
+	}
+	
+	public void voltarMenuPrincipal(ActionEvent event) {
+		((Node) event.getSource()).getScene().getWindow().hide();
+		Parent parent;
+		try {
+			parent = FXMLLoader.load(getClass().getResource("/GUI/view/TelaPrincipalVarejao.fxml"));
+			Stage stage3 = new Stage();
+			Scene cena = new Scene(parent);
+			stage3.setScene(cena);
+			stage3.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void setApp(MainTeste main) {
 		this.main = main;
 	}
