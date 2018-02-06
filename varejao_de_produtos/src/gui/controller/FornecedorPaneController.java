@@ -25,8 +25,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import negocio.controller.FachadaVarejao;
+import negocio.entities.Caixa;
 import negocio.entities.Estados;
 import negocio.entities.Fornecedorref;
 import negocio.entities.Situacao;
@@ -79,8 +81,8 @@ public class FornecedorPaneController implements Initializable {
 	private Button buttonLimparFornecedor;
 
 	@FXML
-	private Button buttonListaRepresentantes;
-	
+	private Button buttonAlterarFornecedor;
+
 	@FXML
 	Label lblMensagem;
 
@@ -119,7 +121,7 @@ public class FornecedorPaneController implements Initializable {
 								situ = Situacao.INATIVO;
 						}catch(Exception e){
 							Alert alert = new Alert(AlertType.ERROR);
-							alert.setTitle("Erro ao cadastrar um Fornecedor.");
+							alert.setTitle("Erro ao alterar um Fornecedor.");
 							alert.setHeaderText("Preencha o campo Situacao.");
 							alert.setContentText(e.getMessage());
 							alert.showAndWait();
@@ -203,7 +205,21 @@ public class FornecedorPaneController implements Initializable {
 		}
 		});
 	}
-	
+
+	@FXML
+	public void selecionarFornecedor(MouseEvent arg0){
+		Fornecedorref fornecedor = tbViewFornecedor.getSelectionModel().getSelectedItem();
+		if(!tbViewFornecedor.getSelectionModel().isEmpty()){
+			textFieldNomeFornecedor.setText(fornecedor.getNome());
+			comboBoxSituacaoFornecedor.setValue(fornecedor.getSituacao().toString());
+			textFieldCnpjFornecedor.setText(fornecedor.getCnpj());
+			textFieldRuaFornecedor.setText(fornecedor.getRua());
+			textFieldCepFornecedor.setText(fornecedor.getCep());
+			textFieldBairroFornecedor.setText(fornecedor.getBairro());
+			comboBoxEstados.setValue(fornecedor.getEstado().toString());
+		}
+	}
+
 	public void removerFornecedor(){
 		Fornecedorref fornecedor = tbViewFornecedor.getSelectionModel().getSelectedItem();
 		try{
@@ -224,6 +240,62 @@ public class FornecedorPaneController implements Initializable {
 
 		}
 	}
+
+	public void alterarFornecedor() {
+		Fornecedorref aux = tbViewFornecedor.getSelectionModel().getSelectedItem();
+
+		try {
+			String nome = new String(textFieldNomeFornecedor.getText());
+			Situacao situ = null;
+			String situacao = comboBoxSituacaoFornecedor.getValue();
+				try{
+					if(situacao.toString().equals("ATIVO")){
+						situ = Situacao.ATIVO;
+					}else
+						situ = Situacao.INATIVO;
+				}catch(Exception e){
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Erro ao alterar um Fornecedor.");
+					alert.setHeaderText("Preencha o campo Situacao.");
+					alert.setContentText(e.getMessage());
+					alert.showAndWait();
+				}
+		String cnpj = textFieldCnpjFornecedor.getText();
+		String rua = textFieldRuaFornecedor.getText();
+		String cep = textFieldCepFornecedor.getText();
+
+		String estadoletra = comboBoxEstados.getValue();
+		Estados estadosigla = null;
+		String UF;
+
+		for(int i=0;i<arrayestados.length;i++){
+			if(arrayestados[i].toString().equals(estadoletra)){
+				estadosigla = arrayestados[i];
+			}
+		}
+
+		String bairro = textFieldBairroFornecedor.getText();
+		try {
+			varejao.alterarFornecedor(aux);
+			lblMensagem.setText("Fornecedor alterado.");
+			refreshTable();
+		} catch(Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao alterar um fornecedor.");
+			alert.setHeaderText("Impossivel efetuar alteracao.");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+
+		}
+	}catch (Exception e) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Erro ao alterar um funcionario.");
+		alert.setHeaderText("Impossivel efetuar alteracao.");
+		alert.setContentText(e.getMessage());
+		alert.showAndWait();
+
+	}
+}
 
 	@FXML
 	private void txtcnpjKey(){
@@ -278,7 +350,7 @@ public class FornecedorPaneController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 
 	}
-	
+
 	public void refreshTable() throws Exception{
 		oblistaFornecedor = FXCollections.observableArrayList();
 		oblistaFornecedor.addAll(varejao.listarFornecedores());
