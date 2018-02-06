@@ -223,6 +223,7 @@ public class VendaControllerGui  implements Initializable{
 					Date data= new Date();
 					
 					String cpf_comprador= new String (textField_CpfComprador.getText());
+					cpf_comprador = cpf_comprador.replace(".", "").replace("-", "");
 					Integer id_caixa= new Integer(comboBoxIdCaixa.getValue());
 					System.out.println(""+ id_caixa);
 					try {
@@ -436,7 +437,7 @@ public class VendaControllerGui  implements Initializable{
 	}
 	
 	@FXML
-	public void txtcpf() {
+	public void txtCpf() {
 		TextFieldFormatter tf = new TextFieldFormatter();
 		tf.setMask("###.###.###-##");
 		tf.setCaracteresValidos("0123456789");

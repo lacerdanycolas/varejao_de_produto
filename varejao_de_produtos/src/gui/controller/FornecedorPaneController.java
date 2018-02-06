@@ -121,7 +121,7 @@ public class FornecedorPaneController implements Initializable {
 								situ = Situacao.INATIVO;
 						}catch(Exception e){
 							Alert alert = new Alert(AlertType.ERROR);
-							alert.setTitle("Erro ao alterar um Fornecedor.");
+							alert.setTitle("Erro ao cadastrar um Fornecedor.");
 							alert.setHeaderText("Preencha o campo Situacao.");
 							alert.setContentText(e.getMessage());
 							alert.showAndWait();
@@ -275,6 +275,16 @@ public class FornecedorPaneController implements Initializable {
 		}
 
 		String bairro = textFieldBairroFornecedor.getText();
+
+		aux.setNome(nome);
+		if(situ != null){
+		aux.setSituacao(situ);
+		}
+		aux.setCnpj(cnpj);
+		aux.setRua(rua);
+		aux.setEstado(estadoletra);
+		aux.setBairro(bairro);
+		aux.setCep(cep);
 
 		try {
 			varejao.alterarFornecedor(aux);
