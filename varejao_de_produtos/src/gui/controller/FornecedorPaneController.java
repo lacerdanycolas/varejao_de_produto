@@ -275,6 +275,7 @@ public class FornecedorPaneController implements Initializable {
 		}
 
 		String bairro = textFieldBairroFornecedor.getText();
+
 		try {
 			varejao.alterarFornecedor(aux);
 			lblMensagem.setText("Fornecedor alterado.");
