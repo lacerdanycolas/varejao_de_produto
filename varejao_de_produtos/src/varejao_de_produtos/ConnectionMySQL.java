@@ -10,8 +10,8 @@ public class ConnectionMySQL {
 	private static int currentUser = Tipo_Funcionario.COORDENADOR.getId();
 	private static Connection conexao;
 	private static String driver = "com.mysql.jdbc.Driver";
-	//private static String url = "jdbc:mysql://localhost:3306/varejao_de_produtos";
-private static String url="jdbc:mysql://127.0.0.1/varejao_de_fraldas";
+	private static String url = "jdbc:mysql://localhost:3306/varejao_de_produtos";
+//private static String url="jdbc:mysql://127.0.0.1/varejao_de_fraldas";
 
 	private static String OPERADOR_CAIXA = "operador_caixa";
 	private static String SENHA_OPERADOR_CAIXA = "op_caixa";
@@ -23,7 +23,7 @@ private static String url="jdbc:mysql://127.0.0.1/varejao_de_fraldas";
 	private static String SENHA_SUPERVISOR_ESTOQUE = "estoque";
 
 	private static String COORDENADOR = "root";
-	private static String SENHA_COORDENADOR = "fish1997";
+	private static String SENHA_COORDENADOR = "*BancoDados0102";
 
 	public static void setUser(int i){
 		try {

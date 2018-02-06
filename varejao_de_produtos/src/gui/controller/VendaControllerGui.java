@@ -438,14 +438,14 @@ public class VendaControllerGui  implements Initializable{
 		
 	}
 	
-	@FXML
-	public void txtcpf() {
-		TextFieldFormatter tf = new TextFieldFormatter();
-		tf.setMask("###.####.###-##");
-		tf.setCaracteresValidos("0123456789");
-		tf.setTf(textField_CpfComprador);
-		tf.formatter();
-		
-	}
+//	@FXML
+//	public void txtcpf() {
+//		TextFieldFormatter tf = new TextFieldFormatter();
+//		tf.setMask("###.###.###-##");
+//		tf.setCaracteresValidos("0123456789");
+//		tf.setTf(textField_CpfComprador);
+//		tf.formatter();
+//		
+//	}
 
 }
