@@ -25,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import negocio.entities.Caixa;
 import negocio.entities.Funcionario;
@@ -245,7 +246,20 @@ public class CaixaPaneController implements Initializable{
 		oblistaCaixa.addAll(varejao.listarCaixa());
 		tbViewCaixa.setItems(oblistaCaixa);
 	}
-
+	
+	@FXML
+	public void selecionarCaixa(MouseEvent arg0){
+		Caixa caixa = tbViewCaixa.getSelectionModel().getSelectedItem();
+		if(!tbViewCaixa.getSelectionModel().isEmpty()){
+			textFieldDescricaoCaixa.setText(caixa.getDescricao());
+			comboBoxSituacao.setValue(caixa.getSituacao().toString());
+			comboBoxPreferencial.setValue(caixa.getE_preferencial().toString());
+			textFieldObservacaoCaixa.setText(caixa.getObservacao());
+			textFieldIdMatrizCaixa.setText(caixa.getId_matriz().toString());
+			textFieldIdMatrizCaixa.editableProperty().set(false);
+			comboBoxSeqFilial.setValue(caixa.getSeq_filial());
+		}
+	}
 
 	public void carregarTableViewCaixa() {
 		tbCollumIdCaixa.setCellValueFactory(new PropertyValueFactory<>("Id"));
@@ -285,19 +299,71 @@ public void carregandoValoresTela(){
 }
 
 public void alterarCaixa() {
-	Caixa caixa = tbViewCaixa.getSelectionModel().getSelectedItem();
+	Caixa aux = new Caixa();
+	aux = tbViewCaixa.getSelectionModel().getSelectedItem();
 	try{
-		if(caixa !=null && caixa instanceof Caixa){
-			varejao.alterarCaixa(caixa);
-			refreshTable();
-			lblMensagem.setText("Caixa alterado");
-		}else{
-			lblMensagem.setText("Selecione um caixa para ser alterado");
+		String descricao = new String(textFieldDescricaoCaixa.getText());
+		Situacao situ = null;
+		String situacao = comboBoxSituacao.getValue();
+		try{
+			if(situacao.toString().equals("ATIVO")){
+				situ = Situacao.ATIVO;
+			}else{
+				situ = Situacao.INATIVO;
+			}
+		}catch(Exception e){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao alterar um caixa.");
+			alert.setHeaderText("Preencha o campo Situacao.");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
 		}
+		String preferencial = comboBoxPreferencial.getValue();
+		Preferencial_Caixa pref = null;
+		try{
+			if(preferencial.toString().equals("S")){
+				pref = Preferencial_Caixa.S;
+			}else{
+				pref = Preferencial_Caixa.N;
+			}
+		}catch(Exception e){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao alterar um caixa.");
+			alert.setHeaderText("Preencha o campo Preferencial.");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		}
+		String observacao = new String(textFieldObservacaoCaixa.getText());
+
+		String idMatriz = new String(textFieldIdMatrizCaixa.getText());
+		int idm = Integer.parseInt(idMatriz);
+		int seqf = 0;
+		try{
+		String seq_filial = new String(comboBoxSeqFilial.getValue().toString());
+		seqf = Integer.parseInt(seq_filial);
+		}catch(Exception e){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao alterar um caixa.");
+			alert.setHeaderText("Preencha o campo Sequencial Filial.");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		}
+		aux = new Caixa(descricao, situ, pref, observacao, idm, seqf);
+		try{
+			varejao.alterarCaixa(aux);
+			refreshTable();
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Erro ao cadastrar um caixa.");
+			alert.setHeaderText("Impossivel cadastrar caixa.");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+		}
+		
 	}catch (Exception e){
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Erro ao alterar um funcionario.");
-		alert.setHeaderText("Impossivel efetuar alteração.");
+		alert.setTitle("Erro ao alterar um caixa.");
+		alert.setHeaderText("Impossivel efetuar alteracao.");
 		alert.setContentText(e.getMessage());
 		alert.showAndWait();
 

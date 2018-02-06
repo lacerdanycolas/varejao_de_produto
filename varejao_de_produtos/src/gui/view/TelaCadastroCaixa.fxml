@@ -60,7 +60,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tbViewCaixa" prefHeight="412.0" prefWidth="178.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tbViewCaixa" onMouseClicked="#selecionarCaixa" prefHeight="412.0" prefWidth="178.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="tbCollumIdCaixa" prefWidth="75.0" text="Id" />
                       <TableColumn fx:id="tbCollumSituacaoCaixa" prefWidth="75.0" text="Situação" />

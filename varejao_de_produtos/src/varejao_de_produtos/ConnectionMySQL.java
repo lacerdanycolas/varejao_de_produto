@@ -23,7 +23,7 @@ private static String url="jdbc:mysql://127.0.0.1/varejao_de_fraldas";
 	private static String SENHA_SUPERVISOR_ESTOQUE = "estoque";
 
 	private static String COORDENADOR = "root";
-	private static String SENHA_COORDENADOR = "";
+	private static String SENHA_COORDENADOR = "fish1997";
 
 	public static void setUser(int i){
 		try {
