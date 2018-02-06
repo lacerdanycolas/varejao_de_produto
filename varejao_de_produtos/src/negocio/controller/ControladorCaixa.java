@@ -61,9 +61,8 @@ public class ControladorCaixa {
 	public void alterarCaixa (Caixa novoCaixa) throws Exception {
 		if (novoCaixa == null) {
 			throw new FormatacaoInvalidaException();
-		} else if (novoCaixa != null) {
+		} else {
 			this.repositoroio.update(novoCaixa);
-			this.repositoroio.save(novoCaixa);
 		}
 	}
 

@@ -299,8 +299,17 @@ public void carregandoValoresTela(){
 }
 
 public void alterarCaixa() {
-	Caixa aux = new Caixa();
-	aux = tbViewCaixa.getSelectionModel().getSelectedItem();
+	Caixa aux = tbViewCaixa.getSelectionModel().getSelectedItem();
+	try{
+		varejao.deletarCaixa(aux);
+		
+	}catch(Exception e){
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Erro ao alterar um caixa.");
+		alert.setHeaderText("Error ao alterar um caixa.");
+		alert.setContentText(e.getMessage());
+		alert.showAndWait();
+	}
 	try{
 		String descricao = new String(textFieldDescricaoCaixa.getText());
 		Situacao situ = null;
@@ -348,16 +357,12 @@ public void alterarCaixa() {
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
 		}
-		aux = new Caixa(descricao, situ, pref, observacao, idm, seqf);
+		Caixa caixa = new Caixa(descricao, situ, pref, observacao, idm, seqf);
 		try{
-			varejao.alterarCaixa(aux);
+			varejao.salvarCaixa(caixa);
 			refreshTable();
 		} catch (Exception e) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Erro ao cadastrar um caixa.");
-			alert.setHeaderText("Impossivel cadastrar caixa.");
-			alert.setContentText(e.getMessage());
-			alert.showAndWait();
+			e.printStackTrace();
 		}
 		
 	}catch (Exception e){

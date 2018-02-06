@@ -38,7 +38,6 @@ public class FachadaVarejao {
 		this.funcionarios = ControladorFuncionario.getInstance();
 
 
-
 	}
 
 	public static FachadaVarejao getInstance(){

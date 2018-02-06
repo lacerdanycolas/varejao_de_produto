@@ -185,6 +185,7 @@ public class Repository<T, TId> implements IRepository<T, TId>{
 			query += campos[j].toString()+"=? ";
 		}
 		query += "WHERE "+meu_id+"=?;";
+		System.out.println(query);
 		PreparedStatement st = ConnectionMySQL.getConnection().prepareStatement(query);
 		for(int k = 0; k <= campos.length-1; k++){
 			Field field = entity.getClass().getDeclaredField(campos[k]);
@@ -201,7 +202,13 @@ public class Repository<T, TId> implements IRepository<T, TId>{
 		Field field = entity.getClass().getDeclaredField(meu_id);
 		field.setAccessible(true);
 		Object value = field.get(entity);
+	
+		if(value == null) {
+			throw new Exception("Id da entidade não pode ser nulo, nego burro");
+			}
+		System.out.println("ID "+value.toString());
 		st.setObject(campos.length+1, value);
+		System.out.println(st);
 		st.execute();
 		return null;
 	}
