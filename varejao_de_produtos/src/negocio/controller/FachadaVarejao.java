@@ -38,7 +38,6 @@ public class FachadaVarejao {
 		this.funcionarios = ControladorFuncionario.getInstance();
 
 
-
 	}
 
 	public static FachadaVarejao getInstance(){
@@ -72,6 +71,10 @@ public class FachadaVarejao {
 	//SALVAR CAIXA
 	public void salvarCaixa(Caixa caixa) throws Exception{
 		this.caixas.salvarCaixa(caixa);
+	}
+
+	public void alterarCaixa(Caixa caixa) throws Exception {
+		this.caixas.alterarCaixa(caixa);
 	}
 
 
@@ -180,7 +183,6 @@ public class FachadaVarejao {
 		public void deletarFornecedor(Fornecedorref fornecedor) throws Exception{
 			this.fornecedores.deletarFornecedor(fornecedor);
 		}
-
 
 }
 

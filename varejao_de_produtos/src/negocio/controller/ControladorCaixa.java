@@ -34,14 +34,13 @@ public class ControladorCaixa {
 		return repositoroio.getAll();
 	}
 
-
-
 	public Caixa salvarCaixa(Caixa caixa) throws Exception{
 		if(caixa == null)
 			throw new FormatacaoInvalidaException();
 
 		else
 			return repositoroio.save(caixa);
+
 
 	}
 
@@ -57,4 +56,13 @@ public class ControladorCaixa {
 
 
 
+	public void alterarCaixa (Caixa novoCaixa) throws Exception {
+		if (novoCaixa == null) {
+			throw new FormatacaoInvalidaException();
+		} else {
+			this.repositoroio.update(novoCaixa);
+		}
+	}
+
 }
+

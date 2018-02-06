@@ -1,3 +1,4 @@
+
 package gui.controller;
 
 import java.io.IOException;
@@ -77,7 +78,7 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
     @FXML
     private Button btnVoltar;
     @FXML
-    private Label lblMessage;
+    private Label lblMessagem;
     @FXML
     private Label lblPeriodo;
     @FXML
@@ -156,7 +157,7 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 			}catch(Exception e){
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Erro ao cadastrar uma Jornada.");
-				alert.setHeaderText("Parametros inválidos ou nulos.");
+				alert.setHeaderText("Parametros invï¿½lidos ou nulos.");
 				alert.setContentText(e.getMessage());
 				alert.showAndWait();
 			}
@@ -197,13 +198,13 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 								Jornada_dia_turno_conjuntoRepository.getInstance().save(jdt);
 								Alert alert = new Alert(Alert.AlertType.INFORMATION);
 								alert.setTitle("Tela Cadastro Jornada e Periodo");
-								alert.setHeaderText("Cadastramento Período");
-								alert.setContentText("Período cadastrado com sucesso");
+								alert.setHeaderText("Cadastramento Perï¿½odo");
+								alert.setContentText("Perï¿½odo cadastrado com sucesso");
 								alert.show();
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								Alert alert = new Alert(AlertType.ERROR);
-								alert.setTitle("Erro ao cadastrar um Período.");
+								alert.setTitle("Erro ao cadastrar um Perï¿½odo.");
 								alert.setHeaderText("Impossivel efetuar cadastro.");
 								alert.setContentText(e.getMessage());
 								alert.showAndWait();
@@ -224,8 +225,8 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 
 			}catch(Exception e){
 				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Erro ao cadastrar um Período.");
-				alert.setHeaderText("Parametros inválidos ou nulos, impossível realizar ação.");
+				alert.setTitle("Erro ao cadastrar um Perï¿½odo.");
+				alert.setHeaderText("Parametros invï¿½lidos ou nulos, impossï¿½vel realizar aï¿½ï¿½o.");
 				alert.setContentText(e.getMessage());
 				alert.showAndWait();
 			}
@@ -256,7 +257,7 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 							// TODO Auto-generated catch block
 							Alert alert = new Alert(AlertType.ERROR);
 							alert.setTitle("Erro ao deletar uma jornada.");
-							alert.setHeaderText("Parametros inválidos ou nulos. Selecione uma jornada para deletar");
+							alert.setHeaderText("Parametros invï¿½lidos ou nulos. Selecione uma jornada para deletar");
 							alert.setContentText(e.getMessage());
 							alert.showAndWait();
 						}
@@ -370,3 +371,5 @@ public class JornadaTrabalhoConjuntoController implements Initializable {
 
 
 }
+
+

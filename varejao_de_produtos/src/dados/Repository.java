@@ -154,7 +154,66 @@ public class Repository<T, TId> implements IRepository<T, TId>{
 
 	@Override
 	public T update(T entity) throws Exception {
-		// TODO Auto-generated method stub
+		String className = entity.getClass().getSimpleName().toLowerCase();
+		String query = "UPDATE "+ className +" SET ";
+		String meu_id = "";
+		int i = 0;
+		int achouUm = 0;
+		for(Field f : entity.getClass().getDeclaredFields()){
+			if(f.isAnnotationPresent(MeuId.class)){
+				if(achouUm == 0){
+					meu_id = f.getName();
+					achouUm++;
+				}else if(achouUm != 0){
+					throw new Exception("Entidade com multiplos Ids");
+				}
+			}
+		}
+		i = 0;
+		String[] campos = new String[entity.getClass().getDeclaredFields().length-1]; 
+		for(Field f : entity.getClass().getDeclaredFields()){
+			if(!f.isAnnotationPresent(MeuId.class)){
+				System.out.println(i);
+				campos[i] = f.getName();
+				i++;
+			}
+		}
+		query += "";
+		System.out.println(entity.getClass().getDeclaredFields().length);
+		for(int j = 0; j <= campos.length-1; j++){
+			/*System.out.println(j);*/
+			if(j == campos.length-1){
+				query += campos[j].toString()+"=? ";
+			}else{
+				query += campos[j].toString()+"=? "+ ", ";
+			}
+		}
+		query += "WHERE "+meu_id+"=?;";
+		System.out.println(query);
+		PreparedStatement st = ConnectionMySQL.getConnection().prepareStatement(query);
+		for(int k = 0; k <= campos.length-1; k++){
+			Field field = entity.getClass().getDeclaredField(campos[k]);
+			field.setAccessible(true);
+			if(field.getType().isEnum()){
+				Method method = field.getType().getDeclaredMethod("getId");
+			    Integer val = (Integer) method.invoke(field.get(entity));
+			    st.setObject(k+1, val);
+			}else{
+				Object value = field.get(entity);
+				st.setObject(k+1, value);
+			}
+		}
+		Field field = entity.getClass().getDeclaredField(meu_id);
+		field.setAccessible(true);
+		Object value = field.get(entity);
+	
+		if(value == null) {
+			throw new Exception("Id da entidade não pode ser nulo, nego burro");
+			}
+		System.out.println("ID "+value.toString());
+		st.setObject(campos.length+1, value);
+		System.out.println(st);
+		st.execute();
 		return null;
 	}
 

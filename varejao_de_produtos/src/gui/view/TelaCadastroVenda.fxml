@@ -31,9 +31,9 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Text>
-                        <ImageView fitHeight="164.0" fitWidth="170.0" layoutX="340.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="164.0" fitWidth="170.0" layoutX="338.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../Pictures/varejaoFraldas.jpg" />
+                              <Image url="@../../../images/WhatsApp%20Image%202018-01-28%20at%2017.26.04.jpeg" />
                            </image>
                         </ImageView>
                         <Text fill="WHITE" layoutX="15.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id do Caixa" wrappingWidth="94.0" />
@@ -53,6 +53,9 @@
                         <Button layoutX="425.0" layoutY="1.0" mnemonicParsing="false" onAction="#voltarMenuPrincipal" text="&lt;" />
                         <Button layoutX="467.0" layoutY="1.0" mnemonicParsing="false" onAction="#sair" text="X" />
                         <ComboBox fx:id="comboBoxIdCaixa" layoutX="82.0" layoutY="33.0" prefHeight="25.0" prefWidth="119.0" />
+                        <TextField fx:id="textField_IdCaixa" layoutX="82.0" layoutY="33.0" prefHeight="25.0" prefWidth="121.0" />
+                        <Button layoutX="514.0" layoutY="1.0" mnemonicParsing="false" onAction="#sair" text="X" textFill="#eb0b0b" />
+                        <Button layoutX="486.0" layoutY="1.0" mnemonicParsing="false" onAction="#voltarMenuPrincipal" text="&lt;" />
                      </children>
                   </AnchorPane>
                </children>

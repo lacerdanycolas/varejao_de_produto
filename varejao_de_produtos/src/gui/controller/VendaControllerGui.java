@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 
 import dados.FuncoesRepository;
 import gui.MainTeste;
-import gui.TesteVenda;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -95,7 +94,7 @@ public class VendaControllerGui  implements Initializable{
 	private ObservableList<Item_Venda> listaItens;
 	private Collection<Item_Venda> IVlist = new ArrayList<Item_Venda>();
 	
-	private TesteVenda main;
+	private MainTeste main;
 	private FachadaVarejao fachada = FachadaVarejao.getInstance();
 	private ArrayList<Item_Venda> items= new ArrayList<Item_Venda>();
 	Item_Venda item_venda;
@@ -182,7 +181,7 @@ public class VendaControllerGui  implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		this.main = TesteVenda.getInstance();
+		this.main = MainTeste.getInstance();
 		CarregarComBox();
 		
 		tbCollumIdProduto.setCellValueFactory(new PropertyValueFactory<Item_Venda,Integer>("id_produtoref"));
@@ -397,7 +396,7 @@ public class VendaControllerGui  implements Initializable{
 		}
 		
 	
-	public void setApp(TesteVenda main) {
+	public void setApp(MainTeste main) {
 		this.main = main;
 	}
 	

@@ -35,8 +35,9 @@ public class Main {
 
 		RepresentanteRepository representanteRepository = RepresentanteRepository.getInstance();
 		TurnoRepository turnorep = TurnoRepository.getInstance();
-
+		
 		try {
+			repository.update(new Dia(7, "Sabado_Atualizado"));
 			/*Collection<Turno> listaTurnos = turnoRepository.getAll();
 			for(Turno turno: listaTurnos){
 				System.out.println(turno.toString());
@@ -48,11 +49,10 @@ public class Main {
 			//Funcionario func = new Funcionario("03236541123",sexo, estado_civil, "8842161", "Rafael", "Camara", "Figueredo", situacao, "Rua Espardate", "Brasilia teimosa", "PE", "45555555", "admin", "admin", "10303577495",  tipo_func, "2352733254", 14);
 // refs/remotes/origin/master
 			//Caixa caixa = new Caixa(null, situacao, e_preferencial, null, 1, 26);
-			Dia d = new Dia(27, "Olha o Dia novo");
 
 /*			Produtoref produto = new Produtoref("28162152", null, null, new BigDecimal("27.32"), "10", new BigDecimal("0.00"), "Faca de madeira", null, null, null, 3, 4, 4, 2, 9, 17);
 =======
-
+			
 			//Collection<Turno> listaturno = turnorep.getAll();
 			//System.out.println(listaturno.toString());
 //			Representante rep = new Representante("11459922455", "Joao Marcio", "joaomarcio@example.com", "33459939");
