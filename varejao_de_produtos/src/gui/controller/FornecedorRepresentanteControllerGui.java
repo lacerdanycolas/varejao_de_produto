@@ -59,7 +59,6 @@ public class FornecedorRepresentanteControllerGui implements Initializable {
 
 		carregarTbFornecedor();
 
-
 	}
 
 	private void carregarTbFornecedor(){
@@ -130,9 +129,6 @@ public class FornecedorRepresentanteControllerGui implements Initializable {
 				tbCollumNomeRep.setCellValueFactory(cellData -> new SimpleStringProperty(representante.getNome()));
 			}
 		}
-
-
-
 	}
 
 

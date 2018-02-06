@@ -182,7 +182,11 @@ public class Repository<T, TId> implements IRepository<T, TId>{
 		System.out.println(entity.getClass().getDeclaredFields().length);
 		for(int j = 0; j <= campos.length-1; j++){
 			/*System.out.println(j);*/
-			query += campos[j].toString()+"=? ";
+			if(j == campos.length-1){
+				query += campos[j].toString()+"=? ";
+			}else{
+				query += campos[j].toString()+"=? "+ ", ";
+			}
 		}
 		query += "WHERE "+meu_id+"=?;";
 		System.out.println(query);

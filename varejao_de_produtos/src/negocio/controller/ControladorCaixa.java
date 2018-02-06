@@ -34,8 +34,6 @@ public class ControladorCaixa {
 		return repositoroio.getAll();
 	}
 
-
-
 	public Caixa salvarCaixa(Caixa caixa) throws Exception{
 		if(caixa == null)
 			throw new FormatacaoInvalidaException();

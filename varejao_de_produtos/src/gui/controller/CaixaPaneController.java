@@ -300,7 +300,7 @@ public void carregandoValoresTela(){
 
 public void alterarCaixa() {
 	Caixa aux = tbViewCaixa.getSelectionModel().getSelectedItem();
-	try{
+	/*try{
 		varejao.deletarCaixa(aux);
 		
 	}catch(Exception e){
@@ -309,7 +309,7 @@ public void alterarCaixa() {
 		alert.setHeaderText("Error ao alterar um caixa.");
 		alert.setContentText(e.getMessage());
 		alert.showAndWait();
-	}
+	}*/
 	try{
 		String descricao = new String(textFieldDescricaoCaixa.getText());
 		Situacao situ = null;
@@ -357,9 +357,15 @@ public void alterarCaixa() {
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
 		}
-		Caixa caixa = new Caixa(descricao, situ, pref, observacao, idm, seqf);
+		aux.setDescricao(textFieldDescricaoCaixa.getText());
+		aux.setSituacao(situ);
+		aux.setE_preferencial(pref);
+		aux.setObservacao(observacao);
+		aux.setId_matriz(idm);
+		aux.setSeq_filial(seqf);
 		try{
-			varejao.salvarCaixa(caixa);
+			varejao.alterarCaixa(aux);
+			lblMensagem.setText("Caixa alterado");
 			refreshTable();
 		} catch (Exception e) {
 			e.printStackTrace();
