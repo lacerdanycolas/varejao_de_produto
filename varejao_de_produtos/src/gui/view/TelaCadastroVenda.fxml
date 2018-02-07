@@ -50,12 +50,10 @@
                         <Button fx:id="buttonAddItem" layoutX="25.0" layoutY="280.0" mnemonicParsing="false" text="Adicionar Item" />
                         <Button fx:id="buttonRemoverItem" layoutX="140.0" layoutY="280.0" mnemonicParsing="false" text="Remover Item" />
                         <Button fx:id="buttonCadastarVenda" layoutX="271.0" layoutY="280.0" mnemonicParsing="false" text="Cadastrar Venda" />
-                        <Button layoutX="425.0" layoutY="1.0" mnemonicParsing="false" onAction="#voltarMenuPrincipal" text="&lt;" />
-                        <Button layoutX="467.0" layoutY="1.0" mnemonicParsing="false" onAction="#sair" text="X" />
                         <ComboBox fx:id="comboBoxIdCaixa" layoutX="82.0" layoutY="33.0" prefHeight="25.0" prefWidth="119.0" />
-                        <TextField fx:id="textField_IdCaixa" layoutX="82.0" layoutY="33.0" prefHeight="25.0" prefWidth="121.0" />
                         <Button layoutX="514.0" layoutY="1.0" mnemonicParsing="false" onAction="#sair" text="X" textFill="#eb0b0b" />
                         <Button layoutX="486.0" layoutY="1.0" mnemonicParsing="false" onAction="#voltarMenuPrincipal" text="&lt;" />
+                        <Label fx:id="lblMensagem" layoutX="15.0" layoutY="15.0" prefHeight="17.0" prefWidth="200.0" />
                      </children>
                   </AnchorPane>
                </children>

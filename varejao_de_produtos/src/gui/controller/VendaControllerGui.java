@@ -211,7 +211,7 @@ public class VendaControllerGui  implements Initializable{
 					
 					if(items.isEmpty()) {
 						 Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
-						  dialogoInfo.setTitle("Atenção");
+						  dialogoInfo.setTitle("Atenï¿½ï¿½o");
 				            dialogoInfo.setHeaderText("Cadastro da Venda");
 				            dialogoInfo.setContentText("Adicione um item");
 				            dialogoInfo.showAndWait();
@@ -227,32 +227,30 @@ public class VendaControllerGui  implements Initializable{
 					System.out.println(""+ id_caixa);
 					try {
 						CadastrarVenda(cpf_comprador,data, id_caixa);
+						lblMensagem.setText("Venda cadastrada");
 						CadastroItems(items);
 						AtualizaTabela();
 						LimparLista(items);
 						textField_CpfComprador.clear();
 						
-						AtualizaTabela();
-						  Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
-						  dialogoInfo.setTitle("Informação");
+						
+						  /*Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
+						  dialogoInfo.setTitle("Informaï¿½ï¿½o");
 				            dialogoInfo.setHeaderText("Cadastro da Venda");
 				            dialogoInfo.setContentText("Venda cadastrada com sucesso");
-				            dialogoInfo.showAndWait();
+				            dialogoInfo.showAndWait();*/
 						  
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 						
-						
-					
-						
-						
+			
 					}catch(Exception e) {
 						Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
-			            dialogoInfo.setTitle("ATENÇÃO");
+			            dialogoInfo.setTitle("ATENï¿½ï¿½O");
 			            dialogoInfo.setHeaderText("Cadastro Venda");
-			            dialogoInfo.setContentText("Os campos Id do Caixa e CPF do comprador são obrigatorios!");
+			            dialogoInfo.setContentText("Os campos Id do Caixa e CPF do comprador sï¿½o obrigatorios!");
 			            dialogoInfo.showAndWait();
 					}
 					}
@@ -299,7 +297,6 @@ public class VendaControllerGui  implements Initializable{
 					if(resultado==1) {
 
 						item_venda= AddItemLista(id_venda, id_produtoref, quantidade, valor_unitario, valor_desconto_item);
-				
 						try {
 							AtualizaTabela();
 						} catch (Exception e) {
@@ -313,16 +310,16 @@ public class VendaControllerGui  implements Initializable{
 						textFieldValor_Desconto_item.clear();
 					}else {
 						Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
-			            dialogoInfo.setTitle("ATENÇÃO");
+			            dialogoInfo.setTitle("ATENï¿½ï¿½O");
 			            dialogoInfo.setHeaderText("Venda de Itens");
-			            dialogoInfo.setContentText("O produto não possui quantidade suficiente no estoque");
+			            dialogoInfo.setContentText("O produto nï¿½o possui quantidade suficiente no estoque");
 			            dialogoInfo.showAndWait();
 					}
 					
 					
 				}catch(Exception e) {
 					Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
-		            dialogoInfo.setTitle("ATENÇÃO");
+		            dialogoInfo.setTitle("ATENï¿½ï¿½O");
 		            dialogoInfo.setHeaderText("Cadastro de Itens");
 		            dialogoInfo.setContentText("Preencha todos os campos!");
 		            dialogoInfo.showAndWait();
@@ -359,8 +356,8 @@ public class VendaControllerGui  implements Initializable{
 	            	items.remove(item);
 	            	tbViewItem.getItems().remove(tbViewItem.getSelectionModel().getSelectedIndex());
 					AtualizaTabela();
-					 dialogoInfo.setTitle("Informação");
-			            dialogoInfo.setHeaderText("Remoção Item da Venda");
+					 dialogoInfo.setTitle("Informaï¿½ï¿½o");
+			            dialogoInfo.setHeaderText("Remoï¿½ï¿½o Item da Venda");
 			            dialogoInfo.setContentText("Item removido com sucesso");
 			            dialogoInfo.showAndWait();
 	            	
@@ -374,8 +371,8 @@ public class VendaControllerGui  implements Initializable{
 	            
 	            }else {
 	            	 Alert dialogo = new Alert(Alert.AlertType.WARNING);
-					  dialogo.setTitle("Atenção");
-			            dialogo.setHeaderText("Remoção de item");
+					  dialogo.setTitle("Atenï¿½ï¿½o");
+			            dialogo.setHeaderText("Remoï¿½ï¿½o de item");
 			            dialogo.setContentText("Selecione um item");
 			            dialogo.showAndWait();
 	            }
@@ -383,9 +380,9 @@ public class VendaControllerGui  implements Initializable{
 	          } catch(Exception e2) {
 
 	            	Alert dialogoInfo = new Alert(Alert.AlertType.WARNING);
-		            dialogoInfo.setTitle("ATENÇÃO");
+		            dialogoInfo.setTitle("ATENï¿½ï¿½O");
 		            dialogoInfo.setHeaderText("Remover Item da Venda");
-		            dialogoInfo.setContentText("Selecione um item para removê-lo");
+		            dialogoInfo.setContentText("Selecione um item para removï¿½-lo");
 		            dialogoInfo.showAndWait();
 	            }
 	          
@@ -441,7 +438,7 @@ public class VendaControllerGui  implements Initializable{
 	@FXML
 	public void txtcpf() {
 		TextFieldFormatter tf = new TextFieldFormatter();
-		tf.setMask("###.####.###-##");
+		tf.setMask("###.###.###-##");
 		tf.setCaracteresValidos("0123456789");
 		tf.setTf(textField_CpfComprador);
 		tf.formatter();
