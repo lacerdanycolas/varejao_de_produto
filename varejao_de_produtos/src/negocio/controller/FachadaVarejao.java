@@ -187,6 +187,10 @@ public class FachadaVarejao {
 		public void alterarFornecedor(Fornecedorref fornecedor) throws Exception {
 			this.fornecedores.alterarFornecedor(fornecedor);
 		}
+		
+		public void alterarProduto(Produtoref produto) throws Exception{
+			this.produtos.alterarProduto(produto);
+		}
 
 }
 

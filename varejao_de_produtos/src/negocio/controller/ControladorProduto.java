@@ -2,6 +2,7 @@ package negocio.controller;
 
 import java.util.Collection;
 import dados.ProdutorefRepository;
+import exceptions.FormatacaoInvalidaException;
 import negocio.entities.Produtoref;
 
 public class ControladorProduto {
@@ -45,6 +46,14 @@ public class ControladorProduto {
 				throw new Exception("Produto nao existe");
 			} else {
 				repositorio.delete(produto);
+			}
+		}
+		
+		public void alterarProduto(Produtoref novoProduto) throws Exception {
+			if(novoProduto == null){
+				throw new FormatacaoInvalidaException();
+			}else{
+				this.repositorio.update(novoProduto);
 			}
 		}
 }

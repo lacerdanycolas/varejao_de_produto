@@ -24,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import negocio.controller.FachadaVarejao;
 import negocio.entities.Produtoref;
@@ -89,6 +90,9 @@ public class ProdutoPaneController {
 
 	@FXML
 	Button butBuscar;
+	
+	@FXML
+	Button butAlterar;
 
 	@FXML
 	TextField textFieldNome;
@@ -173,6 +177,45 @@ public class ProdutoPaneController {
 		obListaProduto = FXCollections.observableArrayList();
 		obListaProduto.addAll(varejao.listarProduto());
 		tabelaProdutos.setItems(obListaProduto);
+	}
+	
+	@FXML
+	public void selecionarProduto(MouseEvent arg0){
+		Produtoref produto = tabelaProdutos.getSelectionModel().getSelectedItem();
+		if(!tabelaProdutos.getSelectionModel().isEmpty()){
+			textFieldNome.setText(produto.getNome());
+			textFieldCodigoDeBarras.setText(produto.getCodigo_de_barra());
+			textFieldPrecoTabela.setText(produto.getPreco_por_tabela().toString());
+			textFieldDescricao.setText(produto.getDescricao());
+			if(produto.getFrequencia_pedido()==null){
+				textFieldFrequenciaPedido.setText("");
+			}else{
+				textFieldFrequenciaPedido.setText(produto.getFrequencia_pedido().toString());
+			}
+			textFieldCST.setText(produto.getCst());
+			textFieldICMS.setText(produto.getIcms().toString());
+			if(produto.getPreco_ultima_compra()==null){
+				textFieldPrecoUltimaCompra.setText("");
+			}else{
+			textFieldPrecoUltimaCompra.setText(produto.getPreco_ultima_compra().toString());
+			}
+			if(produto.getQuantidade_minima()==null){
+				textFieldQuantidadeMinima.setText("");
+			}else{
+			textFieldQuantidadeMinima.setText(produto.getQuantidade_estoque().toString());
+			}
+			if(produto.getQuantidade_estoque()==null){
+				textFieldQuantidadeEstoque.setText("");
+			}else{
+			textFieldQuantidadeEstoque.setText(produto.getQuantidade_estoque().toString());
+			}
+			textFieldIdFornecedor.setText(produto.getId_fornecedor().toString());
+			textFieldIdCategoria.setText(produto.getId_categoriaref().toString());
+			textFieldIdSubcategoria.setText(produto.getId_sub_categoriaref().toString());
+			textFieldIdUnidade.setText(produto.getId_unidaderef().toString());
+			textFieldIdMarca.setText(produto.getId_marcaref().toString());
+			textFieldIdNCM.setText(produto.getId_ncm().toString());
+		}
 	}
 
 	public void sair(ActionEvent event) {
@@ -270,6 +313,63 @@ public class ProdutoPaneController {
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
 
+		}
+	}
+	
+	public void alterarProduto(){
+		Produtoref aux = tabelaProdutos.getSelectionModel().getSelectedItem();
+		try{
+			String nome, descricao, cst, codigo_de_barra;
+
+			nome = textFieldNome.getText();
+			codigo_de_barra = textFieldCodigoDeBarras.getText();
+			BigDecimal preco_por_tabela = new BigDecimal (textFieldPrecoTabela.getText());
+			descricao = textFieldDescricao.getText();
+			BigDecimal frequencia_pedido = new BigDecimal(textFieldFrequenciaPedido.getText());
+			cst = textFieldCST.getText();
+			BigDecimal icms = new BigDecimal(textFieldICMS.getText());
+			BigDecimal preco_ultima_compra = new BigDecimal(textFieldPrecoUltimaCompra.getText());
+			int quantidade_estoque = Integer.parseInt(textFieldQuantidadeEstoque.getText());
+			int quantidade_minima = Integer.parseInt(textFieldQuantidadeMinima.getText());
+			int id_fornecedor = Integer.parseInt(textFieldIdFornecedor.getText());
+			int id_categoriaref = Integer.parseInt(textFieldIdCategoria.getText());
+			int id_subcategoriaref = Integer.parseInt(textFieldIdSubcategoria.getText());
+			int id_unidaderef = Integer.parseInt(textFieldIdUnidade.getText());
+			int id_marcaref = Integer.parseInt(textFieldIdMarca.getText());
+			int id_ncm = Integer.parseInt(textFieldIdNCM.getText());
+			aux.setNome(nome);
+			aux.setCodigo_de_barra(codigo_de_barra);
+			aux.setPreco_por_tabela(preco_por_tabela);
+			aux.setDescricao(descricao);
+			aux.setFrequencia_pedido(frequencia_pedido);
+			aux.setCst(cst);
+			aux.setIcms(icms);
+			aux.setPreco_ultima_compra(preco_ultima_compra);
+			aux.setQuantidade_estoque(quantidade_estoque);
+			aux.setQuantidade_minima(quantidade_minima);
+			aux.setId_fornecedor(id_fornecedor);
+			aux.setId_categoriaref(id_categoriaref);
+			aux.setId_sub_categoriaref(id_subcategoriaref);
+			aux.setId_unidaderef(id_unidaderef);
+			aux.setId_marcaref(id_marcaref);
+			aux.setId_ncm(id_ncm);
+			try{
+				varejao.alterarProduto(aux);
+				lblMensagem.setText("Produto alterado");
+				refreshTable();
+			}catch(Exception e){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao alterar um Produto.");
+				alert.setHeaderText("Impossivel efetuar alteracao.");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
+			}
+			}catch(Exception e){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao alterar um Produto.");
+				alert.setHeaderText("Impossivel efetuar alteracao.");
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
 		}
 	}
 	
