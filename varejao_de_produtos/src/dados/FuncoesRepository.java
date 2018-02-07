@@ -30,6 +30,22 @@ public class FuncoesRepository {
             System.out.println(ex.getMessage());
         }
 	}
+	public static void TotalEstoqueAtualiza(int idproduto) {
+		
+		String query = "{ call TotalEstoqueAtualiza (?) }";
+        ResultSet rs;
+        
+        try {
+       CallableStatement stmt = (CallableStatement) ConnectionMySQL.getConnection().prepareCall(query);
+ 
+            stmt.setInt(1, idproduto);
+ 
+            rs = stmt.executeQuery();
+  
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+	}
 	
 	public static int QtdEstoque(int idproduto, int quant) {
 		String query = "select QtdEstoque (?,?)";
