@@ -3,7 +3,9 @@ package negocio.controller;
 import java.util.Collection;
 
 import dados.FuncionarioRepository;
+import exceptions.FormatacaoInvalidaException;
 import exceptions.FuncionarioNaoExiste;
+import negocio.entities.Caixa;
 import negocio.entities.Funcionario;
 import varejao_de_produtos.ConnectionMySQL;
 
@@ -17,8 +19,8 @@ public class ControladorFuncionario {
 		}
 		return instance;
 	}
-	
-	
+
+
 	private ControladorFuncionario () {
 		this.repositorio = FuncionarioRepository.getInstance();
 	}
@@ -62,7 +64,15 @@ public class ControladorFuncionario {
 		else
 			repositorio.delete(Func);
 	}
-	
+
+	public void alterarFuncionario (Funcionario novoFunc) throws Exception {
+		if (novoFunc == null) {
+			throw new FormatacaoInvalidaException();
+		} else {
+			this.repositorio.update(novoFunc);
+		}
+	}
+
 	public boolean efetuarLogin(String login, String senha) throws Exception{
 		Funcionario retorno = null;
 		for(Funcionario f: this.listarFuncionarios()){
