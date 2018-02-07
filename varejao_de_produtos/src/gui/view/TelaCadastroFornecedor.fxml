@@ -56,13 +56,14 @@
                         </ImageView>
                         <Text fill="WHITE" layoutX="250.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CEP" />
                         <Label fx:id="lblMensagem" layoutX="12.0" layoutY="6.0" prefHeight="17.0" prefWidth="236.0" />
+                        <Button id="buttonSalvarCaixa" fx:id="buttonAlterarFornecedor" layoutX="78.0" layoutY="41.0" mnemonicParsing="false" onAction="#alterarFornecedor" text="Alterar" />
                      </children>
                   </AnchorPane>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tbViewFornecedor" prefHeight="412.0" prefWidth="178.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tbViewFornecedor" onMouseClicked="#selecionarFornecedor" prefHeight="412.0" prefWidth="178.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
                         <TableColumn fx:id="tbCollumIdFornecedor" prefWidth="29.0" text="Id" />
                         <TableColumn fx:id="tbCollumNomeFornecedor" prefWidth="122.0" text="Nome" />

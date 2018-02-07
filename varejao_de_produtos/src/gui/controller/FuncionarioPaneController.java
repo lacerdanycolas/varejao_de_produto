@@ -22,8 +22,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import negocio.controller.FachadaVarejao;
+import negocio.entities.Caixa;
 import negocio.entities.Estado_Civil;
 import negocio.entities.Estados;
 import negocio.entities.Funcionario;
@@ -122,10 +124,10 @@ public class FuncionarioPaneController {
 
 	@FXML
 	TextField txtCnpjMatrizFuncionario;
-	
+
 	@FXML
 	private ComboBox<String> comboBoxEstados;
-	
+
 	@FXML
 	private ComboBox<String> comboBoxSituacao;
 
@@ -217,6 +219,17 @@ public class FuncionarioPaneController {
 		txtCpf_gerente.clear();
 		txtCnpjMatrizFuncionario.clear();
 		lblMensagem.setText("");
+	}
+
+	@FXML
+	public void selecionarFuncionario(MouseEvent arg0){
+		Funcionario funcionario = tabelaFuncionarios.getSelectionModel().getSelectedItem();
+		if(!tabelaFuncionarios.getSelectionModel().isEmpty()){
+			txtCpfFuncionario.setText(funcionario.getCpf());
+			comboBoxSexo.setValue(funcionario.getSexo().toString());
+			comboBoxEstadoCivil.setValue(funcionario.getEstadoC().toString());
+			txtRgFuncionario.setText(funcionario.getRg());
+		}
 	}
 
 	public void cadastrarFuncionario(){
@@ -324,7 +337,7 @@ public class FuncionarioPaneController {
 				alert.setTitle("Erro ao cadastrar um Funcionario.");
 				alert.setHeaderText("Preencha o campo Sequencial Filial.");
 				alert.setContentText(e.getMessage());
-				alert.showAndWait();	
+				alert.showAndWait();
 			}
 			Funcionario aux = new Funcionario(cpf, sexo, estadoCivil, rg, primeiro_nome, segundo_nome, terceiro_nome, situacao, rua, bairro, estadoletra, cep, login, senha, cpf_gerente, tipoFuncionario, cnpj_Matriz, seqf);
 			varejao.salvarFuncionario(aux);

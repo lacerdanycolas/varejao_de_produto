@@ -3,6 +3,8 @@ package negocio.controller;
 import java.util.Collection;
 
 import dados.FornecedorrefRepository;
+import exceptions.FormatacaoInvalidaException;
+import negocio.entities.Caixa;
 import negocio.entities.Fornecedorref;
 
 public class ControladorFornecedorref {
@@ -46,6 +48,14 @@ public class ControladorFornecedorref {
 			throw new Exception("Fornecedor n�o existe");
 		else
 			repositorio.delete(fornecedor);
+	}
+	
+	public void alterarFornecedor (Fornecedorref novoForn) throws Exception {
+		if (novoForn == null) {
+			throw new FormatacaoInvalidaException();
+		} else {
+			this.repositorio.update(novoForn);
+		}
 	}
 
 }
