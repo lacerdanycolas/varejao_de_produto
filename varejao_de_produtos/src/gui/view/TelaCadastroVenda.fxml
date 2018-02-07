@@ -38,7 +38,7 @@
                         </ImageView>
                         <Text fill="WHITE" layoutX="15.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id do Caixa" wrappingWidth="94.0" />
                         <Text fill="WHITE" layoutX="229.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF  do Comprador" wrappingWidth="133.0" />
-                        <TextField fx:id="textField_CpfComprador" layoutX="363.0" layoutY="33.0" promptText="###########" />
+                        <TextField fx:id="textField_CpfComprador" layoutX="363.0" layoutY="33.0" onKeyReleased="#txtCpf" promptText="###########" />
                         <Text fill="WHITE" layoutX="20.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id produto" wrappingWidth="83.912109375" />
                         <Text fill="WHITE" layoutX="20.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço (R$)" />
                         <Text fill="WHITE" layoutX="20.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantidade" />
