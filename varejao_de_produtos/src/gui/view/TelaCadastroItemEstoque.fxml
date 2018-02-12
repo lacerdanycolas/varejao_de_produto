@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="503.0" prefWidth="543.0" style="-fx-background-color: #E80000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ItemEstoquePaneController">
+   <children>
+      <Button fx:id="butCadastrar" layoutX="29.0" layoutY="49.0" mnemonicParsing="false" onAction="#cadastrarItemEstoque" text="Cadastrar" />
+      <Button fx:id="butRemover" layoutX="118.0" layoutY="49.0" mnemonicParsing="false" onAction="#removerItemEstoque" text="Remover" />
+      <Button fx:id="butLimpar" layoutX="204.0" layoutY="49.0" mnemonicParsing="false" onAction="#limparForm" text="Limpar" />
+      <Label layoutX="203.0" layoutY="11.0" text="Item Estoque" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="117.0" text="Quantidade:" textFill="WHITE" />
+      <Label layoutX="26.0" layoutY="149.0" text="Data de Validade:" textFill="WHITE" />
+      <Label layoutX="29.0" layoutY="84.0" text="Valor da compra:" textFill="WHITE" />
+      <Button layoutX="497.0" layoutY="10.0" mnemonicParsing="false" onAction="#sair" text="X" textFill="#eb0b0b" />
+      <Button layoutX="469.0" layoutY="10.0" mnemonicParsing="false" onAction="#voltarMenuPrincipal" text="&lt;" />
+      <Label fx:id="lblMensagem" layoutX="3.0" layoutY="6.0" prefHeight="17.0" prefWidth="337.0" />
+      <Label layoutX="61.0" layoutY="278.0" prefHeight="26.0" prefWidth="69.0" text="Id produto:" textFill="WHITE" />
+      <ImageView fitHeight="62.0" fitWidth="64.0" layoutX="380.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/WhatsApp%20Image%202018-01-28%20at%2017.26.04.jpeg" />
+         </image>
+      </ImageView>
+      <Label layoutX="71.0" layoutY="215.0" text="Id avaria:" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="247.0" text="Id pratileira:" textFill="WHITE" />
+      <TextField fx:id="textFieldIdAvaria" layoutX="125.0" layoutY="208.0" prefHeight="27.0" prefWidth="65.0" />
+      <TextField fx:id="textFieldIdProduto" layoutX="125.0" layoutY="277.0" prefHeight="25.0" prefWidth="65.0" />
+      <TextField fx:id="textFieldQuantidade" layoutX="124.0" layoutY="112.0" prefHeight="25.0" prefWidth="65.0" />
+      <Label layoutX="82.0" layoutY="315.0" text="Id lote:" textFill="WHITE" />
+      <TextField fx:id="textFieldValorCompra" layoutX="124.0" layoutY="80.0" prefHeight="25.0" prefWidth="65.0" />
+      <TextField fx:id="textFieldIdPrateleira" layoutX="125.0" layoutY="242.0" prefHeight="27.0" prefWidth="65.0" />
+      <TextField fx:id="textFieldIdLote" layoutX="125.0" layoutY="310.0" prefHeight="17.0" prefWidth="65.0" />
+      <TextField fx:id="textFieldIdEstoque" layoutX="422.0" layoutY="76.0" prefHeight="27.0" prefWidth="40.0" />
+      <Label layoutX="354.0" layoutY="82.0" prefHeight="17.0" prefWidth="64.0" text="Id estoque:" textFill="WHITE" />
+      <Button fx:id="butAlterar" layoutX="276.0" layoutY="49.0" mnemonicParsing="false" onAction="#alterarItemEstoque" text="Alterar" />
+      <DatePicker fx:id="datePickerDataValidade" layoutX="125.0" layoutY="145.0" prefHeight="25.0" prefWidth="149.0" />
+      <DatePicker fx:id="datePickerDataEntrada" layoutX="125.0" layoutY="177.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label layoutX="33.0" layoutY="181.0" text="Data de Entrada:" textFill="WHITE" />
+      <TableView fx:id="tabelaItemEstoque" layoutY="344.0" onMouseClicked="#selecionarItemEstoque" prefHeight="159.0" prefWidth="546.0">
+         <columns>
+            <TableColumn fx:id="tbItemEstoqueColumnID" prefWidth="49.0" text="ID" />
+            <TableColumn fx:id="tbItemEstoqueColumnValor" prefWidth="49.0" text="Valor" />
+            <TableColumn fx:id="tbItemEstoqueColumnQuantidade" prefWidth="49.0" text="Quantidade" />
+            <TableColumn fx:id="tbItemEstoqueColumnDataValidade" prefWidth="49.0" text="Data Validade" />
+            <TableColumn fx:id="tbItemEstoqueColumnDataEntrada" prefWidth="49.0" text="Data Entrada" />
+            <TableColumn fx:id="tbItemEstoqueColumnIdAvaria" prefWidth="53.0" text="Id Avaria" />
+            <TableColumn fx:id="tbItemEstoqueColumnIdPrateleira" prefWidth="45.0" text="Id Prateleira" />
+            <TableColumn fx:id="tbItemEstoqueColumnIdProduto" prefWidth="49.0" text="Id Produto" />
+            <TableColumn fx:id="tbItemEstoqueColumnIdLote" prefWidth="49.0" text="Id Lote" />
+            <TableColumn fx:id="tbItemEstoqueColumnIdEstoque" prefWidth="49.0" text="Id Estoque" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

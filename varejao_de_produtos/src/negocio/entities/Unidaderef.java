@@ -2,21 +2,21 @@ package negocio.entities;
 
 import dados.MeuId;
 
-public class Unidade {
+public class Unidaderef {
 	@MeuId
 	private Integer id;
 	private String descricao;
-	private String Sigla;
-	
-	public Unidade(){
-		
+	private String sigla;
+
+	public Unidaderef(){
+
 	}
-	
-	public Unidade(int id, String descricao, String sigla) {
-	
+
+	public Unidaderef(int id, String descricao, String sigla) {
+
 		this.id = id;
 		this.descricao = descricao;
-		Sigla = sigla;
+		this.sigla = sigla;
 	}
 
 
@@ -46,21 +46,21 @@ public class Unidade {
 
 
 	public String getSigla() {
-		return Sigla;
+		return sigla;
 	}
 
 
 
 	public void setSigla(String sigla) {
-		Sigla = sigla;
+		sigla = sigla;
 	}
 
 
 
 	@Override
 	public String toString() {
-		return "Unidade [id=" + id + ", descricao=" + descricao + ", Sigla=" + Sigla + "]";
+		return getSigla();
 	}
-	
-	
+
+
 }

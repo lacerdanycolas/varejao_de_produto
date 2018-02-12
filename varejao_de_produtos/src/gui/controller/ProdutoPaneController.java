@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -16,18 +15,23 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import negocio.controller.FachadaVarejao;
+import negocio.entities.Categoriaref;
+import negocio.entities.Fornecedorref;
+import negocio.entities.Marcaref;
 import negocio.entities.Produtoref;
+import negocio.entities.Sub_categoriaref;
+import negocio.entities.Unidaderef;
 
 public class ProdutoPaneController {
 	private FachadaVarejao varejao;
@@ -62,7 +66,10 @@ public class ProdutoPaneController {
 	TableColumn<Produtoref, String> tbColumnPrecoUltimaCompra;
 
 	@FXML
-	TableColumn<Produtoref, String> tbColumnIDFornecedor;
+	TableColumn<Produtoref, String> tbColumnIDNCM;
+
+	@FXML
+	TableColumn<Produtoref, String> tdColumnIDFornecedor;
 
 	@FXML
 	TableColumn<Produtoref, String> tbColumnIDCategoria;
@@ -77,7 +84,19 @@ public class ProdutoPaneController {
 	TableColumn<Produtoref, String> tbColumnIDMarca;
 
 	@FXML
-	TableColumn<Produtoref, String> tbColumnIDNCM;
+	private ComboBox<Fornecedorref> comboBoxFornecedor;
+
+	@FXML
+	private ComboBox<Categoriaref> comboBoxCategoria;
+
+	@FXML
+	private ComboBox<Sub_categoriaref> comboBoxSubcategoria;
+
+	@FXML
+	private ComboBox<Unidaderef> comboBoxUnidade;
+
+	@FXML
+	private ComboBox<Marcaref> comboBoxMarca;
 
 	@FXML
 	Button butCadastrar;
@@ -90,7 +109,7 @@ public class ProdutoPaneController {
 
 	@FXML
 	Button butBuscar;
-	
+
 	@FXML
 	Button butAlterar;
 
@@ -128,21 +147,6 @@ public class ProdutoPaneController {
 	TextField textFieldQuantidadeMinima;
 
 	@FXML
-	TextField textFieldIdFornecedor;
-
-	@FXML
-	TextField textFieldIdCategoria;
-
-	@FXML
-	TextField textFieldIdSubcategoria;
-
-	@FXML
-	TextField textFieldIdUnidade;
-
-	@FXML
-	TextField textFieldIdMarca;
-
-	@FXML
 	TextField textFieldIdNCM;
 
 	private Collection<Produtoref> listaProduto = new ArrayList<Produtoref>();
@@ -162,14 +166,43 @@ public class ProdutoPaneController {
 		tbColumnDescricao.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescricao()));
 		tbColumnPrecoUltimaCompra.setCellValueFactory(new PropertyValueFactory<>("Preco_ultima_compra"));
 		//tbColumnIDFornecedor.setCellValueFactory(new PropertyValueFactory<>("Id_fornecedor"));
-		tbColumnIDCategoria.setCellValueFactory(new PropertyValueFactory<>("Id_categoriaref"));
-		tbColumnIDSubcategoria.setCellValueFactory(new PropertyValueFactory<>("Id_sub_categoriaref"));
-		tbColumnIDUnidade.setCellValueFactory(new PropertyValueFactory<>("Id_unidaderef"));
-		tbColumnIDMarca.setCellValueFactory(new PropertyValueFactory<>("Id_marcaref"));
+
+		tdColumnIDFornecedor.setCellValueFactory(new PropertyValueFactory<>("ID_fornecedor"));
+		tbColumnIDCategoria.setCellValueFactory(new PropertyValueFactory<>("ID_categoria"));
+		tbColumnIDSubcategoria.setCellValueFactory(new PropertyValueFactory<>("ID_subcategoria"));
+		tbColumnIDUnidade.setCellValueFactory(new PropertyValueFactory<>("ID_unidade"));
+		tbColumnIDMarca.setCellValueFactory(new PropertyValueFactory<>("ID_marca"));
+
 		tbColumnIDNCM.setCellValueFactory(new PropertyValueFactory<>("id_ncm"));
 		obListaProduto = FXCollections.observableArrayList();
 		obListaProduto.addAll(varejao.listarProduto());
 		tabelaProdutos.setItems(obListaProduto);
+
+		Collection<Fornecedorref> fornecedores = this.varejao.listarFornecedores();
+		ObservableList<Fornecedorref> oblistaFornecedores = FXCollections.observableArrayList(fornecedores);
+		comboBoxFornecedor.setItems(oblistaFornecedores);
+
+		Collection<Categoriaref> categorias = this.varejao.listarCategorias();
+		ObservableList<Categoriaref> oblistaCategorias = FXCollections.observableArrayList(categorias);
+		comboBoxCategoria.setItems(oblistaCategorias);
+
+		Collection<Sub_categoriaref> subcategorias = this.varejao.listarSubcategorias();
+		ObservableList<Sub_categoriaref> oblistaSubcategorias = FXCollections.observableArrayList(subcategorias);
+		comboBoxSubcategoria.setItems(oblistaSubcategorias);
+
+		Collection<Unidaderef> unidades = this.varejao.listarUnidades();
+		ObservableList<Unidaderef> oblistaUnidades = FXCollections.observableArrayList(unidades);
+		comboBoxUnidade.setItems(oblistaUnidades);
+
+		Collection<Marcaref> marcas = this.varejao.listarMarcas();
+		ObservableList<Marcaref> oblistaMarcas = FXCollections.observableArrayList(marcas);
+		comboBoxMarca.setItems(oblistaMarcas);
+
+//		if (produto != null) {
+//			this.tabelaProdutos.getSelectionModel().select(produto);
+//
+//			selecionarProduto(null);
+//		}
 	}
 
 	@FXML
@@ -178,7 +211,7 @@ public class ProdutoPaneController {
 		obListaProduto.addAll(varejao.listarProduto());
 		tabelaProdutos.setItems(obListaProduto);
 	}
-	
+
 	@FXML
 	public void selecionarProduto(MouseEvent arg0){
 		Produtoref produto = tabelaProdutos.getSelectionModel().getSelectedItem();
@@ -187,6 +220,7 @@ public class ProdutoPaneController {
 			textFieldCodigoDeBarras.setText(produto.getCodigo_de_barra());
 			textFieldPrecoTabela.setText(produto.getPreco_por_tabela().toString());
 			textFieldDescricao.setText(produto.getDescricao());
+			textFieldIdNCM.setText(produto.getId_ncm().toString());
 			if(produto.getFrequencia_pedido()==null){
 				textFieldFrequenciaPedido.setText("");
 			}else{
@@ -209,12 +243,23 @@ public class ProdutoPaneController {
 			}else{
 			textFieldQuantidadeEstoque.setText(produto.getQuantidade_estoque().toString());
 			}
-			textFieldIdFornecedor.setText(produto.getId_fornecedor().toString());
-			textFieldIdCategoria.setText(produto.getId_categoriaref().toString());
-			textFieldIdSubcategoria.setText(produto.getId_sub_categoriaref().toString());
-			textFieldIdUnidade.setText(produto.getId_unidaderef().toString());
-			textFieldIdMarca.setText(produto.getId_marcaref().toString());
-			textFieldIdNCM.setText(produto.getId_ncm().toString());
+			try {
+				comboBoxFornecedor.setValue(this.varejao.buscarFornecedor(produto.getId_fornecedor()));
+				comboBoxCategoria.setValue(this.varejao.buscarCategoria(produto.getId_categoriaref()));
+				comboBoxSubcategoria.setValue(this.varejao.buscarSubategoria(produto.getId_sub_categoriaref()));
+				comboBoxUnidade.setValue(this.varejao.buscarUnidade(produto.getId_unidaderef()));
+				comboBoxMarca.setValue(this.varejao.buscarMarca(produto.getId_marcaref()));
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			textFieldIdFornecedor.setText(produto.getId_fornecedor().toString());
+//			textFieldIdCategoria.setText(produto.getId_categoriaref().toString());
+//			textFieldIdSubcategoria.setText(produto.getId_sub_categoriaref().toString());
+//			textFieldIdUnidade.setText(produto.getId_unidaderef().toString());
+//			textFieldIdMarca.setText(produto.getId_marcaref().toString());
+//			textFieldIdNCM.setText(produto.getId_ncm().toString());
 		}
 	}
 
@@ -249,11 +294,11 @@ public class ProdutoPaneController {
 		textFieldPrecoUltimaCompra.clear();
 		textFieldQuantidadeEstoque.clear();
 		textFieldQuantidadeMinima.clear();
-		textFieldIdFornecedor.clear();
-		textFieldIdCategoria.clear();
-		textFieldIdSubcategoria.clear();
-		textFieldIdUnidade.clear();
-		textFieldIdMarca.clear();
+		comboBoxFornecedor.valueProperty().set(null);
+		comboBoxCategoria.valueProperty().set(null);
+		comboBoxSubcategoria.valueProperty().set(null);
+		comboBoxUnidade.valueProperty().set(null);
+		comboBoxMarca.valueProperty().set(null);
 		textFieldIdNCM.clear();
 		lblMensagem.setText("");
 
@@ -273,11 +318,12 @@ public class ProdutoPaneController {
 			BigDecimal preco_ultima_compra = new BigDecimal(textFieldPrecoUltimaCompra.getText());
 			int quantidade_estoque = Integer.parseInt(textFieldQuantidadeEstoque.getText());
 			int quantidade_minima = Integer.parseInt(textFieldQuantidadeMinima.getText());
-			int id_fornecedor = Integer.parseInt(textFieldIdFornecedor.getText());
-			int id_categoriaref = Integer.parseInt(textFieldIdCategoria.getText());
-			int id_subcategoriaref = Integer.parseInt(textFieldIdSubcategoria.getText());
-			int id_unidaderef = Integer.parseInt(textFieldIdUnidade.getText());
-			int id_marcaref = Integer.parseInt(textFieldIdMarca.getText());
+
+			int id_fornecedor = comboBoxFornecedor.getValue().getId();
+			int id_categoriaref = comboBoxCategoria.getValue().getId();
+			int id_subcategoriaref = comboBoxSubcategoria.getValue().getId();
+			int id_unidaderef = comboBoxUnidade.getValue().getId();
+			int id_marcaref = comboBoxMarca.getValue().getId();
 			int id_ncm = Integer.parseInt(textFieldIdNCM.getText());
 
 			Produtoref aux = new Produtoref(codigo_de_barra, descricao, frequencia_pedido, preco_por_tabela, cst, icms, nome, preco_ultima_compra, quantidade_estoque, quantidade_minima, id_fornecedor, id_categoriaref, id_subcategoriaref, id_unidaderef,id_marcaref, id_ncm);
@@ -299,7 +345,7 @@ public class ProdutoPaneController {
 		try{
 			if(produto !=null && produto instanceof Produtoref){
 				varejao.deletarProduto(produto);
-				tabelaProdutos.getItems().remove(tabelaProdutos.getSelectionModel().getSelectedIndex());
+//				tabelaProdutos.getItems().remove(tabelaProdutos.getSelectionModel().getSelectedIndex());
 				limparForm();
 				refreshTable();
 				lblMensagem.setText("Produto Removido");
@@ -315,7 +361,7 @@ public class ProdutoPaneController {
 
 		}
 	}
-	
+
 	public void alterarProduto(){
 		Produtoref aux = tabelaProdutos.getSelectionModel().getSelectedItem();
 		try{
@@ -331,11 +377,6 @@ public class ProdutoPaneController {
 			BigDecimal preco_ultima_compra = new BigDecimal(textFieldPrecoUltimaCompra.getText());
 			int quantidade_estoque = Integer.parseInt(textFieldQuantidadeEstoque.getText());
 			int quantidade_minima = Integer.parseInt(textFieldQuantidadeMinima.getText());
-			int id_fornecedor = Integer.parseInt(textFieldIdFornecedor.getText());
-			int id_categoriaref = Integer.parseInt(textFieldIdCategoria.getText());
-			int id_subcategoriaref = Integer.parseInt(textFieldIdSubcategoria.getText());
-			int id_unidaderef = Integer.parseInt(textFieldIdUnidade.getText());
-			int id_marcaref = Integer.parseInt(textFieldIdMarca.getText());
 			int id_ncm = Integer.parseInt(textFieldIdNCM.getText());
 			aux.setNome(nome);
 			aux.setCodigo_de_barra(codigo_de_barra);
@@ -347,6 +388,11 @@ public class ProdutoPaneController {
 			aux.setPreco_ultima_compra(preco_ultima_compra);
 			aux.setQuantidade_estoque(quantidade_estoque);
 			aux.setQuantidade_minima(quantidade_minima);
+			int id_fornecedor = comboBoxFornecedor.getValue().getId();
+			int id_categoriaref = comboBoxCategoria.getValue().getId();
+			int id_subcategoriaref = comboBoxSubcategoria.getValue().getId();
+			int id_unidaderef = comboBoxUnidade.getValue().getId();
+			int id_marcaref = comboBoxMarca.getValue().getId();
 			aux.setId_fornecedor(id_fornecedor);
 			aux.setId_categoriaref(id_categoriaref);
 			aux.setId_sub_categoriaref(id_subcategoriaref);
@@ -372,7 +418,7 @@ public class ProdutoPaneController {
 				alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	public void txtCodigoDeBarrapMask(){
 		TextFieldFormatter tf = new TextFieldFormatter();
@@ -380,5 +426,49 @@ public class ProdutoPaneController {
 		tf.setCaracteresValidos("0123456789");
 		tf.setTf(textFieldCodigoDeBarras);
 		tf.formatter();
+	}
+
+	public void setProduto(Produtoref produto) {
+
+		tabelaProdutos.getSelectionModel().select(produto);
+
+		textFieldNome.setText(produto.getNome());
+		textFieldCodigoDeBarras.setText(produto.getCodigo_de_barra());
+		textFieldPrecoTabela.setText(produto.getPreco_por_tabela().toString());
+		textFieldDescricao.setText(produto.getDescricao());
+		textFieldIdNCM.setText(produto.getId_ncm().toString());
+		if(produto.getFrequencia_pedido()==null){
+			textFieldFrequenciaPedido.setText("");
+		}else{
+			textFieldFrequenciaPedido.setText(produto.getFrequencia_pedido().toString());
+		}
+		textFieldCST.setText(produto.getCst());
+		textFieldICMS.setText(produto.getIcms().toString());
+		if(produto.getPreco_ultima_compra()==null){
+			textFieldPrecoUltimaCompra.setText("");
+		}else{
+		textFieldPrecoUltimaCompra.setText(produto.getPreco_ultima_compra().toString());
+		}
+		if(produto.getQuantidade_minima()==null){
+			textFieldQuantidadeMinima.setText("");
+		}else{
+		textFieldQuantidadeMinima.setText(produto.getQuantidade_estoque().toString());
+		}
+		if(produto.getQuantidade_estoque()==null){
+			textFieldQuantidadeEstoque.setText("");
+		}else{
+		textFieldQuantidadeEstoque.setText(produto.getQuantidade_estoque().toString());
+		}
+		try {
+			comboBoxFornecedor.setValue(this.varejao.buscarFornecedor(produto.getId_fornecedor()));
+			comboBoxCategoria.setValue(this.varejao.buscarCategoria(produto.getId_categoriaref()));
+			comboBoxSubcategoria.setValue(this.varejao.buscarSubategoria(produto.getId_sub_categoriaref()));
+			comboBoxUnidade.setValue(this.varejao.buscarUnidade(produto.getId_unidaderef()));
+			comboBoxMarca.setValue(this.varejao.buscarMarca(produto.getId_marcaref()));
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

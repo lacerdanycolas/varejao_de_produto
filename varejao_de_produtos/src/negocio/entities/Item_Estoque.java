@@ -1,5 +1,6 @@
 package negocio.entities;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import dados.MeuId;
@@ -7,7 +8,7 @@ import dados.MeuId;
 public class Item_Estoque {
 	@MeuId
 	private Integer id;
-	private Double valor_compra;
+	private BigDecimal valor_compra;
 	private Integer quantidade;
 	private Date data_validade;
 	private Date data_entrada;
@@ -16,14 +17,14 @@ public class Item_Estoque {
 	private Integer id_produtoref;
 	private Integer id_lote;
 	private Integer id_estoque;
-	
+
 	public Item_Estoque(){
-		
+
 	}
-	
-	public Item_Estoque(Double valor_compra, Integer quantidade, Date data_validade, Date data_entrada,
+
+	public Item_Estoque(BigDecimal valor_compra, Integer quantidade, Date data_validade, Date data_entrada,
 			Integer id_avaria, Integer id_pratileira, Integer id_produtoref, Integer id_lote, Integer id_estoque) {
-		
+
 		this.valor_compra = valor_compra;
 		this.quantidade = quantidade;
 		this.data_validade = data_validade;
@@ -40,10 +41,10 @@ public class Item_Estoque {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Double getValor_compra() {
+	public BigDecimal getValor_compra() {
 		return valor_compra;
 	}
-	public void setValor_compra(Double valor_compra) {
+	public void setValor_compra(BigDecimal valor_compra) {
 		this.valor_compra = valor_compra;
 	}
 	public Integer getQuantidade() {
@@ -94,7 +95,7 @@ public class Item_Estoque {
 	public void setId_estoque(Integer id_estoque) {
 		this.id_estoque = id_estoque;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Item_Estoque [id=" + id + ", valor_compra=" + valor_compra + ", quantidade=" + quantidade
@@ -102,7 +103,7 @@ public class Item_Estoque {
 				+ ", id_pratileira=" + id_pratileira + ", id_produtoref=" + id_produtoref + ", id_lote=" + id_lote
 				+ ", id_estoque=" + id_estoque + "]";
 	}
-	
 
-	
+
+
 }

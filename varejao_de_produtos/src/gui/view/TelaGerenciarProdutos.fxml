@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="503.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.GerenciarProdutosPaneController">
+   <children>
+      <SplitPane orientation="VERTICAL" prefHeight="503.0" prefWidth="543.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="561.0" prefWidth="678.0" style="-fx-background-color: #E80000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Text fill="WHITE" layoutX="56.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fornecedor:" />
+                        <ComboBox fx:id="comboBoxFornecedores" layoutX="135.0" layoutY="79.0" prefHeight="25.0" prefWidth="119.0" promptText="Selecione..." />
+                        <Text fill="WHITE" layoutX="165.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciador de Produtos" wrappingWidth="210.91210651397705">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="164.0" fitWidth="170.0" layoutX="361.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/WhatsApp%20Image%202018-01-28%20at%2017.26.04.jpeg" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="478.0" layoutY="10.0" mnemonicParsing="false" onAction="#voltarMenuPrincipal" text="&lt;" />
+                        <Button layoutX="506.0" layoutY="10.0" mnemonicParsing="false" onAction="#sair" text="X" textFill="#eb0b0b" />
+                        <Label fx:id="lblMensagem" layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="239.0" />
+                        <TableView fx:id="tabelaProdutos" layoutX="-4.0" layoutY="246.0" onMouseClicked="#abrirTelaProdutos" prefHeight="259.0" prefWidth="549.0">
+                           <columns>
+                              <TableColumn fx:id="tbColumnID" prefWidth="49.0" text="ID" />
+                              <TableColumn fx:id="tbColumnNome" prefWidth="52.0" text="Nome" />
+                              <TableColumn fx:id="tbColumnCodigoDeBarras" prefWidth="50.0" text="Código de Barras" />
+                              <TableColumn fx:id="tbColumnPrecoTabela" prefWidth="67.0" text="Preço de Tabela" />
+                              <TableColumn fx:id="tbColumnCST" prefWidth="58.0" text="CST" />
+                              <TableColumn fx:id="tbColumnICMS" prefWidth="138.0" text="ICMS" />
+                              <TableColumn fx:id="tbColumnDescricao" prefWidth="75.0" text="Descrição" />
+                              <TableColumn fx:id="tbColumnPrecoUltimaCompra" prefWidth="75.0" text="Preço Ultima Compra" />
+                              <TableColumn fx:id="tdColumnIDFornecedor" prefWidth="75.0" text="ID Fornecedor" />
+                              <TableColumn fx:id="tbColumnIDCategoria" prefWidth="75.0" text="ID Categoria" />
+                              <TableColumn fx:id="tbColumnIDSubcategoria" prefWidth="75.0" text="ID Subcategoria" />
+                              <TableColumn fx:id="tbColumnIDUnidade" prefWidth="75.0" text="ID Unidade" />
+                              <TableColumn fx:id="tbColumnIDMarca" prefWidth="75.0" text="ID Marca" />
+                              <TableColumn fx:id="tbColumnIDNCM" prefWidth="75.0" text="ID NCM" />
+                           </columns>
+                        </TableView>
+                        <Button layoutX="56.0" layoutY="198.0" mnemonicParsing="false" onAction="#removerProduto" text="Remover" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

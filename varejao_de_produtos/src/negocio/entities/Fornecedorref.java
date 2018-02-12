@@ -142,8 +142,7 @@ public class Fornecedorref {
 
 	@Override
 	public String toString() {
-		return "Fornecedor [id=" + id + ", nome=" + nome + ", cnpj=" + cnpj + ", rua=" + rua + ", cep=" + cep
-				+ ", estado=" + estado + ", bairro=" + bairro + ", situacao=" + situacao + "]";
+		return nome;
 	}
 
 

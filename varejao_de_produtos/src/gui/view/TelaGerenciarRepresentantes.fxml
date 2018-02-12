@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="503.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.GerenciarRepresentantesPaneController">
+   <children>
+      <SplitPane orientation="VERTICAL" prefHeight="503.0" prefWidth="543.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="561.0" prefWidth="678.0" style="-fx-background-color: #E80000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Text fill="WHITE" layoutX="56.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fornecedor:" />
+                        <ComboBox fx:id="comboBoxFornecedores" layoutX="135.0" layoutY="79.0" prefHeight="25.0" prefWidth="119.0" promptText="Selecione..." />
+                        <Text fill="WHITE" layoutX="143.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciador de Representantes" wrappingWidth="266.91210651397705">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="164.0" fitWidth="170.0" layoutX="361.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/WhatsApp%20Image%202018-01-28%20at%2017.26.04.jpeg" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="478.0" layoutY="10.0" mnemonicParsing="false" onAction="#voltarMenuPrincipal" text="&lt;" />
+                        <Button layoutX="506.0" layoutY="10.0" mnemonicParsing="false" onAction="#sair" text="X" textFill="#eb0b0b" />
+                        <Label fx:id="lblMensagem" layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="239.0" />
+                        <TableView fx:id="tabelaRepresentantes" layoutX="-4.0" layoutY="246.0" onMouseClicked="#abrirTelaRepresentantes" prefHeight="259.0" prefWidth="549.0">
+                           <columns>
+                              <TableColumn fx:id="tbColumnID" prefWidth="49.0" text="ID" />
+                              <TableColumn fx:id="tbColumnIDfornecedor" prefWidth="148.0" text="ID Fornecedor" />
+                              <TableColumn fx:id="tbColumnIDrepresentante" prefWidth="113.0" text="ID Representante" />
+                              <TableColumn fx:id="tbColumnDataInicio" prefWidth="142.0" text="Data Início" />
+                              <TableColumn fx:id="tbColumnDataFim" prefWidth="94.0" text="Data Fim" />
+                           </columns>
+                        </TableView>
+                        <Button layoutX="56.0" layoutY="198.0" mnemonicParsing="false" onAction="#removerFornecedor_representante" text="Remover" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

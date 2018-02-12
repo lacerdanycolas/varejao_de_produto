@@ -1,26 +1,27 @@
 package negocio.entities;
 import dados.MeuId;
+
+import java.math.BigDecimal;
 import java.sql.Date;
 
 public class Pedido_Fornecedor {
 	@MeuId
 	private int id;
-	private double total_desconto;
-	private double valor_total;
-	private double ipi;
+	private BigDecimal total_desconto;
+	private BigDecimal valor_total;
+	private BigDecimal ipi;
 	private String cfop;
 	private Date data_pedido;
 	private Situacao situacao;
-	private double valor_frete;
+	private BigDecimal valor_frete;
 	private String cpf_coordenador;
-	
+
 	public Pedido_Fornecedor(){
-		
+
 	}
-	
-	public Pedido_Fornecedor(int id, double total_desconto, double valor_total, double ipi, String cfop,
-			Date data_pedido, Situacao situacao, double valor_frete, String cpf_coordenador) {
-		this.id = id;
+
+	public Pedido_Fornecedor(BigDecimal total_desconto, BigDecimal valor_total, BigDecimal ipi, String cfop,
+			Date data_pedido, Situacao situacao, BigDecimal valor_frete, String cpf_coordenador) {
 		this.total_desconto = total_desconto;
 		this.valor_total = valor_total;
 		this.ipi = ipi;
@@ -42,32 +43,32 @@ public class Pedido_Fornecedor {
 	}
 
 
-	public double getTotal_desconto() {
+	public BigDecimal getTotal_desconto() {
 		return total_desconto;
 	}
 
 
-	public void setTotal_desconto(double total_desconto) {
+	public void setTotal_desconto(BigDecimal total_desconto) {
 		this.total_desconto = total_desconto;
 	}
 
 
-	public double getValor_total() {
+	public BigDecimal getValor_total() {
 		return valor_total;
 	}
 
 
-	public void setValor_total(double valor_total) {
+	public void setValor_total(BigDecimal valor_total) {
 		this.valor_total = valor_total;
 	}
 
 
-	public double getIpi() {
+	public BigDecimal getIpi() {
 		return ipi;
 	}
 
 
-	public void setIpi(double ipi) {
+	public void setIpi(BigDecimal ipi) {
 		this.ipi = ipi;
 	}
 
@@ -102,12 +103,12 @@ public class Pedido_Fornecedor {
 	}
 
 
-	public double getValor_frete() {
+	public BigDecimal getValor_frete() {
 		return valor_frete;
 	}
 
 
-	public void setValor_frete(double valor_frete) {
+	public void setValor_frete(BigDecimal valor_frete) {
 		this.valor_frete = valor_frete;
 	}
 
@@ -128,7 +129,7 @@ public class Pedido_Fornecedor {
 				+ ", ipi=" + ipi + ", cfop=" + cfop + ", data_pedido=" + data_pedido + ", situacao=" + situacao
 				+ ", valor_frete=" + valor_frete + ", cpf_coordenador=" + cpf_coordenador + "]";
 	}
-	
-	
-	
+
+
+
 }

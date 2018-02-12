@@ -1,5 +1,7 @@
 package negocio.entities;
 
+import java.math.BigDecimal;
+
 import dados.MeuId;
 
 public class Item_Pedido {
@@ -8,15 +10,13 @@ public class Item_Pedido {
 	private int id_pedido_fornecedor;
 	private int id_produto_ref;
 	private int quantidade;
-	private double preco_unitario;
-	
+	private BigDecimal preco_unitario;
+
 	public Item_Pedido(){
-		
+
 	}
-	
-	public Item_Pedido(int id, int id_pedido_fornecedor, int id_produto_ref, int quantidade, double preco_unitario) {
-		
-		this.id = id;
+
+	public Item_Pedido(int id_pedido_fornecedor, int id_produto_ref, int quantidade, BigDecimal preco_unitario){
 		this.id_pedido_fornecedor = id_pedido_fornecedor;
 		this.id_produto_ref = id_produto_ref;
 		this.quantidade = quantidade;
@@ -46,19 +46,19 @@ public class Item_Pedido {
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
-	public double getPreco_unitario() {
+	public BigDecimal getPreco_unitario() {
 		return preco_unitario;
 	}
-	public void setPreco_unitario(double preco_unitario) {
+	public void setPreco_unitario(BigDecimal preco_unitario) {
 		this.preco_unitario = preco_unitario;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Item_Pedido [id=" + id + ", id_pedido_fornecedor=" + id_pedido_fornecedor + ", id_produto_ref="
 				+ id_produto_ref + ", quantidade=" + quantidade + ", preco_unitario=" + preco_unitario + "]";
 	}
-	
-	
+
+
 
 }
